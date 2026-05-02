@@ -9,63 +9,103 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play index.</tw-noscript></noscript></tw-story>
-<tw-storydata name="index" startnode="1" creator="Twine" creator-version="2.12.0" format="Harlowe" format-version="3.3.9" ifid="FD8A624A-FB2A-4514-AD60-EC8C00AA35D3" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Arka Planı Yumuşat */
+<tw-storydata name="index" startnode="1" creator="Twine" creator-version="2.12.0" format="Harlowe" format-version="3.3.9" ifid="FD8A624A-FB2A-4514-AD60-EC8C00AA35D3" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Genel Sayfa Ayarları */
 tw-story {
-	background-color: #f0f2f5; /* Hafif gri, modern bir hava */
-	color: #333;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5 !important; /* Hafif modern gri arka plan */
+    color: #333 !important;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 70px !important; /* Üst bar için boşluk */
 }
 
-/* Hikaye Metninin Olduğu Ana Kart */
+/* Üst Bar (Header) Tasarımı */
+.stats-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1e272e !important; /* Lacivert/Siyah tonu */
+    color: #ffffff !important;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 0.85em;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Bar İçindeki Her Bir Madde */
+.stat-item {
+    padding: 0 10px;
+    border-right: 1px solid #485460;
+    white-space: nowrap;
+}
+
+.stat-item:last-child {
+    border-right: none;
+}
+
+/* Metin Kartı Yapısı */
 tw-passage {
-	background: white;
-	padding: 30px;
-	border-radius: 15px;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-	line-height: 1.6;
-	max-width: 600px;
-	margin: 20px auto;
-	text-align: center;
+    background: #ffffff !important; /* Beyaz kart */
+    padding: 40px !important;
+    border-radius: 12px !important; /* Oval köşeler */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important; /* Hafif gölge */
+    max-width: 650px !important;
+    line-height: 1.8 !important;
+    text-align: center;
+    color: #2d3436 !important;
+    border: 1px solid #e1e4e8;
 }
 
-/* Seçenek Linklerini Kart Butonlara Dönüştür */
+/* Seçenek Linklerini Buton Yapma */
 tw-link {
-	display: block;
-	background: #ffffff;
-	color: #2d89ef !important; /* Mavi tonu */
-	border: 2px solid #2d89ef;
-	padding: 15px 20px;
-	margin: 10px 0;
-	border-radius: 10px;
-	text-decoration: none !important;
-	font-weight: bold;
-	transition: all 0.3s ease;
-	text-align: center;
+    display: block !important;
+    background: #ffffff !important;
+    color: #0984e3 !important; /* Modern mavi */
+    border: 2px solid #0984e3 !important;
+    padding: 12px 20px !important;
+    margin: 12px auto !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    transition: all 0.2s ease-in-out !important;
+    max-width: 80% !important;
 }
 
-/* Seçeneklerin Üzerine Gelince (Hover) */
+/* Butonun Üzerine Gelince (Hover) */
 tw-link:hover {
-	background: #2d89ef !important;
-	color: white !important;
-	transform: translateY(-3px); /* Hafif yukarı kalkma efekti */
-	box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background: #0984e3 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px); /* Hafif yukarı kalkma efekti */
+    box-shadow: 0 4px 12px rgba(9, 132, 227, 0.3) !important;
 }
 
-/* Başlıkları ve Kalın Yazıları Özelleştir */
+/* Vurgulu Yazılar (B harfi veya güçlü kelimeler) */
 b, strong {
-	color: #e44d26; /* Önemli kelimeler için turuncu/kırmızı tonu */
+    color: #d63031; /* Önemli kısımlar için yumuşak kırmızı */
 }
 
-/* Değişkenleri (Para, Enerji vb.) Gösteren Bölüm İçin Opsiyonel Stil */
-.stats {
-	font-size: 0.9em;
-	color: #666;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 20px;
-	padding-bottom: 10px;
-	display: flex;
-	justify-content: space-around;
+/* Sidebar (Geri/İleri Okları) */
+tw-sidebar {
+    display: none; /* Temiz bir görünüm için yan okları gizliyoruz */
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 600px) {
+    .stats-bar {
+        font-size: 0.7em;
+        padding: 5px 0;
+    }
+    tw-passage {
+        padding: 20px !important;
+        margin: 10px !important;
+    }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="header" color="blue"></tw-tag><tw-passagedata pid="1" name="başlangıç" tags="" position="100,725" size="100,100">{
+
 (set: $isim to &quot;Barış&quot;)
 (set: $para to 500)
 (set: $enerji to 100)
@@ -74,7 +114,10 @@ b, strong {
 (set: $sabika to 0)
 (set: $yazilim_bilgisi to 0)
 (set: $gun to 1)
+(set: $maas to 0)
+(set: $meslek to &quot;İşsiz&quot;)
 (set: $kira_gunu to 3)
+(set: $gecmisTetiklendi to false)
 }
 Merhaba **$isim**, büyük şehre hoş geldin.
 
@@ -82,13 +125,19 @@ Merhaba **$isim**, büyük şehre hoş geldin.
 (if: $enerji &lt;= 0)[(goto: &quot;Bayilma&quot;)]
 (if: $gun &gt;= $kira_gunu)[(goto: &quot;KiraOdeme&quot;)]
 }
-Güne başladın. Ne yapmak istersin?
+Güne başladın. (if: $maas &gt; 0)[Şu an bir işin var: **$meslek**.](else:)[Henüz bir işin yok.]
 
 [[Mutfakta bir şeyler atıştır-&gt;Mutfak]]
-[[İş aramaya çık-&gt;IsArama]]
+
+(if: $maas is 0)[
+	[[İş aramaya çık (-30 Enerji)-&gt;IsArama]]
+](else:)[
+	[[Bugün işe git (-40 Enerji)-&gt;IseGit]]
+]
+
 [[Telefonuna bak-&gt;Mesajlar]]
 [[Biraz daha uyu (+10 Enerji, -5 Moral)-&gt;Uyku]] 
-[[Günü bitir ve uyu (Gün Atlar)-&gt;GunSonu]]</tw-passagedata><tw-passagedata pid="3" name="Uyku" tags="" position="25,350" size="100,100">{
+[[Günü bitir ve uyu-&gt;GunSonu]]</tw-passagedata><tw-passagedata pid="3" name="Uyku" tags="" position="25,350" size="100,100">{
 (set: $enerji to (min: it + 10, 100))
 (set: $moral to it - 5)
 }
@@ -128,28 +177,41 @@ Para: $para TL | Enerji: $enerji
     [[Yalan söyle ve meşgul olduğunu yaz-&gt;EveDon]]
 ]
 [[Dürüst ol ve paran olmadığını söyle-&gt;DerinDurustluk]]</tw-passagedata><tw-passagedata pid="7" name="RestoranIs" tags="" position="600,1100" size="100,100">{
-(set: $enerji to it - 20)
+(set: $enerji to (max: it - 20, 0))
 (set: $para to it + 150)
-(set: $itibar to it + 2)
-}Mutfağın arka tarafında dağ gibi bulaşıkları temizledin. Ellerin buruş buruş oldu ama 150 TL kazandın.
+(set: $itibar to it + 5) 
+}Mutfağın arka tarafında dağ gibi bulaşıkları temizledin. Ellerin buruş buruş oldu ama 150 TL kazandın. 
+
+Çalışkanlığın şefin dikkatinden kaçmadı. (+5 İtibar)
 
 [[Şefle konuş (Belki daha iyi bir pozisyon verir)-&gt;SefKonusma]]
-[[Paranı al ve bugünlük bırak-&gt;GuneBasla]]</tw-passagedata><tw-passagedata pid="8" name="KuryeIs" tags="" position="750,700" size="100,100">Kurye müdürü seni süzüyor: &quot;Hızlıysan ekmek yersin.&quot;
+[[Paranı al ve bugünlük bırak-&gt;GunSonu]]</tw-passagedata><tw-passagedata pid="8" name="KuryeIs" tags="" position="675,700" size="100,100">Kurye müdürü seni süzüyor: &quot;Hızlıysan ekmek yersin.&quot;
 
 [[Eski bir motor kirala (-100 TL, Hızlı ama riskli)-&gt;MotorluKurye]]
-[[Yaya kurye olarak dene (Güvenli ama az kazandırır)-&gt;YayaKurye]]</tw-passagedata><tw-passagedata pid="9" name="MotorluKurye" tags="" position="900,800" size="100,100">{
+[[Yaya kurye olarak dene (Güvenli ama az kazandırır)-&gt;YayaKurye]]</tw-passagedata><tw-passagedata pid="9" name="MotorluKurye" tags="" position="825,700" size="100,100">{
 (set: $para to it - 100)
-}Motoru kiraladın ve ilk siparişine çıktın. Yağmur yağmaya başladı, yerler kaygan!
+(set: _zar to (random: 1, 100))
+(set: _riskEshigi to 30)
 
-(if: $enerji &lt; 40)[
-	(set: $kaza_riski to true)
-    **Dikkat:** Enerjin düşük olduğu için tepki süren yavaş!
+(if: $enerji &lt; 50)[
+	(set: _riskEshigi to it + 30)
 ]
 
-Karşına aniden bir kedi fırladı! Ne yapacaksın?
+(if: _zar &lt;= _riskEshigi)[
+	(set: $kaza_olacak_mi to true)
+](else:)[
+	(set: $kaza_olacak_mi to false)
+]
+}Motoru kiraladın ve yola çıktın. Yağmur çiselemeye başladı, yerler kaygan! 
+Tam köşeyi dönerken bir taksi aniden önünde durdu!
+
+(if: $enerji &gt;= 70)[Dikkatin yerinde, her şeye hazırlıklısın. Risk: Düşük]
+(else:)[Gözlerin yorgunluktan yanıyor, tepki süren yavaş! Risk: Yüksek]
+**Ne yapacaksın?**
 
 [[Sertçe frene bas-&gt;FrenYap]]
-[[Direksiyonu sağa kır-&gt;DireksiyonKir]]</tw-passagedata><tw-passagedata pid="10" name="YayaKurye" tags="" position="900,600" size="100,100">{
+[[Direksiyonu sağa kır-&gt;DireksiyonKir]]
+[[Trafiğin açılmasını bekle (Güvenli ama yavaş)-&gt;KuryeGuvenli]]</tw-passagedata><tw-passagedata pid="10" name="YayaKurye" tags="" position="750,525" size="100,100">{
 (set: $enerji to it - 40)
 (set: $para to it + 80)
 }Tüm gün sokaklarda paket taşıdın. Bacaklarına kara sular indi ama 80 TL kazandın. Risk yok ama kazanç da az.
@@ -158,6 +220,7 @@ Karşına aniden bir kedi fırladı! Ne yapacaksın?
 
 (if: $enerji &gt; 40 and $itibar &gt; 12)[
     &quot;Fena iş çıkarmadın evlat. Yarın gel, seni garson olarak deneyelim.&quot;
+    (set: $maas to 150)
     (set: $meslek to &quot;Garson&quot;)
     (set: $itibar to it + 5)
     [[Yeni işe hazırlan-&gt;GuneBasla]]
@@ -165,31 +228,29 @@ Karşına aniden bir kedi fırladı! Ne yapacaksın?
 (else:)[
     &quot;Çok yavaşsın ve bitkin görünüyorsun. Şimdilik bulaşığa devam et, sonra bakarız.&quot;
     [[Hayal kırıklığıyla işten çık-&gt;GuneBasla]]
-]</tw-passagedata><tw-passagedata pid="12" name="FrenYap" tags="" position="1050,900" size="100,100">(if: $kaza_riski is true)[
-    Eyvah! Enerjin düşük olduğu için dengeni sağlayamadın ve kayıp düştün. 
-    Motor hasar aldı ve siparişler mahvoldu.
-    (set: $para to it - 200)
-    (set: $enerji to it - 40)
+]</tw-passagedata><tw-passagedata pid="12" name="FrenYap" tags="" position="1275,425" size="100,100">(if: $kaza_olacak_mi is true and $enerji &lt; 40)[
+    🚨 **KAZA!** 
+    Lastikler kaygan zeminde tutunamadı ve yan yattın. Siparişler yola saçıldı.
+    (set: $para to (max: it - 150, 0))
+    (set: $enerji to (max: it - 40, 0))
     [[Hastaneye git-&gt;Hastane]]
 ]
 (else:)[
-    Ucu ucuna durmayı başardın. Kalbin küt küt atıyor ama paket sağlam. 
-    Müşteri beklediği için acele etmelisin.
-    (set: $para to it + 100)
+    ✅ **BAŞARILI!** 
+    ABS sistemi devreye girdi, milim farkla durdun. Taksi şoförüne bir selam verip devam ettin.
     [[Siparişi teslim et-&gt;TeslimatBasarili]]
-]</tw-passagedata><tw-passagedata pid="13" name="DireksiyonKir" tags="" position="1050,700" size="100,100">(if: $kaza_riski is true)[
-	Dengeni kaybedip kaldırıma çarptın! Motor hasar gördü ve paketler paramparça.
-    (set: $para to it - 150)
-    (set: $enerji to it - 50)
-    (set: $moral to it - 20)
-    [[Yaralı halde hastaneye git-&gt;Hastane]]
+]</tw-passagedata><tw-passagedata pid="13" name="DireksiyonKir" tags="" position="1075,425" size="100,100">(if: $kaza_olacak_mi is true)[
+    🚨 **KAZA!** 
+    Kaldırımdaki mantara çarptın! Motorun ön takımı dağıldı, sen de omzunun üstüne düştün.
+    (set: $para to (max: it - 200, 0))
+    (set: $enerji to (max: it - 50, 0))
+    [[Hastaneye git-&gt;Hastane]]
 ]
 (else:)[
-	Usta bir manevrayla sıyrıldın. Paket sapasağlam!
-    (set: $para to it + 120)
-    (set: $itibar to it + 5)
-    [[Paketi teslim et ve geri dön-&gt;GuneBasla]]
-]</tw-passagedata><tw-passagedata pid="14" name="Hastane" tags="" position="1250,900" size="100,100">Hastanenin beyaz koridorlarında beklerken yanına bir hemşire yaklaşıyor. 
+    ✨ **HARİKA MANEVRA!** 
+    Taksiyle kaldırım arasından daracık bir boşluktan süzüldün. Kurye müdürü izlese seni VIP yapardı!
+    [[Siparişi teslim et-&gt;TeslimatBasarili]]
+]</tw-passagedata><tw-passagedata pid="14" name="Hastane" tags="" position="1200,850" size="100,100">Hastanenin beyaz koridorlarında beklerken yanına bir hemşire yaklaşıyor. 
 
 &quot;Çok kötü görünüyorsun,&quot; diyor. &quot;Eğer dinlenmezsen bu şehir seni yutar.&quot;
 
@@ -197,18 +258,20 @@ Karşına aniden bir kedi fırladı! Ne yapacaksın?
 (set: $para to it - 50)
 
 [[Hemşireye teşekkür et ve iş ilanlarını sor-&gt;HemsireIs]]
-[[Borç harç içinde hastaneden kaç-&gt;SokaklaraDon]]</tw-passagedata><tw-passagedata pid="15" name="TeslimatBasarili" tags="" position="1300,700" size="100,100">Müşteri paketi zamanında aldığın için çok mutlu oldu ve sana 50 TL bahşiş verdi!
-
+[[Borç harç içinde hastaneden kaç-&gt;SokaklaraDon]]</tw-passagedata><tw-passagedata pid="15" name="TeslimatBasarili" tags="" position="1425,625" size="100,100">{
 (set: $para to it + 50)
-(set: $tecrube to (it + 10))
+(set: $itibar to it + 3)
+}
+Müşteri paketi zamanında aldığın için çok mutlu oldu ve sana 50 TL bahşiş verdi!
+
+Müşteri çok memnun kaldı. Şehirde yavaş yavaş tanınıyorsun. (+3 İtibar kazandın)
 
 Müdür arıyor: &quot;Aferin evlat, böyle devam edersen seni &#39;VIP Kurye&#39; yapacağım.&quot;
 
-[[Daha fazla paket al (-20 Enerji)-&gt;MotorluKurye]]
 [[Bugünlük bu kadar yeter, dinlen-&gt;GuneBasla]]</tw-passagedata><tw-passagedata pid="16" name="HemsireIs" tags="" position="1500,850" size="100,100">Hemşire sana bir kartvizit uzatıyor. &quot;Bir arkadaşım yaşlı babasına bakacak birini arıyor. Sakin bir iş ama sorumluluğu büyük.&quot;
 
 [[Yaşlı adama bakma işini kabul et-&gt;BakicilikIs]]
-[[Benim aksiyona ihtiyacım var, reddet-&gt;SokaklaraDon]]</tw-passagedata><tw-passagedata pid="17" name="SokaklaraDon" tags="" position="1500,1000" size="100,100">Hava karardı. Cebindeki para azalırken şehrin ışıkları daha soğuk görünüyor. 
+[[Benim aksiyona ihtiyacım var, reddet-&gt;SokaklaraDon]]</tw-passagedata><tw-passagedata pid="17" name="SokaklaraDon" tags="" position="1400,1000" size="100,100">Hava karardı. Cebindeki para azalırken şehrin ışıkları daha soğuk görünüyor. 
 
 Para: $para TL | Enerji: $enerji
 
@@ -322,13 +385,13 @@ Cüzdanı masanın altında gizlice açtın. Paranın yanında üzerinde tuhaf l
 Artık şehrin yeraltı dünyasına ilk adımını attın.
 
 [[Eve dön ve bu geceyi unutmaya çalış-&gt;GunSonu]]</tw-passagedata><tw-passagedata pid="32" name="YazilimOfisi" tags="" position="1225,100" size="100,100">(set: $maas to 250)
-(set: $gunluk_kazanc to 250)
+(set: $meslek to &quot;Ofis Boy&quot;)
 Ofis boy olarak işe başladın. Her yer bilgisayar dolu. Geceleri ofisi temizlerken bilgisayarları kurcalama şansın var.
 
 [[Çay/Kahve servisine odaklan (Güvenli, +$maas TL)-&gt;GunSonu]]
 [[Geceleri gizlice kodlama öğrenmeye çalış (Enerji tüketir)-&gt;KodlamaOgrenme]]</tw-passagedata><tw-passagedata pid="33" name="KodlamaOgrenme" tags="" position="1450,150" size="100,100">{
 (set: $yazilim_bilgisi to it + 20)
-(set: $enerji to (max: it - 40, 0))
+(set: $enerji to (max: it - 30, 0))
 }Gözlerin kan çanağına dönene kadar ekran başında çalıştın. Basit bir algoritma yazdın!
 
 (if: $yazilim_bilgisi &gt;= 40)[
@@ -336,9 +399,10 @@ Ofis boy olarak işe başladın. Her yer bilgisayar dolu. Geceleri ofisi temizle
     [[Stajyerliği kabul et-&gt;YazilimStaj]]
 ]
 (else:)[
-    Henüz yolun başındasın. Biraz daha pratik yapman lazım.
-    [[Eve git ve uyu-&gt;GunSonu]]
-]</tw-passagedata><tw-passagedata pid="34" name="MuhendisDestek" tags="" position="1450,300" size="100,100">Mühendis gözlüklerini düzelterek sana baktı. &quot;Bu algoritma çok temiz. Kimden öğrendin?&quot; 
+    Henüz yolun başındasın. Biraz daha pratik yapman lazım. Yazılım Bilgin: %$yazilim_bilgisi
+    
+    [[Ofisten çık ve eve git-&gt;GunSonu]]
+]s</tw-passagedata><tw-passagedata pid="34" name="MuhendisDestek" tags="" position="1475,275" size="100,100">Mühendis gözlüklerini düzelterek sana baktı. &quot;Bu algoritma çok temiz. Kimden öğrendin?&quot; 
 
 (set: $ozguven to it + 10)
 
@@ -403,10 +467,11 @@ Depo soğuk ve tozlu ama en azından bir çatın var.
 
 Sabah uyandığında her yerin tutulmuş, enerjin yerlerde. Şehir seni gerçekten zorluyor Barış. Ama hala nefes alıyorsun.
 
-[[Zorlukla ayağa kalk ve güne başla-&gt;GuneBasla]]</tw-passagedata><tw-passagedata pid="41" name="YazilimStaj" tags="" position="1600,300" size="100,100">Gündüzleri çay taşıyor, geceleri ise satırlarca kod yazıyorsun. Mühendis sana bir proje verdi: Şirketin yeni uygulaması için bir giriş ekranı hazırlaman lazım.
+[[Zorlukla ayağa kalk ve güne başla-&gt;GuneBasla]]</tw-passagedata><tw-passagedata pid="41" name="YazilimStaj" tags="" position="1700,125" size="100,100">Gündüzleri çay taşıyor, geceleri ise satırlarca kod yazıyorsun. Mühendis sana bir proje verdi: Şirketin yeni uygulaması için bir giriş ekranı hazırlaman lazım.
 
 (set: $enerji to it - 50)
 (set: $yazilim_bilgisi to it + 30)
+(set: $meslek to &quot;Yazılım Stajyeri&quot;)
 
 (if: $yazilim_bilgisi &gt; 40)[
     Görevi başarıyla tamamladın! Mühendis sana 200 TL prim verdi.
@@ -416,19 +481,19 @@ Sabah uyandığında her yerin tutulmuş, enerjin yerlerde. Şehir seni gerçekt
 (else:)[
     Hata yaptın ve sistem çöktü. Mühendis biraz kızgın ama &quot;Denemeye devam et&quot; diyor.
     [[Hatalarından ders al-&gt;KodlamaOgrenme]]
-]</tw-passagedata><tw-passagedata pid="42" name="DerinMesajCak" tags="" position="1750,300" size="100,100">Derin&#39;e hemen heyecanla yazdın: &quot;Sanırım bu işi kıvırıyorum, ilk kodumu onaylattım ve prim aldım!&quot;
+]</tw-passagedata><tw-passagedata pid="42" name="DerinMesajCak" tags="" position="1725,500" size="100,100">Derin&#39;e hemen heyecanla yazdın: &quot;Sanırım bu işi kıvırıyorum, ilk kodumu onaylattım ve prim aldım!&quot;
 
 Derin&#39;den anında cevap geldi: &quot;Harikasın Barış! Seninle gurur duyuyorum. ❤️ Akşam bunu kutlamalıyız, küçük bir sürprizim var.&quot;
 
 [[Sürprizin ne olduğunu sor-&gt;DerinSurpriz]]
-[[Bekleyip göreceğini söyle (Kutlama yemeğine git)-&gt;DerinKutlamaYemegi]]</tw-passagedata><tw-passagedata pid="43" name="DerinSurpriz" tags="" position="1900,175" size="100,100">Derin sana eski ama çalışan bir **laptop** getirdi. 
+[[Bekleyip göreceğini söyle (Kutlama yemeğine git)-&gt;DerinKutlamaYemegi]]</tw-passagedata><tw-passagedata pid="43" name="DerinSurpriz" tags="" position="1975,75" size="100,100">Derin sana eski ama çalışan bir **laptop** getirdi. 
 &quot;Artık ofiste gizli gizli çalışmana gerek yok, evde kendi işlerini yapabilirsin,&quot; dedi.
 
 (set: $esya_laptop to true)
 (set: $moral to it + 30)
 
 [[Teşekkür et ve ona sarıl-&gt;DerinDuygusalAn]]
-[[Hemen laptopu açıp iş ara-&gt;FreelanceBaslangic]]</tw-passagedata><tw-passagedata pid="44" name="DerinDuygusalAn" tags="" position="2100,500" size="100,100">{
+[[Hemen laptopu açıp iş ara-&gt;FreelanceBaslangic]]</tw-passagedata><tw-passagedata pid="44" name="DerinDuygusalAn" tags="" position="2100,475" size="100,100">{
 (set: $moral to it + 20)
 (set: $itibar to it + 10)
 }Derin&#39;e sarıldığında, bu kalabalık ve soğuk şehirde artık yalnız olmadığını hissediyorsun. 
@@ -449,7 +514,7 @@ Derin gözlerinin içine bakarak gülümsüyor: &quot;Sana hep inandım. Bir gü
 (else:)[
     Laptopun olmadığı için bu ekranı göremiyor olman lazımdı. Bir hata oluştu.
     [[Geri dön-&gt;GuneBasla]]
-]</tw-passagedata><tw-passagedata pid="46" name="GecmisinGolgesi" tags="" position="2300,1325" size="100,100">Tam işlerini yoluna koymuşken, ofisin kapısında sert bakışlı bir adam belirdi. Elinde senin cüzdandan çıkan o eski kartvizit var.
+]</tw-passagedata><tw-passagedata pid="46" name="GecmisinGolgesi" tags="" position="2200,1175" size="100,100">Tam işlerini yoluna koymuşken, ofisin kapısında sert bakışlı bir adam belirdi. Elinde senin cüzdandan çıkan o eski kartvizit var.
 
 &quot;O cüzdanın içindeki sadece para değildi evlat,&quot; diyor alçak sesle. &quot;İçindeki mikro çip nerede?&quot;
 
@@ -476,7 +541,7 @@ Adam gülümsedi ama bu hiç iç açıcı bir gülümseme değildi. &quot;Yalan 
 (else:)[
     Hiçbir iz bulamadın. Şehir, sırlarını sana geri vermiyor. Mafya bu cevaptan hiç hoşlanmayacak...
     [[Korku içinde eve dön ve uyu-&gt;GunSonu]]
-]</tw-passagedata><tw-passagedata pid="49" name="MafyaGorev2" tags="" position="2375,1500" size="100,100">{
+]</tw-passagedata><tw-passagedata pid="49" name="MafyaGorev2" tags="" position="2325,1500" size="100,100">{
 (if: $esya_cip is true)[
 	Çipi masaya bıraktın. Adamın gözleri parladı. &quot;Güzel... Şimdi gerçek bir iş için hazırsın.&quot;
 ](else:)[
@@ -509,20 +574,23 @@ Mafya lideri sana bir dosya uzatıyor. Bir bankanın güvenlik duvarını aşman
 	&quot;Henüz yolun başındayız ama doğru yöne gidiyoruz,&quot; diyor Derin.
     
     [[Yeni güne odaklan-&gt;GuneBasla]]
-]</tw-passagedata><tw-passagedata pid="51" name="panel" tags="header" position="0,0" size="100,100">&lt;div class=&quot;stats-container&quot;&gt;
-  &lt;span&gt;💰 (if: $para &lt; 100)[(color: &quot;red&quot;)[$para TL]](else:)[$para TL]&lt;/span&gt; | 
-  &lt;span&gt;⚡ (set: _vizEnerji to (min: $enerji, 100)) (if: _vizEnerji &lt; 20)[(color: &quot;orange&quot;)[%_vizEnerji Enerji]](else:)[%_vizEnerji Enerji]&lt;/span&gt; | 
-  &lt;span&gt;⭐ $itibar İtibar&lt;/span&gt; | 
-  &lt;span&gt;🧠 %$yazilim_bilgisi Yazılım&lt;/span&gt; | 
-  &lt;span&gt;❤️ %$moral Moral&lt;/span&gt; |
-  &lt;span&gt;📅 Gün: $gun&lt;/span&gt;
-&lt;/div&gt;
-&lt;hr&gt;</tw-passagedata><tw-passagedata pid="52" name="GunSonu" tags="" position="300,1100" size="100,100">{
+]</tw-passagedata><tw-passagedata pid="51" name="panel" tags="header" position="0,0" size="100,100">&lt;div class=&quot;stats-bar&quot;&gt;
+  &lt;div class=&quot;stat-item&quot;&gt;💰 $para TL&lt;/div&gt;
+  &lt;div class=&quot;stat-item&quot;&gt;⚡ (set: _vizEnerji to (min: $enerji, 100)) %_vizEnerji&lt;/div&gt;
+  &lt;div class=&quot;stat-item&quot;&gt;⭐ $itibar İtibar&lt;/div&gt;
+  &lt;div class=&quot;stat-item&quot;&gt;🧠 %$yazilim_bilgisi&lt;/div&gt;
+  &lt;div class=&quot;stat-item&quot;&gt;🏢 $meslek&lt;/div&gt;
+  &lt;div class=&quot;stat-item&quot;&gt;📅 Gün: $gun&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="GunSonu" tags="" position="300,1100" size="100,100">{
 (set: $gun to it + 1)
 (set: $enerji to 100) 
 (set: $moral to (min: it + 5, 100))
+
+(if: $maas &gt; 0)[(set: $para to it + $maas)]
 }
-(if: $gun == 4 and $gecmisTetiklendi is not true)[
+(if: $maas &gt; 0)[Bugün işe gittin ve **$maas TL** kazandın! 💰]
+
+(if: $gun &gt;= 4 and $cuzdanBulundu is true and $gecmisTetiklendi is false)[
 	(set: $gecmisTetiklendi to true)
 	(goto: &quot;GecmisinGolgesi&quot;)
 ]
@@ -540,7 +608,7 @@ Ofisindeki dev ekranda ilk oyununuzun indirme sayılarını izlerken, şehrin ı
 **OYUN BİTTİ**
 *Barış&#39;ın Hikayesi - Başarı Sonu*
 
-[[Hikayeyi En Baştan Oyna (Sıfırla)-&gt;başlangıç]]</tw-passagedata><tw-passagedata pid="54" name="DerinKutlamaYemegi" tags="" position="1900,500" size="100,100">{
+[[Hikayeyi En Baştan Oyna (Sıfırla)-&gt;başlangıç]]</tw-passagedata><tw-passagedata pid="54" name="DerinKutlamaYemegi" tags="" position="1925,500" size="100,100">{
 (set: $moral to it + 15)
 }Şık bir restoranda (veya bütçene göre daha mütevazı bir yerde) oturdunuz. 
 Derin çok mutlu görünüyor. &quot;Şehre ilk geldiğin günü hatırla Barış, nereden nereye!&quot; diyor.
@@ -614,7 +682,29 @@ Gözlerini açtığında bir hastane odasındasın (veya birileri seni kenara ç
 (set: $yazilim_bilgisi to it + 5)
 }Deponun köşesindeki sönük ışıkta laptopunu açtın ve sabaha kadar kod yazdın. 300 TL kazandın ama gözlerin kan çanağına döndü.
 
-[[Biraz kestir ve sabah işe odaklan-&gt;GunSonu]]</tw-passagedata></tw-storydata>
+[[Biraz kestir ve sabah işe odaklan-&gt;GunSonu]]</tw-passagedata><tw-passagedata pid="63" name="IseGit" tags="" position="50,950" size="100,100">{
+(set: $enerji to (max: it - 40, 0))
+(set: $itibar to it + 2)
+}
+(if: $meslek is &quot;Garson&quot;)[
+    Bugün restoranda tabak taşıdın. Yorucu bir gündü.
+    [[Eve dön ve dinlen-&gt;GunSonu]]
+]
+(else-if: $meslek is &quot;Ofis Boy&quot;)[
+    Bugün ofiste getir götür işlerini yaptın. Mesai bitti ama ofis hala açık...
+    
+    [[Eve dön ve uyu-&gt;GunSonu]]
+    [[Geceleri gizlice kodlama öğrenmeye çalış (Ekstra Enerji tüketir)-&gt;KodlamaOgrenme]]
+]</tw-passagedata><tw-passagedata pid="64" name="KuryeGuvenli" tags="" position="1050,775" size="100,100">{
+(set: $para to it + 100)
+(set: $enerji to (max: it - 30, 0))
+(set: $itibar to it + 2)
+}Kurallara uyarak, kırmızı ışıklarda bekleyerek tüm paketleri sağ salim teslim ettin. 
+
+Müşteriler paketlerin geç gelmesinden biraz şikayetçi ama en azından kaza yapmadın. 100 TL kazandın.
+
+[[Bugünlük bu kadar yeter-&gt;GunSonu]]
+[[Bir tur daha paket dağıt-&gt;MotorluKurye]]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
