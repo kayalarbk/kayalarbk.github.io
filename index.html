@@ -1,397 +1,655 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YÖKDİL Fen Kelime Çalışma Uygulaması</title>
-    <style>
-        :root {
-            --primary: #d32f2f;
-            --secondary: #2c3e50;
-            --bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text: #333333;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YÖKDİL Fen — Kelime Defteri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14201c;
+    --bg-alt:#1b2a23;
+    --paper:#fbf7ec;
+    --paper-line:#e6ddc8;
+    --ink:#20271f;
+    --accent:#e8c547;
+    --mint:#6fcf97;
+    --coral:#e2725b;
+    --muted:#7fa28e;
+    --soft:#dde5dc;
+    --soft-dim:#9aab9f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 20% 0%, #1c2f27 0%, transparent 55%),
+      radial-gradient(circle at 90% 90%, #1a2a23 0%, transparent 50%),
+      var(--bg);
+    color:var(--soft);
+    font-family:'Space Grotesk', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:18px 14px 40px;
+  }
+  .app{ width:100%; max-width:480px; }
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+  /* Header */
+  header{ text-align:center; margin-bottom:18px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 4px;
+    color:var(--accent);
+    letter-spacing:.01em;
+  }
+  .sub{ font-size:13px; color:var(--soft-dim); }
 
-        h1 {
-            color: var(--primary);
-            margin-bottom: 5px;
-            font-size: 24px;
-        }
+  /* Stats strip */
+  .stats{
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--soft-dim);
+    margin:16px 2px 8px;
+  }
+  .stats b{ color:var(--accent); font-weight:600; }
+  .progress-track{
+    height:3px;
+    background:rgba(255,255,255,.08);
+    border-radius:2px;
+    overflow:hidden;
+    margin-bottom:18px;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--mint), var(--accent));
+    width:0%;
+    transition:width .3s ease;
+  }
 
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+  /* Tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    background:var(--bg-alt);
+    padding:4px;
+    border-radius:10px;
+    margin-bottom:14px;
+  }
+  .tab{
+    flex:1;
+    text-align:center;
+    padding:9px 4px;
+    font-size:13px;
+    font-weight:600;
+    border-radius:7px;
+    cursor:pointer;
+    color:var(--soft-dim);
+    user-select:none;
+    transition:background .15s, color .15s;
+  }
+  .tab.active{ background:var(--accent); color:#1d1605; }
 
-        button {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
+  /* Category chips */
+  .chips{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:10px;
+    margin-bottom:8px;
+    scrollbar-width:none;
+  }
+  .chips::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex:0 0 auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    padding:6px 11px;
+    border-radius:999px;
+    border:1px solid rgba(127,162,142,.4);
+    color:var(--muted);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .15s;
+  }
+  .chip.active{ background:var(--muted); color:#0e1a14; border-color:var(--muted); }
 
-        button:hover {
-            background-color: var(--primary);
-        }
+  .hidden{ display:none !important; }
 
-        button.active {
-            background-color: var(--primary);
-        }
+  /* Flashcard */
+  .card-wrap{ perspective:1200px; height:280px; cursor:pointer; margin-bottom:14px; }
+  .card{
+    width:100%; height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{ transform:rotateY(180deg); }
+  .face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    border-radius:14px;
+    padding:26px 22px;
+    display:flex; flex-direction:column;
+    background:var(--paper);
+    color:var(--ink);
+    box-shadow:0 14px 30px rgba(0,0,0,.35);
+    border:1px dashed var(--paper-line);
+  }
+  .face-back{ transform:rotateY(180deg); background:#22332b; color:var(--soft); border:1px dashed rgba(232,197,71,.3);}
+  .tag-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:auto; }
+  .cat-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid rgba(127,162,142,.5);
+    padding:3px 8px;
+    border-radius:999px;
+  }
+  .box-dot{ display:flex; gap:4px; }
+  .box-dot span{ width:6px; height:6px; border-radius:50%; background:rgba(127,162,142,.25); }
+  .box-dot span.on{ background:var(--mint); }
+  .face-back .box-dot span.on{ background:var(--accent); }
+  .word-en{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:21px;
+    line-height:1.32;
+    margin:auto 0;
+  }
+  .word-tr{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:23px;
+    line-height:1.3;
+    margin:auto 0;
+    color:var(--accent);
+  }
+  .hint{ font-size:11px; color:var(--soft-dim); margin-top:auto; }
+  .face-front .hint{ color:#9a9484; }
 
-        .container {
-            width: 100%;
-            max-width: 500px;
-            min-height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  .grade-row{ display:flex; gap:10px; margin-bottom:10px; }
+  .grade-btn{
+    flex:1;
+    padding:13px 8px;
+    border-radius:10px;
+    border:none;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .grade-again{ background:rgba(226,114,91,.15); color:var(--coral); border:1px solid rgba(226,114,91,.4); }
+  .grade-good{ background:rgba(111,207,151,.15); color:var(--mint); border:1px solid rgba(111,207,151,.4); }
 
-        /* Flashcard Styles */
-        .card-container {
-            perspective: 1000px;
-            width: 100%;
-            height: 250px;
-            cursor: pointer;
-        }
+  .nav-row{ display:flex; gap:10px; }
+  .nav-btn{
+    flex:1;
+    padding:11px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.12);
+    background:transparent;
+    color:var(--soft-dim);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .nav-btn:active{ background:rgba(255,255,255,.06); }
 
-        .card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
+  /* Quiz */
+  .quiz-card{
+    background:var(--bg-alt);
+    border-radius:14px;
+    padding:20px 18px;
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .quiz-q{
+    font-family:'Fraunces', serif;
+    font-size:17px;
+    line-height:1.4;
+    color:var(--soft);
+    margin-bottom:16px;
+  }
+  .quiz-q b{ color:var(--accent); }
+  .opt{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    color:var(--soft);
+    padding:12px 14px;
+    border-radius:9px;
+    margin-bottom:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13.5px;
+    line-height:1.35;
+    cursor:pointer;
+  }
+  .opt.correct{ background:rgba(111,207,151,.18); border-color:var(--mint); color:var(--mint); }
+  .opt.wrong{ background:rgba(226,114,91,.18); border-color:var(--coral); color:var(--coral); }
+  .scoreboard{
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--soft-dim);
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px dashed rgba(255,255,255,.1);
+  }
+  .scoreboard b.ok{ color:var(--mint); }
+  .scoreboard b.bad{ color:var(--coral); }
 
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
+  /* List view */
+  .search-box{
+    width:100%;
+    padding:11px 13px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.1);
+    background:var(--bg-alt);
+    color:var(--soft);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13px;
+    margin-bottom:10px;
+  }
+  .search-box::placeholder{ color:var(--soft-dim); }
+  .list-group{ margin-bottom:14px; }
+  .list-group-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 6px 2px;
+  }
+  .list-item{
+    background:var(--bg-alt);
+    border-radius:9px;
+    padding:10px 12px;
+    margin-bottom:6px;
+    border-left:3px solid var(--accent);
+  }
+  .list-item .li-en{ font-size:13px; font-weight:600; color:var(--soft); margin-bottom:2px; }
+  .list-item .li-tr{ font-size:12.5px; color:var(--soft-dim); }
 
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .card-front {
-            background-color: var(--card-bg);
-            border: 2px solid var(--secondary);
-        }
-
-        .card-back {
-            background-color: var(--secondary);
-            color: white;
-            transform: rotateY(180deg);
-        }
-
-        .word-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .card-back .word-title {
-            color: #ffeb3b;
-        }
-
-        .synonyms {
-            font-size: 16px;
-            color: #555;
-            font-style: italic;
-        }
-
-        .card-back .synonyms {
-            color: #e0e0e0;
-        }
-
-        /* Quiz Styles */
-        .quiz-container {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .question {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .option-btn {
-            background-color: #f0f0f0;
-            color: #333;
-            text-align: left;
-            padding: 12px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .option-btn:hover {
-            background-color: #e0e0e0;
-        }
-
-        .score-board {
-            margin-top: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .controls {
-            margin-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-    </style>
+  ::selection{ background:var(--accent); color:#1d1605; }
+</style>
 </head>
 <body>
+<div class="app">
 
-    <header>
-        <h1>YÖKDİL Fen Kelime Ezber</h1>
-        <p>Görsel notlarından hazırlanan interaktif çalışma seti</p>
-    </header>
+  <header>
+    <div class="eyebrow">YÖKDİL · Fen Bilimleri</div>
+    <h1>Kelime Defteri</h1>
+    <div class="sub">150 sık çıkan akademik kelime grubu</div>
+  </header>
 
-    <div class="nav-buttons">
-        <button id="flashcard-mode-btn" class="active" onclick="switchMode('flashcard')">Kartlar (Flashcards)</button>
-        <button id="quiz-mode-btn" onclick="switchMode('quiz')">Test Et (Quiz)</button>
-    </div>
+  <div class="stats">
+    <span>Çalışılan: <b id="stat-seen">0</b>/<span id="stat-total">0</span></span>
+    <span>Öğrenildi: <b id="stat-known">0</b></span>
+    <span>Tekrarda: <b id="stat-review">0</b></span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 
-    <div class="container">
-        <div id="flashcard-area" class="card-container" onclick="flipCard()">
-            <div class="card" id="card">
-                <div class="card-face card-front">
-                    <div class="word-title" id="front-text">Loading...</div>
-                    <div class="synonyms" id="front-sub">Eş anlamlılar için tıkla</div>
-                </div>
-                <div class="card-face card-back">
-                    <div class="word-title" id="back-text">Loading...</div>
-                    <div class="synonyms" id="back-sub"></div>
-                </div>
-            </div>
+  <div class="tabs">
+    <div class="tab active" data-mode="flashcard">Kartlar</div>
+    <div class="tab" data-mode="quiz">Test</div>
+    <div class="tab" data-mode="list">Liste</div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <!-- FLASHCARD MODE -->
+  <div id="flashcard-area">
+    <div class="card-wrap" id="card-wrap">
+      <div class="card" id="card">
+        <div class="face face-front">
+          <div class="tag-row">
+            <span class="cat-tag" id="front-cat">—</span>
+            <div class="box-dot" id="front-dots"></div>
+          </div>
+          <div class="word-en" id="front-text">Yükleniyor…</div>
+          <div class="hint">Çevirmek için karta dokun</div>
         </div>
-
-        <div id="quiz-area" class="quiz-container hidden">
-            <div class="question" id="quiz-question">Soru yükleniyor...</div>
-            <div class="options" id="quiz-options"></div>
-            <div class="score-board" id="score-board">Doğru: 0 | Yanlış: 0</div>
+        <div class="face face-back">
+          <div class="tag-row">
+            <span class="cat-tag" id="back-cat">—</span>
+            <div class="box-dot" id="back-dots"></div>
+          </div>
+          <div class="word-tr" id="back-text">Yükleniyor…</div>
+          <div class="hint">Tekrar dokunarak geri dön</div>
         </div>
+      </div>
     </div>
 
-    <div class="controls" id="control-buttons">
-        <button onclick="prevWord()">Geri</button>
-        <button onclick="nextWord()">İleri / Rastgele</button>
+    <div class="grade-row">
+      <button class="grade-btn grade-again" id="btn-again">↻ Tekrar Et</button>
+      <button class="grade-btn grade-good" id="btn-good">✓ Biliyorum</button>
     </div>
+    <div class="nav-row">
+      <button class="nav-btn" id="btn-prev">← Geri</button>
+      <button class="nav-btn" id="btn-shuffle">⟳ Karıştır</button>
+      <button class="nav-btn" id="btn-next">İleri →</button>
+    </div>
+  </div>
 
-    <script>
-        // Görsellerdeki kelimelerin birebir eşleşen veri seti
-        const vocabulary = [
-            { eng: "Conform to / Comply with / Adhere to / Abide by / Align with / Commit to", tr: "Uymak, Bağlı kalmak" },
-            { eng: "Ubiquitous / Pervasive / Prevalent / Widespread", tr: "Yaygın, Her yerde bulunan" },
-            { eng: "Reversible", tr: "Geri döndürülebilir" },
-            { eng: "Irreversible", tr: "Geri döndürülemez" },
-            { eng: "Fertile", tr: "Verimli (Toprak vb.)" },
-            { eng: "Fruitless", tr: "Verimsiz, Sonuçsuz" },
-            { eng: "Feasible / Viable / Executable", tr: "Gerçekleştirilebilir, Uygulanabilir" },
-            { eng: "Draw on / Exploit / Harness / Employ / Utilize", tr: "Yararlanmak, Kullanmak, Sömürmek" },
-            { eng: "Engage in / Participate in", tr: "Yer almak, Katılmak" },
-            { eng: "Impetus / Stimulus / Incentive / Inducement / Driving force", tr: "Asıl güç, Dürtü, Güdü, Teşvik" },
-            { eng: "Reminiscent / Evocative", tr: "Andıran, Hatırlatan" },
-            { eng: "Responsive", tr: "Duyarlı, Tepki veren" },
-            { eng: "Confidential", tr: "Gizli" },
-            { eng: "Consent", tr: "Rıza, Onay" },
-            { eng: "Call off / Abolish / Do away with / Cancel", tr: "Yürürlükten kaldırmak, İptal etmek" },
-            { eng: "Receding / Withdraw / Retreat", tr: "Geri çekilme, Geri adım atmak" },
-            { eng: "Seeking / Look for / Forage for", tr: "Aramak (Hayvanların yiyecek araması dahil)" },
-            { eng: "Abandoning / Leave / Forsake / Relinquish", tr: "Bırakmak, Terk etmek" },
-            { eng: "Ascertain / Define / Determined", tr: "Belirlemek, Tespit etmek" },
-            { eng: "Demonstrated / Prove / Evidence", tr: "Göstermek, Kanıtlamak" },
-            { eng: "Severely", tr: "Ciddi şekilde, Ağır biçimde (- olumsuz anlam)" },
-            { eng: "Induced / Prompt / Stimulate / Trigger / Cause / Give rise to", tr: "Teşvik etmek, Yol açmak, Tetiklemek" },
-            { eng: "Perpetuate / Maintain / Continue / Sustain / Prolong", tr: "Sürdürmek, Devam ettirmek" },
-            { eng: "Overcome / Get over / Surmount", tr: "Üstesinden gelmek" },
-            { eng: "Vanished / Fade / Disappear", tr: "Yok olmak, Gözden kaybolmak (≠ Exist)" },
-            { eng: "Disseminated / Distribute / Scatter / Disperse / Spread / Transmit / Circulate", tr: "Yaymak, Dağıtmak" },
-            { eng: "Resistance / Opposition / Defiance", tr: "Direnç, Karşı koyma" },
-            { eng: "Vulnerability / Susceptible", tr: "Hassaslık, Savunmasızlık" },
-            { eng: "Commitment / Devotion / Dedication / Obligation", tr: "Bağlılık, Sadakat, Zorunluluk" },
-            { eng: "Indifference / Reluctance", tr: "İlgisizlik, Kayıtsızlık, Gönülsüzlük" },
-            { eng: "Bring up", tr: "Gündeme getirmek veya Çocuk yetiştirmek" },
-            { eng: "Requirement / Need / Necessity", tr: "Gereklilik, İhtiyaç" },
-            { eng: "Drain / Depletion", tr: "Tüketme, Boşaltma" },
-            { eng: "Propensity / Tendency / Predisposition", tr: "Eğilim, Meyil" },
-            { eng: "Prosperity / Welfare / Flourish / Thrive", tr: "Refah, Gelişme, Zenginleşme" },
-            { eng: "Prospect", tr: "Olasılık, Umut, Beklenti" },
-            { eng: "Indispensable / Integral / Crucial", tr: "Ayrılmaz, Çok önemli, Vazgeçilmez" },
-            { eng: "Obedience / Conformity / Compliance / Submission", tr: "Boyun eğme, İtaat" },
-            { eng: "Inferiority", tr: "Daha düşük olma, Aşağılık (≠ Superior)" },
-            { eng: "Under pressure", tr: "Baskı altında" },
-            { eng: "Contend / Contend with / Deal with", tr: "İddia etmek; Mücadele etmek, Başa çıkmak" }
-        ];
+  <!-- QUIZ MODE -->
+  <div id="quiz-area" class="hidden">
+    <div class="quiz-card">
+      <div class="quiz-q" id="quiz-question">Soru yükleniyor…</div>
+      <div id="quiz-options"></div>
+      <div class="scoreboard">
+        <span>Doğru: <b class="ok" id="q-correct">0</b></span>
+        <span>Yanlış: <b class="bad" id="q-wrong">0</b></span>
+        <span>Seri: <b id="q-streak">0</b></span>
+      </div>
+    </div>
+  </div>
 
-        let currentIndex = 0;
-        let currentMode = 'flashcard';
-        let score = { correct: 0, incorrect: 0 };
+  <!-- LIST MODE -->
+  <div id="list-area" class="hidden">
+    <input class="search-box" id="search" placeholder="Kelime veya anlam ara…">
+    <div id="list-results"></div>
+  </div>
 
-        function updateFlashcard() {
-            const card = document.getElementById('card');
-            card.classList.remove('flipped');
-            setTimeout(() => {
-                document.getElementById('front-text').innerText = vocabulary[currentIndex].eng;
-                document.getElementById('back-text').innerText = vocabulary[currentIndex].tr;
-            }, 150);
-        }
+</div>
 
-        function flipCard() {
-            if (currentMode === 'flashcard') {
-                document.getElementById('card').classList.toggle('flipped');
-            }
-        }
+<script>
+/* ---------------- VOCABULARY DATA ---------------- */
+const vocabulary = [
+  // --- Davranış & Tutum ---
+  {eng:"Conform to / Comply with / Adhere to / Abide by / Align with / Commit to", tr:"Uymak, bağlı kalmak", cat:"Davranış & Tutum"},
+  {eng:"Obedience / Conformity / Compliance / Submission", tr:"Boyun eğme, itaat", cat:"Davranış & Tutum"},
+  {eng:"Indifference / Reluctance / Apathy", tr:"İlgisizlik, kayıtsızlık, gönülsüzlük", cat:"Davranış & Tutum"},
+  {eng:"Commitment / Devotion / Dedication / Obligation", tr:"Bağlılık, sadakat, zorunluluk", cat:"Davranış & Tutum"},
+  {eng:"Resistance / Opposition / Defiance", tr:"Direnç, karşı koyma", cat:"Davranış & Tutum"},
+  {eng:"Vulnerability / Susceptible (to)", tr:"Hassaslık, savunmasızlık", cat:"Davranış & Tutum"},
+  {eng:"Inferiority", tr:"Daha düşük olma, aşağılık (≠ superior)", cat:"Davranış & Tutum"},
+  {eng:"Under pressure", tr:"Baskı altında", cat:"Davranış & Tutum"},
+  {eng:"Contend / Contend with / Deal with / Cope with", tr:"İddia etmek; mücadele etmek, başa çıkmak", cat:"Davranış & Tutum"},
+  {eng:"Propensity / Tendency / Predisposition / Inclination", tr:"Eğilim, meyil", cat:"Davranış & Tutum"},
+  {eng:"Bring up", tr:"Gündeme getirmek veya çocuk yetiştirmek", cat:"Davranış & Tutum"},
+  {eng:"Responsive", tr:"Duyarlı, tepki veren", cat:"Davranış & Tutum"},
+  {eng:"Reminiscent of / Evocative of", tr:"Andıran, hatırlatan", cat:"Davranış & Tutum"},
 
-        function nextWord() {
-            if (currentMode === 'flashcard') {
-                currentIndex = (currentIndex + 1) % vocabulary.length;
-                updateFlashcard();
-            } else {
-                generateQuizQuestion();
-            }
-        }
+  // --- Neden-Sonuç ---
+  {eng:"Induce / Prompt / Stimulate / Trigger / Cause / Give rise to", tr:"Teşvik etmek, yol açmak, tetiklemek", cat:"Neden-Sonuç"},
+  {eng:"Bring about / Lead to / Result in / Culminate in", tr:"Yol açmak, sonuçlanmak", cat:"Neden-Sonuç"},
+  {eng:"Stem from / Arise from / Originate from / Derive from", tr:"Kaynaklanmak, doğmak", cat:"Neden-Sonuç"},
+  {eng:"Attribute to / Ascribe to", tr:"Atfetmek, bir sebebe bağlamak", cat:"Neden-Sonuç"},
+  {eng:"Owing to / Due to / Because of / As a result of", tr:"Yüzünden, nedeniyle", cat:"Neden-Sonuç"},
+  {eng:"Consequently / As a consequence / Therefore / Thus / Hence", tr:"Sonuç olarak, bu nedenle", cat:"Neden-Sonuç"},
+  {eng:"Contribute to / Play a role in / Account for", tr:"Katkıda bulunmak, sebep olmak", cat:"Neden-Sonuç"},
+  {eng:"Impetus / Stimulus / Incentive / Inducement / Driving force", tr:"Asıl güç, dürtü, güdü, teşvik", cat:"Neden-Sonuç"},
 
-        function prevWord() {
-            if (currentMode === 'flashcard') {
-                currentIndex = (currentIndex - 1 + vocabulary.length) % vocabulary.length;
-                updateFlashcard();
-            }
-        }
+  // --- Artış / Azalış ---
+  {eng:"Soar / Surge / Skyrocket / Escalate", tr:"Hızla artmak, fırlamak", cat:"Artış & Azalış"},
+  {eng:"Decline / Diminish / Dwindle / Plummet / Plunge", tr:"Azalmak, düşmek", cat:"Artış & Azalış"},
+  {eng:"Fluctuate / Vary", tr:"Dalgalanmak, değişkenlik göstermek", cat:"Artış & Azalış"},
+  {eng:"Stabilize / Level off / Plateau", tr:"Sabitlenmek, durağanlaşmak", cat:"Artış & Azalış"},
+  {eng:"Gradual / Steady / Incremental", tr:"Kademeli, aşamalı", cat:"Artış & Azalış"},
+  {eng:"Abrupt / Sudden / Drastic / Sharp", tr:"Ani, keskin", cat:"Artış & Azalış"},
+  {eng:"Drain / Depletion", tr:"Tüketme, boşaltma", cat:"Artış & Azalış"},
+  {eng:"Perpetuate / Maintain / Continue / Sustain / Prolong", tr:"Sürdürmek, devam ettirmek", cat:"Artış & Azalış"},
 
-        function switchMode(mode) {
-            currentMode = mode;
-            document.getElementById('flashcard-mode-btn').classList.toggle('active', mode === 'flashcard');
-            document.getElementById('quiz-mode-btn').classList.toggle('active', mode === 'quiz');
-            
-            if (mode === 'flashcard') {
-                document.getElementById('flashcard-area').classList.remove('hidden');
-                document.getElementById('quiz-area').classList.add('hidden');
-                document.getElementById('control-buttons').classList.remove('hidden');
-                updateFlashcard();
-            } else {
-                document.getElementById('flashcard-area').classList.add('hidden');
-                document.getElementById('quiz-area').classList.remove('hidden');
-                document.getElementById('control-buttons').classList.add('hidden'); // Quiz has its own flow
-                generateQuizQuestion();
-            }
-        }
+  // --- Karşılaştırma ---
+  {eng:"Despite / In spite of / Notwithstanding", tr:"-e rağmen", cat:"Karşılaştırma"},
+  {eng:"Whereas / While / On the other hand / In contrast / Conversely", tr:"Oysa ki, diğer yandan", cat:"Karşılaştırma"},
+  {eng:"Analogous to / Akin to / Comparable to", tr:"Benzer, andıran", cat:"Karşılaştırma"},
+  {eng:"Distinct from / Differ from / Diverge from", tr:"Farklı olmak, ayrışmak", cat:"Karşılaştırma"},
+  {eng:"Outweigh / Surpass / Exceed / Override", tr:"Ağır basmak, geçmek", cat:"Karşılaştırma"},
 
-        function generateQuizQuestion() {
-            const correctIndex = Math.floor(Math.random() * vocabulary.length);
-            const questionWord = vocabulary[correctIndex];
-            
-            document.getElementById('quiz-question').innerText = `"${questionWord.tr}" anlamına gelen kelime grubu hangisidir?`;
-            
-            let options = [questionWord.eng];
-            while (options.length < 4) {
-                const randIndex = Math.floor(Math.random() * vocabulary.length);
-                const randWord = vocabulary[randIndex].eng;
-                if (!options.includes(randWord)) {
-                    options.push(randWord);
-                }
-            }
-            
-            // Seçenekleri karıştır
-            options.sort(() => Math.random() - 0.5);
-            
-            const optionsContainer = document.getElementById('quiz-options');
-            optionsContainer.innerHTML = '';
-            
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(opt, questionWord.eng, btn);
-                optionsContainer.appendChild(btn);
-            });
-        }
+  // --- Olasılık & Kesinlik ---
+  {eng:"Feasible / Viable / Executable", tr:"Gerçekleştirilebilir, uygulanabilir", cat:"Olasılık & Kesinlik"},
+  {eng:"Presumably / Arguably / Conceivably", tr:"Muhtemelen, tahminen", cat:"Olasılık & Kesinlik"},
+  {eng:"Inevitably / Invariably / Undoubtedly", tr:"Kaçınılmaz olarak, şüphesiz", cat:"Olasılık & Kesinlik"},
+  {eng:"Plausible / Credible / Conceivable", tr:"Akla yatkın, inandırıcı", cat:"Olasılık & Kesinlik"},
+  {eng:"Dubious / Questionable / Ambiguous", tr:"Şüpheli, belirsiz", cat:"Olasılık & Kesinlik"},
+  {eng:"Presuppose / Assume / Postulate", tr:"Varsaymak, öne sürmek", cat:"Olasılık & Kesinlik"},
+  {eng:"Prospect", tr:"Olasılık, umut, beklenti", cat:"Olasılık & Kesinlik"},
 
-        function checkAnswer(selected, correct, clickedBtn) {
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => btn.disabled = true); // Tıklamaları dondur
-            
-            if (selected === correct) {
-                clickedBtn.style.backgroundColor = '#4caf50';
-                clickedBtn.style.color = 'white';
-                score.correct++;
-            } else {
-                clickedBtn.style.backgroundColor = '#f44336';
-                clickedBtn.style.color = 'white';
-                score.incorrect++;
-                
-                // Doğru olanı yeşil yap
-                buttons.forEach(btn => {
-                    if (btn.innerText === correct) {
-                        btn.style.backgroundColor = '#4caf50';
-                        btn.style.color = 'white';
-                    }
-                });
-            }
-            
-            document.getElementById('score-board').innerText = `Doğru: ${score.correct} | Yanlış: ${score.incorrect}`;
-            
-            // 1.5 saniye sonra yeni soruya geç
-            setTimeout(generateQuizQuestion, 1500);
-        }
+  // --- Araştırma Fiilleri ---
+  {eng:"Investigate / Examine / Explore / Probe", tr:"İncelemek, araştırmak", cat:"Araştırma Fiilleri"},
+  {eng:"Conduct / Carry out / Undertake", tr:"Yürütmek, gerçekleştirmek (deney/çalışma)", cat:"Araştırma Fiilleri"},
+  {eng:"Assess / Evaluate / Appraise / Gauge", tr:"Değerlendirmek, ölçmek", cat:"Araştırma Fiilleri"},
+  {eng:"Detect / Identify / Discern / Pinpoint", tr:"Tespit etmek, saptamak", cat:"Araştırma Fiilleri"},
+  {eng:"Reveal / Unveil / Disclose / Manifest", tr:"Ortaya çıkarmak, göstermek", cat:"Araştırma Fiilleri"},
+  {eng:"Hypothesize / Speculate / Theorize", tr:"Varsaymak, kuram öne sürmek", cat:"Araştırma Fiilleri"},
+  {eng:"Verify / Validate / Corroborate / Substantiate", tr:"Doğrulamak, kanıtlamak", cat:"Araştırma Fiilleri"},
+  {eng:"Refute / Contradict / Challenge / Debunk", tr:"Çürütmek, karşı çıkmak", cat:"Araştırma Fiilleri"},
+  {eng:"Yield / Produce / Generate", tr:"Üretmek, ortaya koymak (sonuç)", cat:"Araştırma Fiilleri"},
+  {eng:"Ascertain / Define / Determine", tr:"Belirlemek, tespit etmek", cat:"Araştırma Fiilleri"},
+  {eng:"Demonstrate / Prove / Provide evidence for", tr:"Göstermek, kanıtlamak", cat:"Araştırma Fiilleri"},
+  {eng:"Disseminate / Distribute / Scatter / Disperse / Spread / Circulate", tr:"Yaymak, dağıtmak", cat:"Araştırma Fiilleri"},
+  {eng:"Draw on / Exploit / Harness / Employ / Utilize", tr:"Yararlanmak, kullanmak, sömürmek", cat:"Araştırma Fiilleri"},
+  {eng:"Overcome / Get over / Surmount", tr:"Üstesinden gelmek", cat:"Araştırma Fiilleri"},
 
-        // İlk açılış kurulumu
-        updateFlashcard();
-    </script>
+  // --- Genel Fiiller ---
+  {eng:"Engage in / Participate in", tr:"Yer almak, katılmak", cat:"Genel Fiiller"},
+  {eng:"Call off / Abolish / Do away with / Cancel", tr:"Yürürlükten kaldırmak, iptal etmek", cat:"Genel Fiiller"},
+  {eng:"Recede / Withdraw / Retreat", tr:"Geri çekilmek, geri adım atmak", cat:"Genel Fiiller"},
+  {eng:"Seek / Look for / Forage for", tr:"Aramak (hayvanların yiyecek araması dahil)", cat:"Genel Fiiller"},
+  {eng:"Abandon / Leave / Forsake / Relinquish", tr:"Bırakmak, terk etmek", cat:"Genel Fiiller"},
+  {eng:"Vanish / Fade / Disappear", tr:"Yok olmak, gözden kaybolmak (≠ exist)", cat:"Genel Fiiller"},
+
+  // --- Miktar & Derece ---
+  {eng:"Ubiquitous / Pervasive / Prevalent / Widespread", tr:"Yaygın, her yerde bulunan", cat:"Miktar & Derece"},
+  {eng:"Severely / Profoundly", tr:"Ciddi şekilde, ağır biçimde (- olumsuz anlam)", cat:"Miktar & Derece"},
+  {eng:"Requirement / Need / Necessity / Prerequisite", tr:"Gereklilik, ihtiyaç, ön koşul", cat:"Miktar & Derece"},
+  {eng:"Indispensable / Integral / Crucial / Vital", tr:"Ayrılmaz, çok önemli, vazgeçilmez", cat:"Miktar & Derece"},
+  {eng:"Substantial / Considerable / Significant / Notable", tr:"Önemli, hatırı sayılır", cat:"Miktar & Derece"},
+  {eng:"Negligible / Marginal / Trivial / Insignificant", tr:"Önemsiz, ihmal edilebilir", cat:"Miktar & Derece"},
+  {eng:"Abundant / Plentiful / Ample", tr:"Bol, bereketli", cat:"Miktar & Derece"},
+  {eng:"Scarce / Sparse / Limited", tr:"Kıt, az bulunur", cat:"Miktar & Derece"},
+  {eng:"Excessive / Exorbitant", tr:"Aşırı, fazla", cat:"Miktar & Derece"},
+  {eng:"Optimal / Ideal / Optimum", tr:"En uygun, ideal", cat:"Miktar & Derece"},
+
+  // --- Soyut Kavramlar ---
+  {eng:"Reversible", tr:"Geri döndürülebilir", cat:"Soyut Kavramlar"},
+  {eng:"Irreversible", tr:"Geri döndürülemez", cat:"Soyut Kavramlar"},
+  {eng:"Fertile", tr:"Verimli (toprak vb.)", cat:"Soyut Kavramlar"},
+  {eng:"Fruitless", tr:"Verimsiz, sonuçsuz", cat:"Soyut Kavramlar"},
+  {eng:"Confidential", tr:"Gizli", cat:"Soyut Kavramlar"},
+  {eng:"Consent", tr:"Rıza, onay", cat:"Soyut Kavramlar"},
+  {eng:"Prosperity / Welfare / Flourish / Thrive", tr:"Refah, gelişme, zenginleşme", cat:"Soyut Kavramlar"},
+  {eng:"Resilience / Robustness", tr:"Dayanıklılık, esneklik", cat:"Soyut Kavramlar"},
+  {eng:"Equilibrium / Balance", tr:"Denge", cat:"Soyut Kavramlar"},
+  {eng:"Coherence / Consistency", tr:"Tutarlılık, bütünlük", cat:"Soyut Kavramlar"},
+  {eng:"Complexity / Intricacy", tr:"Karmaşıklık", cat:"Soyut Kavramlar"},
+  {eng:"Diversity / Variety / Heterogeneity", tr:"Çeşitlilik", cat:"Soyut Kavramlar"},
+  {eng:"Homogeneity / Uniformity", tr:"Tekdüzelik, türdeşlik", cat:"Soyut Kavramlar"},
+  {eng:"Adaptation / Adjustment", tr:"Uyum, adaptasyon", cat:"Soyut Kavramlar"},
+  {eng:"Constraint / Limitation / Restriction", tr:"Kısıtlama, sınırlama", cat:"Soyut Kavramlar"},
+  {eng:"Implication / Ramification / Repercussion", tr:"Sonuç, dolaylı etki", cat:"Soyut Kavramlar"},
+  {eng:"Underlying / Fundamental / Intrinsic / Inherent", tr:"Temel, doğasında olan", cat:"Soyut Kavramlar"},
+
+  // --- Bağlaçlar & Geçişler ---
+  {eng:"Provided that / As long as / On condition that", tr:"Şu şartla ki", cat:"Bağlaçlar & Geçişler"},
+  {eng:"Unless / Except if", tr:"Eğer ...mezse, aksi takdirde", cat:"Bağlaçlar & Geçişler"},
+  {eng:"Even though / Although / Though", tr:"Her ne kadar ...se de", cat:"Bağlaçlar & Geçişler"},
+  {eng:"Furthermore / Moreover / In addition / Additionally", tr:"Ayrıca, bunun yanı sıra", cat:"Bağlaçlar & Geçişler"},
+  {eng:"Nevertheless / Nonetheless / However / Still / Yet", tr:"Yine de, bununla birlikte", cat:"Bağlaçlar & Geçişler"},
+  {eng:"In terms of / With regard to / Regarding / As for", tr:"... açısından, ile ilgili olarak", cat:"Bağlaçlar & Geçişler"},
+];
+
+vocabulary.forEach((w,i)=>{ w.id=i; w.box=0; }); // box: 0=yeni,1-2=tekrarda,3=öğrenildi
+
+/* ---------------- STATE ---------------- */
+let mode = 'flashcard';
+let activeCat = 'Tümü';
+let order = vocabulary.map(w=>w.id);
+let pos = 0;
+let qStreak = 0;
+
+const categories = ['Tümü', ...new Set(vocabulary.map(w=>w.cat))];
+
+/* ---------------- CHIPS ---------------- */
+const chipsEl = document.getElementById('chips');
+categories.forEach(c=>{
+  const d = document.createElement('div');
+  d.className = 'chip' + (c==='Tümü' ? ' active' : '');
+  d.textContent = c;
+  d.onclick = ()=>{ activeCat = c;
+    document.querySelectorAll('.chip').forEach(ch=>ch.classList.remove('active'));
+    d.classList.add('active');
+    applyFilter();
+  };
+  chipsEl.appendChild(d);
+});
+
+function currentPool(){
+  return activeCat==='Tümü' ? vocabulary : vocabulary.filter(w=>w.cat===activeCat);
+}
+function applyFilter(){
+  order = currentPool().map(w=>w.id);
+  pos = 0;
+  updateStats();
+  if(mode==='flashcard') updateCard();
+  if(mode==='quiz') generateQuiz();
+  if(mode==='list') renderList();
+}
+
+/* ---------------- TABS ---------------- */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick = ()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    mode = t.dataset.mode;
+    document.getElementById('flashcard-area').classList.toggle('hidden', mode!=='flashcard');
+    document.getElementById('quiz-area').classList.toggle('hidden', mode!=='quiz');
+    document.getElementById('list-area').classList.toggle('hidden', mode!=='list');
+    if(mode==='flashcard') updateCard();
+    if(mode==='quiz') generateQuiz();
+    if(mode==='list') renderList();
+  };
+});
+
+/* ---------------- FLASHCARDS ---------------- */
+function dotsHTML(box){
+  let h='';
+  for(let i=0;i<3;i++) h += `<span class="${i<box?'on':''}"></span>`;
+  return h;
+}
+function updateCard(){
+  const w = vocabulary[order[pos]];
+  document.getElementById('card').classList.remove('flipped');
+  document.getElementById('front-text').textContent = w.eng;
+  document.getElementById('back-text').textContent = w.tr;
+  document.getElementById('front-cat').textContent = w.cat;
+  document.getElementById('back-cat').textContent = w.cat;
+  document.getElementById('front-dots').innerHTML = dotsHTML(w.box);
+  document.getElementById('back-dots').innerHTML = dotsHTML(w.box);
+  updateStats();
+}
+document.getElementById('card-wrap').onclick = ()=> document.getElementById('card').classList.toggle('flipped');
+document.getElementById('btn-next').onclick = ()=>{ pos=(pos+1)%order.length; updateCard(); };
+document.getElementById('btn-prev').onclick = ()=>{ pos=(pos-1+order.length)%order.length; updateCard(); };
+document.getElementById('btn-shuffle').onclick = ()=>{ for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];} pos=0; updateCard(); };
+document.getElementById('btn-again').onclick = ()=>{ vocabulary[order[pos]].box = 0; advanceCard(); };
+document.getElementById('btn-good').onclick = ()=>{ const w=vocabulary[order[pos]]; w.box = Math.min(3, w.box+1); advanceCard(); };
+function advanceCard(){ pos=(pos+1)%order.length; updateCard(); }
+
+document.addEventListener('keydown', e=>{
+  if(mode!=='flashcard') return;
+  if(e.code==='Space'){ e.preventDefault(); document.getElementById('card').classList.toggle('flipped'); }
+  if(e.code==='ArrowRight') document.getElementById('btn-next').click();
+  if(e.code==='ArrowLeft') document.getElementById('btn-prev').click();
+});
+
+/* ---------------- STATS ---------------- */
+function updateStats(){
+  const pool = currentPool();
+  document.getElementById('stat-total').textContent = pool.length;
+  const seen = pool.filter(w=>w.box>0).length;
+  const known = pool.filter(w=>w.box>=3).length;
+  const review = pool.filter(w=>w.box>0 && w.box<3).length;
+  document.getElementById('stat-seen').textContent = seen;
+  document.getElementById('stat-known').textContent = known;
+  document.getElementById('stat-review').textContent = review;
+  document.getElementById('progress-fill').style.width = pool.length ? (known/pool.length*100)+'%' : '0%';
+}
+
+/* ---------------- QUIZ ---------------- */
+function generateQuiz(){
+  const pool = currentPool();
+  if(pool.length < 4){ document.getElementById('quiz-question').textContent = 'Bu kategoride yeterli kelime yok.'; document.getElementById('quiz-options').innerHTML=''; return; }
+  const qWord = pool[Math.floor(Math.random()*pool.length)];
+  document.getElementById('quiz-question').innerHTML = `<b>"${qWord.tr}"</b> anlamına gelen kelime grubu hangisidir?`;
+  let opts = [qWord.eng];
+  while(opts.length < 4){
+    const r = pool[Math.floor(Math.random()*pool.length)].eng;
+    if(!opts.includes(r)) opts.push(r);
+  }
+  opts.sort(()=>Math.random()-0.5);
+  const optsEl = document.getElementById('quiz-options');
+  optsEl.innerHTML = '';
+  opts.forEach(o=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = o;
+    b.onclick = ()=> checkAnswer(o, qWord.eng, b);
+    optsEl.appendChild(b);
+  });
+}
+function checkAnswer(selected, correct, btn){
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=null);
+  if(selected===correct){
+    btn.classList.add('correct');
+    document.getElementById('q-correct').textContent = +document.getElementById('q-correct').textContent + 1;
+    qStreak++;
+  } else {
+    btn.classList.add('wrong');
+    document.getElementById('q-wrong').textContent = +document.getElementById('q-wrong').textContent + 1;
+    qStreak = 0;
+    document.querySelectorAll('.opt').forEach(b=>{ if(b.textContent===correct) b.classList.add('correct'); });
+  }
+  document.getElementById('q-streak').textContent = qStreak;
+  setTimeout(generateQuiz, 1300);
+}
+
+/* ---------------- LIST ---------------- */
+function renderList(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const pool = currentPool().filter(w => !q || w.eng.toLowerCase().includes(q) || w.tr.toLowerCase().includes(q));
+  const grouped = {};
+  pool.forEach(w=>{ (grouped[w.cat] = grouped[w.cat]||[]).push(w); });
+  const root = document.getElementById('list-results');
+  root.innerHTML = '';
+  Object.keys(grouped).forEach(cat=>{
+    const g = document.createElement('div');
+    g.className = 'list-group';
+    g.innerHTML = `<div class="list-group-title">${cat} · ${grouped[cat].length}</div>`;
+    grouped[cat].forEach(w=>{
+      const item = document.createElement('div');
+      item.className = 'list-item';
+      item.innerHTML = `<div class="li-en">${w.eng}</div><div class="li-tr">${w.tr}</div>`;
+      g.appendChild(item);
+    });
+    root.appendChild(g);
+  });
+  if(pool.length===0) root.innerHTML = '<div style="text-align:center;color:var(--soft-dim);font-size:13px;padding:30px 0;">Sonuç bulunamadı.</div>';
+}
+document.getElementById('search').addEventListener('input', renderList);
+
+/* ---------------- INIT ---------------- */
+updateCard();
+</script>
 </body>
 </html>
 
