@@ -66,7 +66,6 @@
   .face-back .ex b{ color:var(--rose); }
   .hint{ font-size:11px; color:#bd8aa1; margin-top:auto; }
   .face-back .hint{ color:var(--soft-dim); }
-  .speak-btn{ position:absolute; bottom:14px; right:14px; z-index:5; width:38px; height:38px; border-radius:50%; border:none; background:var(--accent); color:#fff; font-size:17px; cursor:pointer; box-shadow:0 4px 12px rgba(180,40,90,.4); }
 
   /* love card */
   .card.is-love .face{ background:linear-gradient(150deg,#ff7eb3,#ff5d8f 60%,#c44d7a); color:#fff; border:1px solid rgba(255,255,255,.4); }
@@ -140,7 +139,6 @@
   <!-- FLASHCARD -->
   <div id="flashcard-area">
     <div class="card-wrap" id="card-wrap">
-      <button class="speak-btn" id="speak-btn" title="Telaffuz">🔊</button>
       <div class="card" id="card">
         <div class="face face-front" id="face-front">
           <div class="tag-row"><span class="cat-tag" id="front-cat">—</span><div class="box-dot" id="front-dots"></div></div>
@@ -385,7 +383,7 @@ const vocabulary = [
 vocabulary.forEach((w,i)=>{ w.id=i; w.box=0; w.hard=false; });
 
 /* ---- love / motivation cards ---- */
-const LoveCards = [
+const loveCards = [
   "Bu kelimeler de o sorular da senin emeğinin yanında hiçbir şey. YDT sadece formalite sevgilim, sen zaten hazırsın 💗",
   "Çözdüğün her deneme, ezberlediğin her kelime bir adımdı. Sen zaten yolun sonundaki o başarıyı hak ettin.",
   "Zorlandığın ya da kaygılandığın an derin bir nefes al ve hatırla: Ne kadar çok çabaladığını ben biliyorum.",
@@ -397,7 +395,6 @@ const LoveCards = [
   "Kafan karıştığında kendine haksızlık etme: Bilmediğin hiçbir şey yok, sen her şeyi öğrendin.",
   "Sana, senin o güzel zihnine inanıyorum — içtenlikle, sonuna kadar sevgilim 💗",
 ];
-
 
 /* ============ STORAGE ============ */
 const STORE='yokdil_v2';
@@ -429,7 +426,6 @@ const categories = ['Tümü', ...new Set(vocabulary.map(w=>w.cat))];
 const chipsEl=document.getElementById('chips');
 function buildChips(){
   chipsEl.innerHTML='';
-  // hard chip first (after Tümü)
   categories.forEach((c,idx)=>{
     const d=document.createElement('div');
     d.className='chip'+(activeCat===c?' active':''); d.textContent=c;
@@ -495,15 +491,14 @@ function highlightEx(w){
 function renderSeq(){
   const card=document.getElementById('card'); card.classList.remove('flipped');
   const item=sequence[pos]||{kind:'empty'};
-  const speak=document.getElementById('speak-btn');
   const grade=document.getElementById('grade-row');
   if(item.kind==='love'){
-    card.classList.add('is-love'); speak.style.display='none'; grade.style.display='none';
+    card.classList.add('is-love'); grade.style.display='none';
     document.getElementById('face-front').innerHTML='<div class="love-label">Sana özel 💗</div><div class="love-msg">'+item.text+'</div><div class="hint" style="color:rgba(255,255,255,.85)">çevirmek için dokun</div>';
     document.getElementById('face-back').innerHTML='<div class="love-heart">💗</div><div class="love-msg">Başaracaksın.</div><div class="hint" style="color:rgba(255,255,255,.85)">İleri ile devam et</div>';
     return;
   }
-  card.classList.remove('is-love'); speak.style.display=''; grade.style.display='';
+  card.classList.remove('is-love'); grade.style.display='';
   if(item.kind==='empty'){
     document.getElementById('face-front').innerHTML='<div class="word-en">Bu listede kelime yok.</div>'; return;
   }
@@ -529,10 +524,6 @@ document.getElementById('btn-shuffle').onclick=()=>{ const ids=currentPool().map
 document.getElementById('btn-again').onclick=()=>{ const w=currentWord(); if(!w)return; w.box=0; w.hard=true; bumpDaily(); saveProgress(); buildChips(); next(); };
 document.getElementById('btn-good').onclick=()=>{ const w=currentWord(); if(!w)return; w.box=Math.min(3,w.box+1); if(w.box>=3) w.hard=false; bumpDaily(); saveProgress(); buildChips(); next(); };
 function next(){ pos=(pos+1)%sequence.length; renderSeq(); }
-
-/* speech */
-document.getElementById('speak-btn').onclick=(e)=>{ e.stopPropagation(); const w=currentWord(); if(!w||!('speechSynthesis'in window))return;
-  const u=new SpeechSynthesisUtterance(w.eng.split(' / ')[0]); u.lang='en-US'; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u); };
 
 document.addEventListener('keydown',e=>{ if(mode!=='flashcard')return;
   if(e.code==='Space'){e.preventDefault(); document.getElementById('card').classList.toggle('flipped');}
