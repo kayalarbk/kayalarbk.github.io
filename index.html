@@ -13,11 +13,14 @@
     --muted:#c98aa6; --soft:#fbe4ee; --soft-dim:#cf9fb6;
   }
   *{box-sizing:border-box;}
+  html{ background:#2a0f1c; }
   body{
     margin:0;
-    background:
+    background:#2a0f1c;
+    background-image:
       radial-gradient(circle at 18% 0%, #4a1a30 0%, transparent 55%),
-      radial-gradient(circle at 90% 95%, #45152b 0%, transparent 50%), var(--bg);
+      radial-gradient(circle at 90% 95%, #45152b 0%, transparent 50%);
+    background-attachment:fixed;
     color:var(--soft); font-family:'Space Grotesk', sans-serif; min-height:100vh;
     display:flex; justify-content:center; padding:18px 14px 40px;
   }
@@ -59,6 +62,7 @@
   .word-en{ font-family:'Fraunces', serif; font-weight:600; font-size:23px; line-height:1.3; margin:auto 0 6px; }
   .syn{ font-size:13px; color:#a96384; font-style:italic; line-height:1.4; }
   .ex{ font-size:12.5px; color:#8a5570; line-height:1.45; margin-top:8px; }
+  .ex-tr{ font-size:11.5px; color:var(--soft-dim); line-height:1.4; margin-top:4px; }
   .ex b{ color:var(--plum); font-weight:600; }
   .word-tr{ font-family:'Fraunces', serif; font-weight:500; font-size:24px; line-height:1.3; margin:auto 0 6px; color:var(--accent); }
   .face-back .syn{ color:var(--soft-dim); }
@@ -68,8 +72,8 @@
   .face-back .hint{ color:var(--soft-dim); }
 
   /* love card */
-  .card.is-love .face{ background:linear-gradient(150deg,#ff7eb3,#ff5d8f 60%,#c44d7a); color:#fff; border:1px solid rgba(255,255,255,.4); }
-  .card.is-love .face-back{ background:linear-gradient(150deg,#c44d7a,#ff5d8f); }
+  .card.is-love .face{ background:linear-gradient(150deg,#b53e6b,#9c2f5a 55%,#7d2548); color:#fff; border:1px solid rgba(255,255,255,.35); }
+  .card.is-love .face-back{ background:linear-gradient(150deg,#7d2548,#b53e6b); }
   .love-label{ font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.85); }
   .love-msg{ font-family:'Fraunces', serif; font-style:italic; font-size:21px; line-height:1.4; margin:auto 0; text-align:center; }
   .love-heart{ font-size:30px; text-align:center; }
@@ -379,6 +383,101 @@ const vocabulary = [
   {eng:"Forage for / Seek / Look for", tr:"Aramak (yiyecek araması dahil)", syn:"Search for, hunt for", ex:"Birds forage for seeds in winter.", cat:"Tematik Kalıplar"},
   {eng:"Abandon / Forsake / Relinquish", tr:"Bırakmak, terk etmek", syn:"Desert, give up", ex:"They had to abandon the sinking ship.", cat:"Tematik Kalıplar"},
   {eng:"Overcome / Get over / Surmount", tr:"Üstesinden gelmek", syn:"Conquer, prevail over", ex:"She overcame many obstacles to succeed.", cat:"Tematik Kalıplar"},
+
+  /* ===== PREPOSITIONS (Remzi Hoca) ===== */
+  /* 1. Temel konum & zaman */
+  {eng:"of", tr:"-in, -nın", syn:"", ex:"The consumption of fossil fuels leads to global warming.", exTr:"Fosil yakıtların tüketimi küresel ısınmaya yol açar.", cat:"Edatlar · Temel"},
+  {eng:"in", tr:"-de/da, -deki/daki", syn:"", ex:"There has been a sharp increase in inflation rates.", exTr:"Enflasyon oranlarında keskin bir artış oldu.", cat:"Edatlar · Temel"},
+  {eng:"at", tr:"-de, -da", syn:"", ex:"Water boils at 100 degrees Celsius.", exTr:"Su, 100 santigrat derecede kaynar.", cat:"Edatlar · Temel"},
+  {eng:"on", tr:"-de/da, üstünde, hakkında", syn:"", ex:"The professor published an article on artificial intelligence.", exTr:"Profesör, yapay zeka hakkında bir makale yayımladı.", cat:"Edatlar · Temel"},
+  {eng:"over", tr:"üstünde, ile ilgili, boyunca", syn:"", ex:"Temperatures have risen significantly over the last decade.", exTr:"Sıcaklıklar son on yıl boyunca önemli ölçüde arttı.", cat:"Edatlar · Temel"},
+  {eng:"under", tr:"altında", syn:"", ex:"The experiment was conducted under strict laboratory conditions.", exTr:"Deney, sıkı laboratuvar şartları altında gerçekleştirildi.", cat:"Edatlar · Temel"},
+  {eng:"above", tr:"üstünde", syn:"", ex:"The ozone layer is located above the Earth's surface.", exTr:"Ozon tabakası, Dünya yüzeyinin üstünde yer alır.", cat:"Edatlar · Temel"},
+  {eng:"below", tr:"altında", syn:"", ex:"The temperature dropped below freezing point last night.", exTr:"Dün gece sıcaklık donma noktasının altına düştü.", cat:"Edatlar · Temel"},
+  {eng:"between", tr:"arasında (iki şey)", syn:"", ex:"The treaty was signed between the two neighboring nations.", exTr:"Antlaşma, iki komşu ülke arasında imzalandı.", cat:"Edatlar · Temel"},
+  {eng:"among", tr:"arasında (ikiden fazla)", syn:"", ex:"The virus spread rapidly among the local population.", exTr:"Virüs, yerel halk arasında hızla yayıldı.", cat:"Edatlar · Temel"},
+  {eng:"amongst", tr:"arasında", syn:"", ex:"She was respected amongst her academic peers.", exTr:"Akademik meslektaşları arasında saygı görüyordu.", cat:"Edatlar · Temel"},
+  {eng:"by", tr:"tarafından, -e kadar", syn:"", ex:"The project must be completed by next Monday.", exTr:"Projenin önümüzdeki pazartesiye kadar tamamlanması gerekiyor.", cat:"Edatlar · Temel"},
+  {eng:"as", tr:"olarak", syn:"", ex:"He works as a senior research analyst at the institute.", exTr:"Enstitüde kıdemli araştırma analisti olarak çalışıyor.", cat:"Edatlar · Temel"},
+  {eng:"with", tr:"ile, -lı/-li", syn:"", ex:"A patient with chronic high blood pressure needs constant care.", exTr:"Kronik yüksek tansiyonlu bir hastanın sürekli bakıma ihtiyacı vardır.", cat:"Edatlar · Temel"},
+  {eng:"without", tr:"-sız/siz, -madan", syn:"", ex:"It is impossible to survive without clean drinking water.", exTr:"Temiz içme suyu olmadan hayatta kalmak imkansızdır.", cat:"Edatlar · Temel"},
+  {eng:"within", tr:"içinde (zaman/mekan)", syn:"", ex:"Results will be announced within two weeks.", exTr:"Sonuçlar iki hafta içinde açıklanacak.", cat:"Edatlar · Temel"},
+  {eng:"into", tr:"-e, -a (içine doğru)", syn:"", ex:"The company is moving into the renewable energy sector.", exTr:"Şirket, yenilenebilir enerji sektörünün içine doğru adım atıyor.", cat:"Edatlar · Temel"},
+  {eng:"onto", tr:"-ın üzerine, üzerine doğru", syn:"", ex:"The cat jumped onto the kitchen counter.", exTr:"Kedi, mutfak tezgahının üzerine doğru atladı.", cat:"Edatlar · Temel"},
+  {eng:"during", tr:"sırasında, esnasında", syn:"", ex:"Many economic shifts occurred during the industrial revolution.", exTr:"Sanayi devrimi sırasında birçok ekonomik değişim meydana geldi.", cat:"Edatlar · Temel"},
+  {eng:"throughout", tr:"boyunca", syn:"", ex:"The policy was implemented throughout the entire country.", exTr:"Politika, tüm ülke boyunca uygulandı.", cat:"Edatlar · Temel"},
+
+  /* 2. Yön (-ward) */
+  {eng:"to", tr:"-e/a, -e doğru", syn:"", ex:"The delegation traveled to Geneva for the peace talks.", exTr:"Heyet, barış görüşmeleri için Cenevre'ye seyahat etti.", cat:"Edatlar · Yön"},
+  {eng:"toward / towards", tr:"-e doğru, yönünde", syn:"", ex:"The government is taking steps toward economic recovery.", exTr:"Hükümet, ekonomik iyileşme yönünde adımlar atıyor.", cat:"Edatlar · Yön"},
+  {eng:"inward", tr:"içeri doğru", syn:"", ex:"The door opens inward, so pull it carefully.", exTr:"Kapı içeri doğru açılıyor, bu yüzden dikkatlice çekin.", cat:"Edatlar · Yön"},
+  {eng:"forward", tr:"ileri doğru", syn:"", ex:"We need to look forward and plan for future challenges.", exTr:"İleriye doğru bakmalı ve gelecekteki zorlukları planlamalıyız.", cat:"Edatlar · Yön"},
+  {eng:"onward", tr:"ileriye doğru", syn:"", ex:"The empire expanded onward into Asian territories.", exTr:"İmparatorluk, Asya topraklarına doğru ileriye doğru genişledi.", cat:"Edatlar · Yön"},
+  {eng:"upward", tr:"yukarı doğru", syn:"", ex:"There is an upward trend in global trade volume.", exTr:"Küresel ticaret hacminde yukarı doğru bir eğilim var.", cat:"Edatlar · Yön"},
+  {eng:"outward", tr:"dışarıya doğru", syn:"", ex:"The virus spreads through outward physical contact.", exTr:"Virüs, dışarıya doğru olan fiziksel temas yoluyla yayılır.", cat:"Edatlar · Yön"},
+  {eng:"downward", tr:"aşağıya doğru", syn:"", ex:"Stock prices showed a downward spiral after the crisis.", exTr:"Hisse senedi fiyatları krizden sonra aşağı doğru bir sarmal gösterdi.", cat:"Edatlar · Yön"},
+  {eng:"backward", tr:"geriye doğru", syn:"", ex:"Sometimes, a step backward helps you see the bigger picture.", exTr:"Bazen geriye doğru bir adım atmak büyük resmi görmenize yardımcı olur.", cat:"Edatlar · Yön"},
+  {eng:"homeward", tr:"eve doğru", syn:"", ex:"The tired passengers began their homeward journey.", exTr:"Yorgun yolcular eve doğru olan yolculuklarına başladılar.", cat:"Edatlar · Yön"},
+  {eng:"leftward", tr:"sola doğru", syn:"", ex:"The driver made a sharp leftward turn to avoid the crash.", exTr:"Sürücü, kazayı önlemek için sola doğru keskin bir dönüş yaptı.", cat:"Edatlar · Yön"},
+  {eng:"rightward", tr:"sağa doğru", syn:"", ex:"The political shift moved rightward in recent elections.", exTr:"Son seçimlerde siyasi kayma sağa doğru hareket etti.", cat:"Edatlar · Yön"},
+  {eng:"seaward", tr:"denize doğru", syn:"", ex:"The cliffs face seaward, offering a magnificent view.", exTr:"Kayalıklar denize doğru bakıyor ve muhteşem bir manzara sunuyor.", cat:"Edatlar · Yön"},
+  {eng:"southward", tr:"güneye doğru", syn:"", ex:"Birds migrate southward during the harsh winter months.", exTr:"Kuşlar, çetin kış aylarında güneye doğru göç ederler.", cat:"Edatlar · Yön"},
+  {eng:"northward", tr:"kuzeye doğru", syn:"", ex:"The expedition continued northward despite the heavy snow.", exTr:"Yoğun kara rağmen sefer kuzeye doğru devam etti.", cat:"Edatlar · Yön"},
+  {eng:"westward", tr:"batıya doğru", syn:"", ex:"Railroads expanded westward during the 19th century.", exTr:"Demiryolları 19. yüzyılda batıya doğru genişledi.", cat:"Edatlar · Yön"},
+  {eng:"eastward", tr:"doğuya doğru", syn:"", ex:"The storm moved eastward, affecting coastal cities.", exTr:"Fırtına doğuya doğru hareket ederek kıyı kentlerini etkiledi.", cat:"Edatlar · Yön"},
+  {eng:"windward", tr:"rüzgara doğru", syn:"", ex:"Sailors prefer to keep the ship on the windward side.", exTr:"Denizciler gemiyi rüzgara doğru olan tarafta tutmayı tercih ederler.", cat:"Edatlar · Yön"},
+  {eng:"skyward", tr:"gökyüzüne doğru", syn:"", ex:"The rocket shot skyward within seconds of launching.", exTr:"Roket, fırlatıldıktan saniyeler sonra gökyüzüne doğru fırladı.", cat:"Edatlar · Yön"},
+
+  /* 3. Süreç, çevre & ilişki */
+  {eng:"along", tr:"boyunca", syn:"", ex:"Trees were planted along the river banks.", exTr:"Nehir kıyıları boyunca ağaçlar dikildi.", cat:"Edatlar · İlişki"},
+  {eng:"alongside", tr:"ile birlikte, boyunca", syn:"", ex:"The new law will work alongside existing regulations.", exTr:"Yeni yasa, mevcut düzenlemelerle birlikte çalışacak.", cat:"Edatlar · İlişki"},
+  {eng:"along with", tr:"ile birlikte", syn:"", ex:"Smoking, along with poor diet, increases health risks.", exTr:"Sigara kullanımı, kötü beslenme ile birlikte sağlık risklerini artırır.", cat:"Edatlar · İlişki"},
+  {eng:"around", tr:"etrafında, civarında, yaklaşık", syn:"", ex:"The conference will start around 9:00 AM.", exTr:"Konferans sabah saat 9:00 civarında başlayacak.", cat:"Edatlar · İlişki"},
+  {eng:"round", tr:"çevresinde, etrafında", syn:"", ex:"The satellite orbits round the Earth.", exTr:"Uydu, Dünya'nın etrafında dönüyor.", cat:"Edatlar · İlişki"},
+  {eng:"like", tr:"benzer, gibi", syn:"", ex:"She runs the company like a strict institution.", exTr:"Şirketi katı bir kurum gibi yönetiyor.", cat:"Edatlar · İlişki"},
+  {eng:"unlike", tr:"-ın aksine", syn:"", ex:"Unlike his brother, he prefers studying historical events.", exTr:"Kardeşinin aksine, o tarihi olayları incelemeyi tercih ediyor.", cat:"Edatlar · İlişki"},
+  {eng:"about", tr:"hakkında", syn:"", ex:"The book is about the causes of the World War I.", exTr:"Kitap, I. Dünya Savaşı'nın nedenleri hakkındadır.", cat:"Edatlar · İlişki"},
+  {eng:"concerning", tr:"ile ilgili", syn:"", ex:"There are many questions concerning the safety of the drug.", exTr:"İlacın güvenliği ile ilgili birçok soru var.", cat:"Edatlar · İlişki"},
+  {eng:"regarding", tr:"-ile ilgili", syn:"", ex:"The ministry issued a statement regarding the new tax law.", exTr:"Bakanlık, yeni vergi yasası ile ilgili bir açıklama yaptı.", cat:"Edatlar · İlişki"},
+  {eng:"for", tr:"için", syn:"", ex:"Education is essential for social and economic progress.", exTr:"Eğitim, sosyal ve ekonomik ilerleme için elzemdir.", cat:"Edatlar · İlişki"},
+  {eng:"against", tr:"-e karşı", syn:"", ex:"The team protested against the unfair decision of the referee.", exTr:"Takım, hakemin adaletsiz kararına karşı protestoda bulundu.", cat:"Edatlar · İlişki"},
+  {eng:"through", tr:"içinden, sayesinde, vasıtasıyla", syn:"", ex:"We gained valuable data through extensive field research.", exTr:"Kapsamlı saha araştırması sayesinde değerli veriler elde ettik.", cat:"Edatlar · İlişki"},
+  {eng:"from", tr:"-den, itibaren", syn:"", ex:"The library is open from Monday to Friday.", exTr:"Kütüphane pazartesiden cumaya kadar açıktır.", cat:"Edatlar · İlişki"},
+  {eng:"up", tr:"yukarı, -e kadar", syn:"", ex:"The cost of living has gone up drastically.", exTr:"Yaşam maliyeti önemli ölçüde arttı.", cat:"Edatlar · İlişki"},
+  {eng:"down", tr:"aşağı", syn:"", ex:"Prices have come down due to decreased demand.", exTr:"Azalan talep nedeniyle fiyatlar aşağı indi.", cat:"Edatlar · İlişki"},
+  {eng:"up to", tr:"-e kadar", syn:"", ex:"The hotel can accommodate up to 500 guests.", exTr:"Otel 500 konuğa kadar ağırlayabilir.", cat:"Edatlar · İlişki"},
+  {eng:"down to", tr:"-e kadar (aşağı)", syn:"", ex:"The roots of the tree go down to the underground water.", exTr:"Ağacın kökleri yeraltı suyuna kadar aşağı iniyor.", cat:"Edatlar · İlişki"},
+
+  /* 4. Hariç tutma, konum & durum */
+  {eng:"except / except for", tr:"-den başka, hariç", syn:"", ex:"Everyone attended the meeting except the manager.", exTr:"Müdür hariç herkes toplantıya katıldı.", cat:"Edatlar · Konum"},
+  {eng:"excepting", tr:"hariç", syn:"", ex:"Excepting emergency cases, patients must make an appointment.", exTr:"Acil durumlar hariç, hastalar randevu almalıdır.", cat:"Edatlar · Konum"},
+  {eng:"away from", tr:"-den uzakta", syn:"", ex:"Keep the chemicals away from direct sunlight.", exTr:"Kimyasalları doğrudan güneş ışığından uzakta tutun.", cat:"Edatlar · Konum"},
+  {eng:"out", tr:"dış, dışarı", syn:"", ex:"The kids are playing out in the garden.", exTr:"Çocuklar dışarıda, bahçede oynuyorlar.", cat:"Edatlar · Konum"},
+  {eng:"out of", tr:"-den/dan, dışında", syn:"", ex:"Nine out of ten researchers agreed with the results.", exTr:"On araştırmacıdan dokuzu sonuçlara katıldı.", cat:"Edatlar · Konum"},
+  {eng:"outside", tr:"dışarıda, dışında", syn:"", ex:"The protest took place outside the parliament building.", exTr:"Protesto, parlamento binasının dışında gerçekleşti.", cat:"Edatlar · Konum"},
+  {eng:"amid", tr:"ortasında, arasında", syn:"", ex:"The peace deal was signed amid rising political tensions.", exTr:"Barış anlaşması, artan siyasi gerilimlerin ortasında imzalandı.", cat:"Edatlar · Konum"},
+  {eng:"amidst", tr:"ortasında", syn:"", ex:"The rare flower was discovered amidst dense vegetation.", exTr:"Nadir çiçek, yoğun bitki örtüsünün ortasında keşfedildi.", cat:"Edatlar · Konum"},
+  {eng:"following", tr:"sonrasında, arkasından", syn:"", ex:"Following the announcement, stock prices collapsed.", exTr:"Açıklamanın sonrasında, hisse senedi fiyatları çöktü.", cat:"Edatlar · Konum"},
+  {eng:"than", tr:"-den, -dan (karşılaştırma)", syn:"", ex:"Gold is more valuable than silver.", exTr:"Altın, gümüşten daha değerlidir.", cat:"Edatlar · Konum"},
+  {eng:"near", tr:"yakın, yakında", syn:"", ex:"The laboratory is located near the university campus.", exTr:"Laboratuvar, üniversite kampüsünün yakınında yer almaktadır.", cat:"Edatlar · Konum"},
+  {eng:"beside", tr:"yanına, yanında", syn:"", ex:"Sit beside me during the lecture.", exTr:"Ders sırasında yanımda otur.", cat:"Edatlar · Konum"},
+  {eng:"aside", tr:"yanında, kenarında", syn:"", ex:"Put your doubts aside and focus on the task.", exTr:"Şüphelerinizi bir kenara bırakın ve göreve odaklanın.", cat:"Edatlar · Konum"},
+  {eng:"next to", tr:"bitişik, yanında", syn:"", ex:"The pharmacy is located next to the hospital.", exTr:"Eczane, hastanenin bitişiğinde yer almaktadır.", cat:"Edatlar · Konum"},
+  {eng:"in front of", tr:"önünde", syn:"", ex:"The car was parked in front of the main entrance.", exTr:"Araba, ana girişin önünde park edilmişti.", cat:"Edatlar · Konum"},
+  {eng:"behind", tr:"arkasında", syn:"", ex:"Economic factors are often behind social conflicts.", exTr:"Ekonomik faktörler genellikle sosyal çatışmaların arkasındadır.", cat:"Edatlar · Konum"},
+  {eng:"across", tr:"karşıdan karşıya, genelinde", syn:"", ex:"The company has offices across the globe.", exTr:"Şirketin dünya genelinde ofisleri var.", cat:"Edatlar · Konum"},
+  {eng:"opposite", tr:"karşı, zıt, aksi", syn:"", ex:"The results were completely opposite to what we expected.", exTr:"Sonuçlar, beklediğimizin tamamen zıttıydı.", cat:"Edatlar · Konum"},
+  {eng:"underneath", tr:"altında", syn:"", ex:"The documents were hidden underneath a pile of books.", exTr:"Belgeler, bir kitap yığınının altında gizlenmişti.", cat:"Edatlar · Konum"},
+  {eng:"inside", tr:"içinde, içeride", syn:"", ex:"The keys were found inside the locked drawer.", exTr:"Anahtarlar, kilitli çekmecenin içinde bulundu.", cat:"Edatlar · Konum"},
+  {eng:"beneath", tr:"altında", syn:"", ex:"The subway network runs beneath the city streets.", exTr:"Metro ağı, şehir sokaklarının altında çalışır.", cat:"Edatlar · Konum"},
+  {eng:"upon", tr:"üzerine", syn:"", ex:"Upon arrival, guests must check in at the reception.", exTr:"Varış üzerine, konuklar resepsiyonda kayıt yaptırmalıdır.", cat:"Edatlar · Konum"},
+  {eng:"beyond", tr:"ötesine, ötesinde", syn:"", ex:"The implications of this discovery are beyond imagination.", exTr:"Bu keşfin etkileri hayal gücünün ötesindedir.", cat:"Edatlar · Konum"},
+  {eng:"via", tr:"üzerinden, yolu ile", syn:"", ex:"The signal was transmitted via satellite.", exTr:"Sinyal, uydu vasıtasıyla iletildi.", cat:"Edatlar · Konum"},
+  {eng:"aboard", tr:"içinde (gemi/uçak)", syn:"", ex:"All passengers aboard the flight were safely evacuated.", exTr:"Uçaktaki tüm yolcular güvenli bir şekilde tahliye edildi.", cat:"Edatlar · Konum"},
+  {eng:"per", tr:"her biri, başına", syn:"", ex:"The maximum speed limit is 120 km per hour.", exTr:"Maksimum hız sınırı saat başına 120 km'dir.", cat:"Edatlar · Konum"},
+  {eng:"versus", tr:"-e karşı", syn:"", ex:"The debate focused on public health versus economic growth.", exTr:"Tartışma, halk sağlığına karşı ekonomik büyümeye odaklandı.", cat:"Edatlar · Konum"},
+  {eng:"back", tr:"geri", syn:"", ex:"We need to bring back traditional agricultural methods.", exTr:"Geleneksel tarım yöntemlerini geri getirmemiz gerekiyor.", cat:"Edatlar · Konum"},
+  {eng:"off", tr:"-den uzak, açığında", syn:"", ex:"The island is located just off the coast of Italy.", exTr:"Ada, İtalya kıyısının hemen açığında yer almaktadır.", cat:"Edatlar · Konum"},
 ];
 vocabulary.forEach((w,i)=>{ w.id=i; w.box=0; w.hard=false; });
 
@@ -419,7 +518,7 @@ function bumpDaily(){ if(daily.date!==todayStr()) daily={date:todayStr(),count:0
 let mode='flashcard', activeCat='Tümü', qType='tr2en';
 let sequence=[], pos=0, qStreak=0;
 loadProgress();
-document.getElementById('word-count').textContent = vocabulary.length + ' akademik kelime · eş anlamlı + örnek cümle';
+document.getElementById('word-count').textContent = vocabulary.length + ' kelime & edat · örnek cümleli';
 const categories = ['Tümü', ...new Set(vocabulary.map(w=>w.cat))];
 
 /* ============ CHIPS ============ */
@@ -485,7 +584,7 @@ function dots(box){ let h=''; for(let i=0;i<3;i++) h+=`<span class="${i<box?'on'
 function highlightEx(w){
   if(!w.ex) return '';
   const phrase=w.eng.split(' / ')[0];
-  const re=new RegExp('('+phrase.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','i');
+  const re=new RegExp('\\b('+phrase.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','i');
   return w.ex.replace(re,'<b>$1</b>');
 }
 function renderSeq(){
@@ -510,7 +609,7 @@ function renderSeq(){
   document.getElementById('face-back').innerHTML=
     `<div class="tag-row"><span class="cat-tag">${w.cat}</span><div class="box-dot">${dots(w.box)}</div></div>
      <div class="word-tr">${w.tr}</div><div class="syn">${w.syn?'≈ '+w.syn:''}</div>
-     <div class="ex">${highlightEx(w)}</div>
+     <div class="ex">${highlightEx(w)}</div>${w.exTr?`<div class="ex-tr">${w.exTr}</div>`:''}
      <div class="hint">Geri dönmek için tekrar dokun</div>`;
   updateStats();
 }
@@ -553,7 +652,7 @@ function generateQuiz(){
     const cand=pool.filter(w=>blankInfo(w)); 
     if(cand.length<4){ qq.textContent='Bu kategoride boşluk doldurma için yeterli örnek cümle yok.'; oc.innerHTML=''; return; }
     const q=cand[Math.floor(Math.random()*cand.length)]; const phrase=blankInfo(q);
-    const re=new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+    const re=new RegExp('\\b'+phrase.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');
     qq.innerHTML=q.ex.replace(re,'<span class="blank">______</span>');
     let opts=[q]; while(opts.length<4){ const r=pool[Math.floor(Math.random()*pool.length)]; if(!opts.includes(r))opts.push(r); }
     opts.sort(()=>Math.random()-.5); oc.innerHTML='';
