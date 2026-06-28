@@ -250,19 +250,6 @@
     </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📐 İnteraktif Simülasyon <span class="tag tag-cyan">Canlı</span></div>
-    <div class="live-sim">
-      <div class="live-sim-head">🔴 Ohm Yasası & Güç Hesaplayıcı <span class="live-badge">CANLI</span></div>
-      <div class="sim-control"><label>Gerilim V</label><input type="range" id="ohm-v" min="1" max="50" value="12" oninput="updateOhm()"><span class="sim-val" id="ohm-v-val">12 V</span></div>
-      <div class="sim-control"><label>Direnç R</label><input type="range" id="ohm-r" min="1" max="50" value="6" oninput="updateOhm()"><span class="sim-val" id="ohm-r-val">6 Ω</span></div>
-      <div class="sim-readout">
-        <div class="ro-row"><span class="ro-lbl">Akım I = V/R</span><span class="ro-val" id="ohm-i">2.00 A</span></div>
-        <div class="ro-row"><span class="ro-lbl">🎯 Güç P = VI</span><span class="ro-val hi" id="ohm-p">24.0 W</span></div>
-      </div>
-      <div class="sim-hint">Gerilim ve direnci değiştir. R sabitken V iki katına çıkınca P dört katına çıkar (P∝V²).</div>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
@@ -341,21 +328,6 @@
     </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📐 İnteraktif Simülasyon <span class="tag tag-cyan">Canlı</span></div>
-    <div class="live-sim">
-      <div class="live-sim-head">🔴 Çevre Akımı Devresi <span class="live-badge">CANLI</span></div>
-      <div class="sim-control"><label>V₁ (12V)</label><input type="range" id="c-v1" min="1" max="30" value="12" oninput="updateCircuit()"><span class="sim-val" id="c-v1-val">12 V</span></div>
-      <div class="sim-control"><label>V₃ (18V)</label><input type="range" id="c-v3" min="1" max="30" value="18" oninput="updateCircuit()"><span class="sim-val" id="c-v3-val">18 V</span></div>
-      <div class="sim-control"><label>R (2Ω) 🎯</label><input type="range" id="c-r" min="1" max="15" value="2" oninput="updateCircuit()"><span class="sim-val" id="c-r-val">2 Ω</span></div>
-      <div class="sim-readout">
-        <div class="ro-row"><span class="ro-lbl">Net EMK</span><span class="ro-val" id="c-emk">27 V</span></div>
-        <div class="ro-row"><span class="ro-lbl">Devre Akımı (I)</span><span class="ro-val" id="c-i">1.93 A</span></div>
-        <div class="ro-row"><span class="ro-lbl">🎯 2Ω Üzerindeki Gerilim</span><span class="ro-val hi" id="c-v2">3.86 V</span></div>
-      </div>
-      <div class="sim-hint">Kaynak gerilimlerini değiştir — devre akımı ve 2Ω gerilimi anında güncellenir.</div>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
@@ -435,21 +407,6 @@
     </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📐 İnteraktif Simülasyon <span class="tag tag-cyan">Canlı</span></div>
-    <div class="live-sim">
-      <div class="live-sim-head">🔴 Vektör Çarpım Hesaplayıcı <span class="live-badge">CANLI</span></div>
-      <div class="sim-canvas-wrap"><canvas id="vecCanvas" width="300" height="200"></canvas></div>
-      <div class="sim-control"><label>v: x bileşeni</label><input type="range" id="vx" min="-3" max="3" value="2" oninput="updateVec()"><span class="sim-val" id="vx-val">2</span></div>
-      <div class="sim-control"><label>v: y bileşeni</label><input type="range" id="vy" min="-3" max="3" value="1" oninput="updateVec()"><span class="sim-val" id="vy-val">1</span></div>
-      <div class="sim-control"><label>B: z bileşeni</label><input type="range" id="bz" min="-3" max="3" value="1" oninput="updateVec()"><span class="sim-val" id="bz-val">1</span></div>
-      <div class="sim-readout">
-        <div class="ro-row"><span class="ro-lbl">v × B</span><span class="ro-val" id="vxb-out">(1, -2, -1)</span></div>
-        <div class="ro-row"><span class="ro-lbl">🎯 F = q(v×B), ×10⁻¹³ N</span><span class="ro-val hi" id="f-out">(-1.6, 3.2, 1.6)</span></div>
-      </div>
-      <div class="sim-hint">Mavi = hız, Yeşil = alan (z'de), Kırmızı = v×B. Kırmızı ok her zaman diğerlerine diktir.</div>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
@@ -529,20 +486,6 @@
     </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📐 İnteraktif Simülasyon <span class="tag tag-cyan">Canlı</span></div>
-    <div class="live-sim">
-      <div class="live-sim-head">🔴 Manyetik Alan Haritası <span class="live-badge">CANLI</span></div>
-      <div class="sim-canvas-wrap"><canvas id="fieldCanvas" width="300" height="220"></canvas></div>
-      <div class="sim-control"><label>Akım I</label><input type="range" id="bs-i" min="1" max="20" value="5" oninput="updateField()"><span class="sim-val" id="bs-i-val">5 A</span></div>
-      <div class="sim-control"><label>Mesafe a</label><input type="range" id="bs-a" min="5" max="50" value="10" oninput="updateField()"><span class="sim-val" id="bs-a-val">0.10 m</span></div>
-      <div class="sim-readout">
-        <div class="ro-row"><span class="ro-lbl">🎯 P noktasında B</span><span class="ro-val hi" id="bs-b">10.0 μT</span></div>
-        <div class="ro-row"><span class="ro-lbl">Formül</span><span class="ro-val">μ₀I/(2πa)</span></div>
-      </div>
-      <div class="sim-hint">Kırmızı = tel (akım sayfaya dik). Daireler = alan çizgileri. Sarı = ölçüm noktası P.</div>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
@@ -621,21 +564,6 @@
     </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📐 İnteraktif Simülasyon <span class="tag tag-cyan">Canlı</span></div>
-    <div class="live-sim">
-      <div class="live-sim-head">🔴 Faraday İndüksiyon Simülasyonu <span class="live-badge">CANLI</span></div>
-      <div class="sim-canvas-wrap"><canvas id="faradayCanvas" width="300" height="180"></canvas></div>
-      <div class="sim-control"><label>Alan A</label><input type="range" id="fd-a" min="1" max="20" value="5" oninput="updateFaraday()"><span class="sim-val" id="fd-a-val">0.5 m²</span></div>
-      <div class="sim-control"><label>İmleç t</label><input type="range" id="fd-t" min="0" max="40" value="20" oninput="updateFaraday()"><span class="sim-val" id="fd-t-val">2.0 s</span></div>
-      <div class="sim-readout">
-        <div class="ro-row"><span class="ro-lbl">B(t) = 2t + 4t²</span><span class="ro-val" id="fd-b">20.0 T</span></div>
-        <div class="ro-row"><span class="ro-lbl">dB/dt = 2 + 8t</span><span class="ro-val" id="fd-dbdt">18.0 T/s</span></div>
-        <div class="ro-row"><span class="ro-lbl">🎯 İndüklenen EMF (|ε|)</span><span class="ro-val hi" id="fd-emf">9.0 V</span></div>
-      </div>
-      <div class="sim-hint">Mavi eğri = B(t), sarı = imleç. Eğri ne kadar dik (dB/dt büyük), EMF o kadar büyük.</div>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
@@ -714,22 +642,6 @@
     </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📐 İnteraktif Simülasyon <span class="tag tag-cyan">Canlı</span></div>
-    <div class="live-sim">
-      <div class="live-sim-head">🔴 Osiloskop (Sinüs Dalgası) <span class="live-badge">CANLI</span></div>
-      <div class="sim-canvas-wrap"><canvas id="acCanvas" width="300" height="180"></canvas></div>
-      <div class="sim-control"><label>Tepe Vₘ</label><input type="range" id="ac-vm" min="50" max="320" value="170" oninput="updateAC()"><span class="sim-val" id="ac-vm-val">170 V</span></div>
-      <div class="sim-control"><label>Frekans f</label><input type="range" id="ac-f" min="10" max="100" value="50" oninput="updateAC()"><span class="sim-val" id="ac-f-val">50 Hz</span></div>
-      <div class="sim-control"><label>İmleç t</label><input type="range" id="ac-t" min="0" max="20" value="2" oninput="updateAC()"><span class="sim-val" id="ac-t-val">2 ms</span></div>
-      <div class="sim-readout">
-        <div class="ro-row"><span class="ro-lbl">ωt (imleç açısı)</span><span class="ro-val" id="ac-wt">36°</span></div>
-        <div class="ro-row"><span class="ro-lbl">🎯 Anlık gerilim v(t)</span><span class="ro-val hi" id="ac-v">100 V</span></div>
-        <div class="ro-row"><span class="ro-lbl">RMS gerilim</span><span class="ro-val" id="ac-rms">120 V</span></div>
-      </div>
-      <div class="sim-hint">Sarı dikey çizgi = imleç. Kaydır, anlık değeri oku. Tepede ωt = 90°.</div>
-    </div>
-  </div>
 
   <div class="card">
     <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
@@ -925,143 +837,6 @@
     document.getElementById('scrollBtn').classList.toggle('visible', window.scrollY > 200);
   });
 
-  function updateOhm() {
-    const v = +document.getElementById('ohm-v').value, r = +document.getElementById('ohm-r').value;
-    document.getElementById('ohm-v-val').textContent = v + ' V';
-    document.getElementById('ohm-r-val').textContent = r + ' Ω';
-    const I = v/r;
-    document.getElementById('ohm-i').textContent = I.toFixed(2) + ' A';
-    document.getElementById('ohm-p').textContent = (v*I).toFixed(1) + ' W';
-  }
-  function updateCircuit() {
-    const v1 = +document.getElementById('c-v1').value, v3 = +document.getElementById('c-v3').value, r = +document.getElementById('c-r').value;
-    document.getElementById('c-v1-val').textContent = v1 + ' V';
-    document.getElementById('c-v3-val').textContent = v3 + ' V';
-    document.getElementById('c-r-val').textContent = r + ' Ω';
-    const emk = v1 - 3 + v3, rtot = 5 + 4 + r + 3, I = emk/rtot;
-    document.getElementById('c-emk').textContent = emk.toFixed(0) + ' V';
-    document.getElementById('c-i').textContent = I.toFixed(2) + ' A';
-    document.getElementById('c-v2').textContent = (I*r).toFixed(2) + ' V';
-  }
-  function drawVec() {
-    const c = document.getElementById('vecCanvas'); if (!c) return;
-    const ctx = c.getContext('2d'), W=c.width, H=c.height, cx=W/2, cy=H/2;
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='#1e2a3f'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
-    const vx=+document.getElementById('vx').value, vy=+document.getElementById('vy').value, bz=+document.getElementById('bz').value, scale=22;
-    function arrow(dx,dy,color,label){
-      const ex=cx+dx*scale, ey=cy-dy*scale;
-      ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=2.5;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(ex,ey); ctx.stroke();
-      const ang=Math.atan2(ey-cy,ex-cx);
-      ctx.beginPath(); ctx.moveTo(ex,ey);
-      ctx.lineTo(ex-8*Math.cos(ang-0.4),ey-8*Math.sin(ang-0.4));
-      ctx.lineTo(ex-8*Math.cos(ang+0.4),ey-8*Math.sin(ang+0.4));
-      ctx.closePath(); ctx.fill();
-      ctx.font='bold 12px monospace'; ctx.fillText(label,ex+4,ey-4);
-    }
-    arrow(vx,vy,'#3b82f6','v');
-    ctx.fillStyle='#22c55e'; ctx.beginPath(); ctx.arc(cx,cy,5,0,2*Math.PI); ctx.fill();
-    ctx.font='bold 12px monospace'; ctx.fillText('B(z)',cx+8,cy+16);
-    arrow((vy*bz)/Math.max(Math.abs(bz),1),(-vx*bz)/Math.max(Math.abs(bz),1),'#ef4444','vxB');
-  }
-  function updateVec() {
-    const vx=+document.getElementById('vx').value, vy=+document.getElementById('vy').value, bz=+document.getElementById('bz').value;
-    document.getElementById('vx-val').textContent=vx;
-    document.getElementById('vy-val').textContent=vy;
-    document.getElementById('bz-val').textContent=bz;
-    const cxv=vy*bz, cyv=-vx*bz;
-    document.getElementById('vxb-out').textContent=`(${cxv}, ${cyv}, 0)`;
-    const q=-1.6;
-    document.getElementById('f-out').textContent=`(${(q*cxv).toFixed(1)}, ${(q*cyv).toFixed(1)}, 0.0)`;
-    drawVec();
-  }
-  function drawField() {
-    const c=document.getElementById('fieldCanvas'); if(!c) return;
-    const ctx=c.getContext('2d'), W=c.width, H=c.height, cx=W/2, cy=H/2;
-    ctx.clearRect(0,0,W,H); ctx.fillStyle='#05080f'; ctx.fillRect(0,0,W,H);
-    const I=+document.getElementById('bs-i').value, aRaw=+document.getElementById('bs-a').value;
-    const rings=Math.min(3+Math.floor(I/3),10);
-    for(let k=1;k<=rings;k++){
-      const rad=k*(Math.min(W,H)/2/rings)*0.9;
-      ctx.strokeStyle=`rgba(103,232,249,${0.7-k*0.05})`; ctx.lineWidth=1.2;
-      ctx.beginPath(); ctx.arc(cx,cy,rad,0,2*Math.PI); ctx.stroke();
-    }
-    ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(cx,cy,6,0,2*Math.PI); ctx.fill();
-    ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(cx,cy,2,0,2*Math.PI); ctx.stroke();
-    const px=cx+(aRaw/50)*(W/2-15);
-    ctx.fillStyle='#fbbf24'; ctx.beginPath(); ctx.arc(px,cy,5,0,2*Math.PI); ctx.fill();
-    ctx.font='bold 11px monospace'; ctx.fillStyle='#fbbf24'; ctx.fillText('P',px+6,cy-6);
-  }
-  function updateField() {
-    const I=+document.getElementById('bs-i').value, aRaw=+document.getElementById('bs-a').value, a=aRaw/100;
-    document.getElementById('bs-i-val').textContent=I+' A';
-    document.getElementById('bs-a-val').textContent=a.toFixed(2)+' m';
-    const B=4*Math.PI*1e-7*I/(2*Math.PI*a);
-    document.getElementById('bs-b').textContent=(B*1e6).toFixed(1)+' μT';
-    drawField();
-  }
-  function drawFaraday() {
-    const c=document.getElementById('faradayCanvas'); if(!c) return;
-    const ctx=c.getContext('2d'), W=c.width, H=c.height;
-    ctx.clearRect(0,0,W,H); ctx.fillStyle='#05080f'; ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle='#1e2a3f'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(30,H-20); ctx.lineTo(W-5,H-20); ctx.moveTo(30,5); ctx.lineTo(30,H-20); ctx.stroke();
-    const tCur=+document.getElementById('fd-t').value/10, maxB=2*4+4*16;
-    ctx.strokeStyle='#3b82f6'; ctx.lineWidth=2; ctx.beginPath();
-    for(let px=30;px<=W-5;px++){
-      const t=((px-30)/(W-35))*4, B=2*t+4*t*t, py=(H-20)-(B/maxB)*(H-30);
-      if(px===30) ctx.moveTo(px,py); else ctx.lineTo(px,py);
-    }
-    ctx.stroke();
-    const curX=30+(tCur/4)*(W-35);
-    ctx.strokeStyle='#fde047'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
-    ctx.beginPath(); ctx.moveTo(curX,5); ctx.lineTo(curX,H-20); ctx.stroke(); ctx.setLineDash([]);
-    const Bc=2*tCur+4*tCur*tCur, py=(H-20)-(Bc/maxB)*(H-30);
-    ctx.fillStyle='#4ade80'; ctx.beginPath(); ctx.arc(curX,py,4,0,2*Math.PI); ctx.fill();
-    ctx.font='10px monospace'; ctx.fillStyle='#3b82f6'; ctx.fillText('B(t)',36,14);
-  }
-  function updateFaraday() {
-    const aRaw=+document.getElementById('fd-a').value, A=aRaw/10, tCur=+document.getElementById('fd-t').value/10;
-    document.getElementById('fd-a-val').textContent=A.toFixed(1)+' m²';
-    document.getElementById('fd-t-val').textContent=tCur.toFixed(1)+' s';
-    const B=2*tCur+4*tCur*tCur, dbdt=2+8*tCur, emf=A*dbdt;
-    document.getElementById('fd-b').textContent=B.toFixed(1)+' T';
-    document.getElementById('fd-dbdt').textContent=dbdt.toFixed(1)+' T/s';
-    document.getElementById('fd-emf').textContent=emf.toFixed(1)+' V';
-    drawFaraday();
-  }
-  function drawAC() {
-    const c=document.getElementById('acCanvas'); if(!c) return;
-    const ctx=c.getContext('2d'), W=c.width, H=c.height, cy=H/2;
-    ctx.clearRect(0,0,W,H); ctx.fillStyle='#05080f'; ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle='#1e2a3f'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
-    const Vm=+document.getElementById('ac-vm').value, f=+document.getElementById('ac-f').value, tCur=+document.getElementById('ac-t').value, amp=(H/2-10)*(Vm/320);
-    ctx.strokeStyle='#f59e0b'; ctx.lineWidth=2; ctx.beginPath();
-    for(let px=0;px<=W;px++){
-      const t=(px/W)*20e-3, v=Math.sin(2*Math.PI*f*t), py=cy-v*amp;
-      if(px===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
-    }
-    ctx.stroke();
-    const curX=(tCur/20)*W;
-    ctx.strokeStyle='#fde047'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
-    ctx.beginPath(); ctx.moveTo(curX,0); ctx.lineTo(curX,H); ctx.stroke(); ctx.setLineDash([]);
-    const vCur=Math.sin(2*Math.PI*f*tCur*1e-3);
-    ctx.fillStyle='#4ade80'; ctx.beginPath(); ctx.arc(curX,cy-vCur*amp,4,0,2*Math.PI); ctx.fill();
-  }
-  function updateAC() {
-    const Vm=+document.getElementById('ac-vm').value, f=+document.getElementById('ac-f').value, tCur=+document.getElementById('ac-t').value;
-    document.getElementById('ac-vm-val').textContent=Vm+' V';
-    document.getElementById('ac-f-val').textContent=f+' Hz';
-    document.getElementById('ac-t-val').textContent=tCur+' ms';
-    const wt=2*Math.PI*f*tCur*1e-3;
-    document.getElementById('ac-wt').textContent=((wt*180/Math.PI)%360).toFixed(0)+'°';
-    document.getElementById('ac-v').textContent=(Vm*Math.sin(wt)).toFixed(1)+' V';
-    document.getElementById('ac-rms').textContent=(Vm/Math.sqrt(2)).toFixed(1)+' V';
-    drawAC();
-  }
-
   function toggleSol(btn) {
     const sol=btn.nextElementSibling, open=sol.classList.toggle('show');
     btn.textContent=open?'Çözümü Gizle ▲':'Çözümü Gör ▼';
@@ -1109,7 +884,7 @@
     }
   }
   window.addEventListener('load', () => {
-    updateOhm(); updateCircuit(); updateVec(); updateField(); updateFaraday(); updateAC();
+    /* simülasyonlar kaldırıldı */
   });
 </script>
 </body>
