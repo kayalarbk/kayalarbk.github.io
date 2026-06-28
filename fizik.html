@@ -111,6 +111,187 @@
   }
   .topic-btn:hover { border-color: var(--accent); color: #93c5fd; }
   .topic-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .exam-btn {
+    background: rgba(245,158,11,0.12) !important;
+    border-color: rgba(245,158,11,0.4) !important;
+    color: #fcd34d !important;
+  }
+  .exam-btn.active { background: var(--gold) !important; color: #0a0f1e !important; }
+
+  /* ═══ EXAM ═══ */
+  .exam-intro {
+    background: linear-gradient(135deg, #1a1400, #2a1f00);
+    border: 1px solid rgba(245,158,11,0.4);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .exam-intro h2 { color: #fbbf24; font-size: 1.15rem; margin-bottom: 8px; }
+  .exam-intro p { font-size: 0.82rem; color: #fde68a; line-height: 1.6; margin-bottom: 4px; }
+  .exam-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .exam-meta-pill {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.74rem;
+    color: #fcd34d;
+  }
+  .exam-timer {
+    background: #0a0f1e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    position: sticky;
+    top: 6px;
+    z-index: 50;
+  }
+  .exam-timer .timer-display {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #fbbf24;
+  }
+  .exam-timer .timer-label { font-size: 0.72rem; color: #64748b; }
+  .exam-q {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .exam-q-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .exam-q-num {
+    background: var(--gold);
+    color: #0a0f1e;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 11px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .exam-q-topic {
+    font-size: 0.7rem;
+    color: #93c5fd;
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.3);
+    padding: 3px 9px;
+    border-radius: 99px;
+  }
+  .exam-q-pts { margin-left: auto; font-size: 0.72rem; color: #64748b; font-weight: 600; }
+  .exam-q-text { font-size: 0.86rem; color: #e2e8f0; line-height: 1.65; margin-bottom: 12px; }
+  .exam-q-text strong { color: #fbbf24; }
+  .exam-given { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .exam-given-pill {
+    background: #0a0f1e;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 4px 10px;
+    font-size: 0.76rem;
+    color: #7dd3fc;
+  }
+  .exam-answer-area {
+    width: 100%;
+    background: #05080f;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    resize: vertical;
+    min-height: 70px;
+    margin-bottom: 10px;
+  }
+  .exam-answer-area:focus { outline: none; border-color: var(--gold); }
+  .exam-answer-area::placeholder { color: #475569; }
+  .exam-check-btn {
+    background: var(--gold);
+    color: #0a0f1e;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .exam-check-btn:hover { background: #d97706; }
+  .exam-solution {
+    margin-top: 12px;
+    background: #051a0e;
+    border: 1px solid #166534;
+    border-radius: 10px;
+    padding: 14px;
+    display: none;
+    overflow-x: auto;
+  }
+  .exam-solution.show { display: block; }
+  .exam-solution .sol-label {
+    font-size: 0.72rem;
+    color: #4ade80;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .exam-solution .sol-steps { font-size: 0.82rem; color: #cbd5e1; line-height: 1.7; }
+  .exam-solution .sol-final {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(34,197,94,0.3);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #4ade80;
+  }
+  .self-grade { display: flex; gap: 8px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
+  .self-grade > span { font-size: 0.76rem; color: #94a3b8; }
+  .grade-btn {
+    border: 1px solid var(--border);
+    background: #0a0f1e;
+    color: #94a3b8;
+    border-radius: 7px;
+    padding: 5px 12px;
+    font-size: 0.74rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .grade-btn.correct { border-color: var(--green); }
+  .grade-btn.correct.sel { background: #14532d; color: #86efac; }
+  .grade-btn.partial { border-color: var(--gold); }
+  .grade-btn.partial.sel { background: #422006; color: #fcd34d; }
+  .grade-btn.wrong { border-color: var(--red); }
+  .grade-btn.wrong.sel { background: #450a0a; color: #fca5a5; }
+  .exam-result {
+    background: linear-gradient(135deg, #0d1f3c, #0a1424);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 16px;
+    display: none;
+  }
+  .exam-result.show { display: block; }
+  .exam-result .score-big { font-size: 2.5rem; font-weight: 800; color: #fbbf24; }
+  .exam-result .score-sub { font-size: 0.82rem; color: #94a3b8; margin: 6px 0 14px; }
+  .exam-result .score-msg { font-size: 0.95rem; color: #f8fafc; }
+  .exam-actions { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .exam-action-btn {
+    flex: 1;
+    min-width: 130px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-reveal-all { background: #1e293b; color: #cbd5e1; border: 1px solid var(--border); }
+  .btn-finish { background: var(--gold); color: #0a0f1e; }
 
   /* MAIN */
   main { padding: 0 14px 40px; max-width: 720px; margin: 0 auto; }
@@ -543,6 +724,7 @@
   <button class="topic-btn" onclick="showTopic(2)">📡 Biot-Savart</button>
   <button class="topic-btn" onclick="showTopic(3)">⚡ AC Devre</button>
   <button class="topic-btn" onclick="showTopic(4)">🔁 Faraday</button>
+  <button class="topic-btn exam-btn" onclick="showTopic(5)">📝 Final Sınavı</button>
 </div>
 
 <div class="progress-dots">
@@ -551,6 +733,7 @@
   <div class="dot" onclick="showTopic(2)"></div>
   <div class="dot" onclick="showTopic(3)"></div>
   <div class="dot" onclick="showTopic(4)"></div>
+  <div class="dot" onclick="showTopic(5)"></div>
 </div>
 
 <main>
@@ -1361,6 +1544,415 @@ plt.<span class="fn">show</span>()</pre>
 </div>
 </main>
 
+<!-- ═══════════════════════════════════
+     FİNAL SINAVI BÖLÜMÜ (sec5 ana main dışında)
+═══════════════════════════════════ -->
+<div class="section" id="sec5" style="padding:0 14px 40px;max-width:720px;margin:0 auto;">
+
+  <div class="exam-intro">
+    <h2>📝 Final Sınavı — Elektromanyetizma</h2>
+    <p>Serway Bölüm 27–33 konularını kapsar. Her soruyu oku, cevabını kutucuğa <strong>kendi sözlerinle yaz</strong>, sonra "Çözümü Gör" ile karşılaştır ve kendini puanla.</p>
+    <div class="exam-meta">
+      <span class="exam-meta-pill">📚 12 Klasik Soru</span>
+      <span class="exam-meta-pill">⏱️ Önerilen: 90 dk</span>
+      <span class="exam-meta-pill">💯 Toplam 100 puan</span>
+    </div>
+  </div>
+
+  <div class="exam-timer">
+    <span class="timer-label">⏱️ Geçen Süre</span>
+    <span class="timer-display" id="examTimer">00:00</span>
+    <button class="exam-check-btn" onclick="toggleTimer()" id="timerBtn" style="padding:5px 14px;font-size:0.74rem">Başlat</button>
+  </div>
+
+  <!-- ═══ SORU 1 — Bölüm 27: Akım ve Direnç ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S1</span>
+      <span class="exam-q-topic">Böl. 27 — Akım & Direnç</span>
+      <span class="exam-q-pts">6 puan</span>
+    </div>
+    <div class="exam-q-text">Bir iletkenden geçen yük \(q(t) = 4t^2 + 5t\) (Coulomb) ile değişiyor. \(t = 3\,s\) anındaki <strong>anlık akımı</strong> bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">q(t) = 4t² + 5t</span>
+      <span class="exam-given-pill">t = 3 s</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        Anlık akım yükün zamana göre türevidir:
+        \[ i(t) = \frac{dq}{dt} = 8t + 5 \]
+        \[ t = 3: \quad i = 8(3) + 5 = 29\,A \]
+      </div>
+      <div class="sol-final">→ \(i = 29\,A\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,6)">✓ Doğru (6p)</button>
+        <button class="grade-btn partial" onclick="grade(this,3)">~ Kısmen (3p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 2 — Bölüm 27 ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S2</span>
+      <span class="exam-q-topic">Böl. 27 — Direnç & Güç</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Bir direnç \(R = 20\,\Omega\) ve üzerinden \(I = 3\,A\) akım geçiyor. Direncin <strong>uçları arasındaki gerilimi</strong> ve <strong>harcadığı gücü</strong> bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">R = 20 Ω</span>
+      <span class="exam-given-pill">I = 3 A</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        Ohm yasası: \( V = IR = 3 \times 20 = 60\,V \)<br>
+        Güç: \( P = I^2 R = 3^2 \times 20 = 180\,W \) (veya \(P = VI = 60 \times 3 = 180\,W\))
+      </div>
+      <div class="sol-final">→ \(V = 60\,V\) , \(P = 180\,W\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 3 — Bölüm 28: DC Devreler ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S3</span>
+      <span class="exam-q-topic">Böl. 28 — DC Devreler</span>
+      <span class="exam-q-pts">10 puan</span>
+    </div>
+    <div class="exam-q-text">Tek çevreli bir devrede \(\varepsilon = 24\,V\) emk kaynağı, \(2\,\Omega\) iç direnç ve \(10\,\Omega\) dış direnç seri bağlıdır. Devre <strong>akımını</strong> ve dış direncin <strong>uçlarındaki gerilimi</strong> (uç gerilimi) bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">ε = 24 V</span>
+      <span class="exam-given-pill">r = 2 Ω</span>
+      <span class="exam-given-pill">R = 10 Ω</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ I = \frac{\varepsilon}{R+r} = \frac{24}{10+2} = 2\,A \]
+        Uç gerilimi (dış direnç üzerindeki): \( V = IR = 2 \times 10 = 20\,V \)
+      </div>
+      <div class="sol-final">→ \(I = 2\,A\) , \(V = 20\,V\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,10)">✓ Doğru (10p)</button>
+        <button class="grade-btn partial" onclick="grade(this,5)">~ Kısmen (5p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 4 — Bölüm 28: Kirchhoff ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S4</span>
+      <span class="exam-q-topic">Böl. 28 — Kirchhoff</span>
+      <span class="exam-q-pts">10 puan</span>
+    </div>
+    <div class="exam-q-text">İki gözlü bir devrede çevre denklemleri şöyle kuruluyor: \(8I_1 - 3I_2 = 20\) ve \(-3I_1 + 7I_2 = 12\). <strong>\(I_1\) ve \(I_2\)</strong> göz akımlarını bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">8I₁ − 3I₂ = 20</span>
+      <span class="exam-given-pill">−3I₁ + 7I₂ = 12</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        1. denklemi 7, 2.'yi 3 ile çarp:
+        \[ 56I_1 - 21I_2 = 140 \quad,\quad -9I_1 + 21I_2 = 36 \]
+        Topla: \( 47I_1 = 176 \Rightarrow I_1 = 3.74\,A \)<br>
+        2. denkleme koy: \( I_2 = \frac{12 + 3(3.74)}{7} = 3.32\,A \)
+      </div>
+      <div class="sol-final">→ \(I_1 \approx 3.74\,A\) , \(I_2 \approx 3.32\,A\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,10)">✓ Doğru (10p)</button>
+        <button class="grade-btn partial" onclick="grade(this,5)">~ Kısmen (5p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 5 — Bölüm 29: Manyetik Alanlar ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S5</span>
+      <span class="exam-q-topic">Böl. 29 — Manyetik Alanlar</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Bir proton \(\vec{v} = 4\times10^6\,\hat{i}\,m/s\) hızıyla \(\vec{B} = 0.5\,\hat{j}\,T\) alanına giriyor. Protona etki eden <strong>manyetik kuvveti</strong> bulunuz. \((q = +1.6\times10^{-19}\,C)\)</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">v = 4×10⁶ î m/s</span>
+      <span class="exam-given-pill">B = 0.5 ĵ T</span>
+      <span class="exam-given-pill">q = +1.6×10⁻¹⁹ C</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ \vec{F} = q(\vec{v}\times\vec{B}) \]
+        \( \vec{v}\times\vec{B} = (4\times10^6\,\hat{i}) \times (0.5\,\hat{j}) = 2\times10^6\,(\hat{i}\times\hat{j}) = 2\times10^6\,\hat{k} \)
+        \[ \vec{F} = (1.6\times10^{-19})(2\times10^6)\,\hat{k} = 3.2\times10^{-13}\,\hat{k}\,N \]
+      </div>
+      <div class="sol-final">→ \(\vec{F} = 3.2\times10^{-13}\,\hat{k}\,N\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 6 — Bölüm 29: Dairesel Hareket ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S6</span>
+      <span class="exam-q-topic">Böl. 29 — Manyetik Alanda Hareket</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Kütlesi \(m = 9.1\times10^{-31}\,kg\), yükü \(q = 1.6\times10^{-19}\,C\) olan bir elektron, \(B = 0.01\,T\) manyetik alana dik olarak \(v = 2\times10^6\,m/s\) hızla giriyor. İzlediği dairesel yörüngenin <strong>yarıçapını</strong> bulunuz. \(\left(r = \dfrac{mv}{qB}\right)\)</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">m = 9.1×10⁻³¹ kg</span>
+      <span class="exam-given-pill">v = 2×10⁶ m/s</span>
+      <span class="exam-given-pill">B = 0.01 T</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ r = \frac{mv}{qB} = \frac{(9.1\times10^{-31})(2\times10^6)}{(1.6\times10^{-19})(0.01)} \]
+        \[ r = \frac{1.82\times10^{-24}}{1.6\times10^{-21}} = 1.14\times10^{-3}\,m \]
+      </div>
+      <div class="sol-final">→ \(r \approx 1.14\,mm\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 7 — Bölüm 30: Manyetik Alan Kaynakları ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S7</span>
+      <span class="exam-q-topic">Böl. 30 — Biot-Savart</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Sonsuz uzunlukta düz bir tel \(I = 8\,A\) akım taşıyor. Telden \(a = 0.04\,m\) uzaklıktaki bir noktada oluşan <strong>manyetik alan şiddetini</strong> bulunuz. \((\mu_0 = 4\pi\times10^{-7})\)</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">I = 8 A</span>
+      <span class="exam-given-pill">a = 0.04 m</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ B = \frac{\mu_0 I}{2\pi a} = \frac{(4\pi\times10^{-7})(8)}{2\pi(0.04)} \]
+        \[ B = \frac{(2\times10^{-7})(8)}{0.04} = \frac{1.6\times10^{-6}}{0.04} = 4\times10^{-5}\,T \]
+      </div>
+      <div class="sol-final">→ \(B = 40\,\mu T\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 8 — Bölüm 30: Solenoid ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S8</span>
+      <span class="exam-q-topic">Böl. 30 — Solenoid</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Bir solenoidin birim uzunluğunda \(n = 500\,\text{sarım/m}\) bulunuyor ve \(I = 2\,A\) akım taşıyor. Solenoid içindeki <strong>manyetik alanı</strong> bulunuz. \((B = \mu_0 n I)\)</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">n = 500 sarım/m</span>
+      <span class="exam-given-pill">I = 2 A</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ B = \mu_0 n I = (4\pi\times10^{-7})(500)(2) \]
+        \[ B = (4\pi\times10^{-7})(1000) = 1.26\times10^{-3}\,T \]
+      </div>
+      <div class="sol-final">→ \(B \approx 1.26\,mT\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 9 — Bölüm 31: Faraday ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S9</span>
+      <span class="exam-q-topic">Böl. 31 — Faraday Yasası</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">\(A = 0.2\,m^2\) alanlı bir halka, kendisine dik manyetik alanın \(B(t) = 3t^2 + 2t\) (Tesla) ile değiştiği bölgede duruyor. \(t = 1\,s\) anında halkada <strong>indüklenen emk'yı</strong> bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">A = 0.2 m²</span>
+      <span class="exam-given-pill">B(t) = 3t² + 2t</span>
+      <span class="exam-given-pill">t = 1 s</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ \varepsilon = -A\frac{dB}{dt}, \quad \frac{dB}{dt} = 6t + 2 \]
+        \[ t = 1: \frac{dB}{dt} = 6(1) + 2 = 8\,T/s \]
+        \[ |\varepsilon| = A\frac{dB}{dt} = 0.2 \times 8 = 1.6\,V \]
+      </div>
+      <div class="sol-final">→ \(|\varepsilon| = 1.6\,V\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 10 — Bölüm 31: Motional EMF ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S10</span>
+      <span class="exam-q-topic">Böl. 31 — Hareket EMK'sı</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Uzunluğu \(L = 0.5\,m\) olan bir iletken çubuk, \(B = 0.4\,T\) manyetik alana dik olarak \(v = 6\,m/s\) hızla kayıyor. Çubuğun uçları arasında <strong>indüklenen emk'yı</strong> bulunuz. \((\varepsilon = BLv)\)</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">L = 0.5 m</span>
+      <span class="exam-given-pill">B = 0.4 T</span>
+      <span class="exam-given-pill">v = 6 m/s</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ \varepsilon = BLv = 0.4 \times 0.5 \times 6 \]
+        \[ \varepsilon = 1.2\,V \]
+      </div>
+      <div class="sol-final">→ \(\varepsilon = 1.2\,V\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 11 — Bölüm 33: AC Devre ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S11</span>
+      <span class="exam-q-topic">Böl. 33 — AC Devre</span>
+      <span class="exam-q-pts">8 puan</span>
+    </div>
+    <div class="exam-q-text">Bir AC kaynağın frekansı \(f = 60\,Hz\), direnci \(R = 40\,\Omega\)'dur. \(t = 2\,ms\) anında akım \(i = 1.5\,A\) ölçülüyor. Devrenin <strong>tepe voltajını \((V_m)\)</strong> bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">f = 60 Hz</span>
+      <span class="exam-given-pill">R = 40 Ω</span>
+      <span class="exam-given-pill">t = 2 ms</span>
+      <span class="exam-given-pill">i = 1.5 A</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ \omega = 2\pi(60) = 376.99\,rad/s \]
+        \[ \omega t = 376.99 \times 0.002 = 0.754\,rad = 43.2° \]
+        \[ I_m = \frac{i}{\sin(43.2°)} = \frac{1.5}{0.684} = 2.19\,A \]
+        \[ V_m = I_m R = 2.19 \times 40 = 87.7\,V \]
+      </div>
+      <div class="sol-final">→ \(V_m \approx 87.7\,V\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,8)">✓ Doğru (8p)</button>
+        <button class="grade-btn partial" onclick="grade(this,4)">~ Kısmen (4p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SORU 12 — Bölüm 33: RMS & Güç ═══ -->
+  <div class="exam-q">
+    <div class="exam-q-head">
+      <span class="exam-q-num">S12</span>
+      <span class="exam-q-topic">Böl. 33 — RMS & Güç</span>
+      <span class="exam-q-pts">10 puan</span>
+    </div>
+    <div class="exam-q-text">Bir AC devresinde tepe gerilimi \(V_m = 170\,V\) ve direnç \(R = 85\,\Omega\)'dur. <strong>RMS gerilimini</strong> ve dirençte harcanan <strong>ortalama gücü</strong> bulunuz.</div>
+    <div class="exam-given">
+      <span class="exam-given-pill">Vₘ = 170 V</span>
+      <span class="exam-given-pill">R = 85 Ω</span>
+    </div>
+    <textarea class="exam-answer-area" placeholder="Cevabını ve çözüm adımlarını buraya yaz..."></textarea>
+    <button class="exam-check-btn" onclick="toggleSol(this)">Çözümü Gör ▼</button>
+    <div class="exam-solution">
+      <div class="sol-label">✅ Çözüm</div>
+      <div class="sol-steps">
+        \[ V_{rms} = \frac{V_m}{\sqrt{2}} = \frac{170}{1.414} = 120.2\,V \]
+        \[ P = \frac{V_{rms}^2}{R} = \frac{(120.2)^2}{85} = \frac{14448}{85} = 170\,W \]
+      </div>
+      <div class="sol-final">→ \(V_{rms} \approx 120\,V\) , \(P \approx 170\,W\)</div>
+      <div class="self-grade">
+        <span>Kendini puanla:</span>
+        <button class="grade-btn correct" onclick="grade(this,10)">✓ Doğru (10p)</button>
+        <button class="grade-btn partial" onclick="grade(this,5)">~ Kısmen (5p)</button>
+        <button class="grade-btn wrong" onclick="grade(this,0)">✗ Yanlış (0p)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AKSİYONLAR -->
+  <div class="exam-actions">
+    <button class="exam-action-btn btn-reveal-all" onclick="revealAll()">📖 Tüm Çözümleri Aç</button>
+    <button class="exam-action-btn btn-finish" onclick="finishExam()">🏁 Sınavı Bitir & Puanla</button>
+  </div>
+
+  <div class="exam-result" id="examResult">
+    <div class="score-big" id="examScore">0 / 100</div>
+    <div class="score-sub" id="examScoreSub">Henüz puanlanmadı</div>
+    <div class="score-msg" id="examScoreMsg"></div>
+  </div>
+
+</div>
+
 <!-- SCROLL TOP -->
 <button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
@@ -1617,6 +2209,84 @@ plt.<span class="fn">show</span>()</pre>
     document.getElementById('fd-dbdt').textContent = dbdt.toFixed(1) + ' T/s';
     document.getElementById('fd-emf').textContent = emf.toFixed(1) + ' V';
     drawFaraday();
+  }
+
+  /* ═══════════ FİNAL SINAVI FONKSİYONLARI ═══════════ */
+  function toggleSol(btn) {
+    const sol = btn.nextElementSibling;
+    const open = sol.classList.toggle('show');
+    btn.textContent = open ? 'Çözümü Gizle ▲' : 'Çözümü Gör ▼';
+    if (open && window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise([sol]);
+    }
+  }
+
+  function grade(btn, points) {
+    const group = btn.parentElement;
+    group.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+    group.dataset.points = points;
+    group.dataset.graded = '1';
+  }
+
+  function revealAll() {
+    document.querySelectorAll('#sec5 .exam-solution').forEach(sol => {
+      sol.classList.add('show');
+      const btn = sol.previousElementSibling;
+      if (btn && btn.classList.contains('exam-check-btn')) btn.textContent = 'Çözümü Gizle ▲';
+    });
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise([document.getElementById('sec5')]);
+    }
+  }
+
+  function finishExam() {
+    const groups = document.querySelectorAll('#sec5 .self-grade');
+    let total = 0, graded = 0;
+    groups.forEach(g => {
+      if (g.dataset.graded === '1') {
+        total += parseInt(g.dataset.points || '0');
+        graded++;
+      }
+    });
+    const result = document.getElementById('examResult');
+    result.classList.add('show');
+    document.getElementById('examScore').textContent = total + ' / 100';
+
+    if (graded < groups.length) {
+      document.getElementById('examScoreSub').textContent =
+        `${graded}/${groups.length} soru puanlandı — kalan soruları da puanla`;
+    } else {
+      document.getElementById('examScoreSub').textContent = 'Tüm sorular puanlandı ✓';
+    }
+
+    let msg = '';
+    if (total >= 85) msg = '🌟 Mükemmel! Finale tamamen hazırsın.';
+    else if (total >= 70) msg = '👍 Çok iyi! Birkaç konuyu tekrar et.';
+    else if (total >= 50) msg = '📚 Orta seviye. Zayıf konulara odaklan.';
+    else msg = '💪 Daha çok pratik gerek. Konu anlatımlarına dön.';
+    document.getElementById('examScoreMsg').textContent = msg;
+
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ═══════════ SINAV ZAMANLAYICI ═══════════ */
+  let timerInterval = null, timerSeconds = 0;
+  function toggleTimer() {
+    const btn = document.getElementById('timerBtn');
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      btn.textContent = 'Devam';
+    } else {
+      btn.textContent = 'Durdur';
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const m = String(Math.floor(timerSeconds/60)).padStart(2,'0');
+        const s = String(timerSeconds%60).padStart(2,'0');
+        document.getElementById('examTimer').textContent = `${m}:${s}`;
+      }, 1000);
+    }
   }
 
   /* ═══════════ BAŞLANGIÇ ═══════════ */
