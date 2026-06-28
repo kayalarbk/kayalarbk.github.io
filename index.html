@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ders Defteri — Giriş</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#2a0f1c; --bg-alt:#3a1528; --accent:#ff5d8f; --rose:#ff8fb3; --plum:#c44d7a;
+    --muted:#c98aa6; --soft:#fbe4ee; --soft-dim:#cf9fb6;
+  }
+  *{box-sizing:border-box;}
+  html{ background:#2a0f1c; }
+  body{
+    margin:0; background:#2a0f1c;
+    background-image:
+      radial-gradient(circle at 18% 0%, #4a1a30 0%, transparent 55%),
+      radial-gradient(circle at 90% 95%, #45152b 0%, transparent 50%);
+    background-attachment:fixed;
+    color:var(--soft); font-family:'Space Grotesk', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:32px 16px 48px;
+  }
+  .wrap{ width:100%; max-width:480px; }
+  header{ text-align:center; margin-bottom:28px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  h1{ font-family:'Fraunces', serif; font-weight:600; font-size:30px; margin:0 0 6px; color:var(--accent); }
+  .sub{ font-size:13.5px; color:var(--soft-dim); line-height:1.5; }
+
+  .grid{ display:flex; flex-direction:column; gap:12px; }
+  .card{
+    display:flex; align-items:center; gap:16px; text-decoration:none;
+    background:var(--bg-alt); border:1px solid rgba(255,143,179,.16);
+    border-left:4px solid var(--accent); border-radius:14px; padding:18px 18px;
+    transition:transform .12s, border-color .12s, background .12s;
+  }
+  .card:active{ transform:scale(.985); background:#431a2e; }
+  .card .ico{ font-size:30px; line-height:1; flex:0 0 auto; }
+  .card .body{ flex:1; min-width:0; }
+  .card .title{ font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--soft); margin-bottom:2px; }
+  .card .desc{ font-size:12.5px; color:var(--soft-dim); line-height:1.4; }
+  .card .arrow{ color:var(--rose); font-size:20px; flex:0 0 auto; }
+  .card.soon{ border-left-color:var(--muted); opacity:.6; pointer-events:none; }
+  .card.soon .arrow{ font-size:11px; font-family:'IBM Plex Mono', monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+
+  footer{ text-align:center; margin-top:28px; font-size:11.5px; color:var(--soft-dim); font-family:'IBM Plex Mono', monospace; }
+  ::selection{ background:var(--accent); color:#3a0a1d; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Ders Defteri</div>
+    <h1>Çalışma Merkezi</h1>
+    <div class="sub">Çalışmak istediğin dersi seç</div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>Hepsi tek repoda · çevrimdışı çalışır</footer>
+
+</div>
+
+<script>
+  // Yeni ders eklemek için buraya bir satır ekle.
+  // file: aynı repodaki HTML dosyasının adı.  soon:true → "yakında" (link kapalı)
+  const cards = [
+    { ico:"💗", title:"YÖKDİL Kelime", desc:"255 kelime & edat · kartlar, test, liste", file:"yokdil-kelime.html" },
+    { ico:"⚛️", title:"Fizik", desc:"Konu anlatımı ve çalışma kartları", file:"fizik.html" },
+    // Örnek (kapalı): { ico:"📐", title:"Matematik", desc:"Yakında", soon:true },
+  ];
+
+  const grid = document.getElementById('grid');
+  cards.forEach(c=>{
+    const el = document.createElement(c.soon ? 'div' : 'a');
+    el.className = 'card' + (c.soon ? ' soon' : '');
+    if(!c.soon) el.href = c.file;
+    el.innerHTML =
+      `<div class="ico">${c.ico}</div>
+       <div class="body">
+         <div class="title">${c.title}</div>
+         <div class="desc">${c.desc}</div>
+       </div>
+       <div class="arrow">${c.soon ? 'Yakında' : '→'}</div>`;
+    grid.appendChild(el);
+  });
+</script>
+</body>
+</html>
