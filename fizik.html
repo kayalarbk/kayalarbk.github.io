@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fizik Sınav Hazırlık | 5 Konu</title>
+<style>
+  :root {
+    --bg: #080c18;
+    --surface: #111827;
+    --card: #1a2234;
+    --border: #1f2f4a;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --accent: #3b82f6;
+    --gold: #f59e0b;
+    --green: #22c55e;
+    --red: #ef4444;
+    --purple: #a78bfa;
+    --cyan: #06b6d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a0f1e 0%, #0d1f3c 50%, #0a0f1e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 16px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: #93c5fd;
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f8fafc, #93c5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+  }
+
+  /* TOPIC NAV */
+  .topic-nav {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 16px 20px;
+  }
+  .topic-btn {
+    padding: 7px 14px;
+    border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .topic-btn:hover { border-color: var(--accent); color: #93c5fd; }
+  .topic-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* MAIN */
+  main { padding: 0 14px 40px; max-width: 700px; margin: 0 auto; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* TOPIC HEADER */
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .topic-icon { font-size: 2rem; }
+  .topic-header h2 { font-size: 1.1rem; color: #f8fafc; margin-bottom: 3px; }
+  .topic-header p { font-size: 0.78rem; color: var(--muted); }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tag {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .tag-blue { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+  .tag-gold { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+  .tag-green { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+  .tag-purple { background: rgba(167,139,250,0.15); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }
+  .tag-red { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+
+  /* FORMULA BOX */
+  .formula {
+    background: #0a0f1e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    color: #7dd3fc;
+    line-height: 2;
+    margin-bottom: 12px;
+  }
+  .formula .f-label { color: var(--muted); font-size: 0.72rem; display: block; margin-bottom: 4px; font-family: 'Segoe UI', sans-serif; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .step {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 12px;
+    background: #0a0f1e;
+    border-radius: 8px;
+    border-left: 2px solid var(--accent);
+  }
+  .step-n {
+    background: var(--accent);
+    color: #fff;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    font-size: 0.72rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-body h4 { color: #f8fafc; font-size: 0.82rem; margin-bottom: 3px; }
+  .step-body p { color: var(--muted); font-size: 0.78rem; line-height: 1.5; }
+  .step-body code {
+    display: block;
+    font-family: 'Courier New', monospace;
+    color: #a5f3fc;
+    font-size: 0.78rem;
+    margin-top: 4px;
+    background: rgba(0,0,0,0.3);
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1.7;
+  }
+
+  /* YOUTUBE CARD */
+  .yt-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px;
+    background: #0a0f1e;
+    border: 1px solid #1e3a2a;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .yt-card:hover { border-color: #ef4444; background: #120a0a; }
+  .yt-thumb {
+    width: 48px; height: 36px;
+    background: #1a0a0a;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid #3d1515;
+  }
+  .yt-thumb svg { width: 18px; height: 18px; }
+  .yt-info { flex: 1; min-width: 0; }
+  .yt-title { font-size: 0.8rem; color: #e2e8f0; margin-bottom: 2px; line-height: 1.3; }
+  .yt-meta { font-size: 0.72rem; color: var(--muted); }
+  .yt-arrow { color: #ef4444; font-size: 0.9rem; flex-shrink: 0; }
+
+  /* PRACTICE */
+  .practice-q {
+    background: #0a0f1e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .pq-num {
+    font-size: 0.72rem;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .pq-text { font-size: 0.84rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 10px; }
+  .pq-text strong { color: #fbbf24; }
+
+  .show-ans-btn {
+    background: none;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    border-radius: 7px;
+    padding: 6px 14px;
+    font-size: 0.76rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .show-ans-btn:hover { border-color: var(--green); color: var(--green); }
+  .ans-box {
+    margin-top: 10px;
+    background: #051a0e;
+    border: 1px solid #166534;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: none;
+  }
+  .ans-box.show { display: block; }
+  .ans-box .ans-label { font-size: 0.7rem; color: #4ade80; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+  .ans-box code {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #a7f3d0;
+    line-height: 1.8;
+  }
+  .ans-result {
+    margin-top: 6px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #4ade80;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 14px 0;
+  }
+
+  /* RESULT PILL */
+  .result-pill {
+    display: inline-block;
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #4ade80;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 99px;
+    margin-top: 6px;
+  }
+
+  /* SCROLL TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 20px; right: 16px;
+    background: var(--accent);
+    color: #fff;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 100;
+  }
+  .scroll-top.visible { opacity: 1; }
+
+  /* PROGRESS DOTS */
+  .progress-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.3); }
+
+  @media(max-width:480px) {
+    .hero h1 { font-size: 1.3rem; }
+    .topic-btn { font-size: 0.72rem; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">⚡ Sınav Hazırlık</div>
+  <h1>Elektromanyetizma<br>Çalışma Rehberi</h1>
+  <p>5 konu · Formüller · YouTube videoları · Örnek sorular</p>
+</div>
+
+<!-- NAV -->
+<div class="topic-nav" style="padding-top:18px">
+  <button class="topic-btn active" onclick="showTopic(0)">🔌 Devre</button>
+  <button class="topic-btn" onclick="showTopic(1)">🧲 Manyetik Kuvvet</button>
+  <button class="topic-btn" onclick="showTopic(2)">📡 Biot-Savart</button>
+  <button class="topic-btn" onclick="showTopic(3)">⚡ AC Devre</button>
+  <button class="topic-btn" onclick="showTopic(4)">🔁 Faraday</button>
+</div>
+
+<div class="progress-dots">
+  <div class="dot active" onclick="showTopic(0)"></div>
+  <div class="dot" onclick="showTopic(1)"></div>
+  <div class="dot" onclick="showTopic(2)"></div>
+  <div class="dot" onclick="showTopic(3)"></div>
+  <div class="dot" onclick="showTopic(4)"></div>
+</div>
+
+<main>
+
+<!-- ═══════════════════════════════════
+     KONU 1: DEVRE ANALİZİ
+═══════════════════════════════════ -->
+<div class="section active" id="sec0">
+
+  <div class="topic-header" style="border-left-color:#3b82f6">
+    <div class="topic-icon">🔌</div>
+    <div>
+      <h2>Devre Analizi (KVL / Mesh)</h2>
+      <p>Soru 1 — Potansiyel fark, Kirchhoff, Mesh akım yöntemi</p>
+    </div>
+  </div>
+
+  <!-- FORMÜLLER -->
+  <div class="card">
+    <div class="card-title">📐 Temel Formüller <span class="tag tag-blue">Ezber</span></div>
+    <div class="formula">
+      <span class="f-label">Ohm Yasası</span>
+      V = I × R
+
+      <span class="f-label">KVL (Kirchhoff Gerilim Yasası)</span>
+      ΣV = 0  →  Kazanılan = Kaybedilen
+
+      <span class="f-label">Mesh Yöntemi (2 çevre)</span>
+      Mesh 1: R₁I₁ + R_ortak(I₁−I₂) = ΣV₁
+      Mesh 2: R₂I₂ + R_ortak(I₂−I₁) = ΣV₂
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <h4>Mesh sayısını belirle</h4>
+          <p>Kapalı her döngü bir mesh'tir. Her birine akım ata (I₁, I₂...).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <h4>KVL yaz</h4>
+          <p>Kaynak: yönüne göre +/−. Ortak dal: (I₁−I₂) ya da (I₂−I₁).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <h4>Denklem çöz → V = IR</h4>
+          <p>Akımları bulduktan sonra istenen dirençte V = I×R uygula.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUTUBE -->
+  <div class="card">
+    <div class="card-title">▶️ YouTube Videoları</div>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=jXrqWq8NWyk" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Mesh Current Analysis — KVL Method (EC Academy)</div>
+        <div class="yt-meta">Adım adım Mesh çözümü • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=XtGelib-gWc" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">KCL, KVL, Nodal & Mesh Analysis — First Principles</div>
+        <div class="yt-meta">Temel kavramlardan tam analiz • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=rmg9Fr3f1As" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Mesh Analysis + KVL + Ohm's Law | Lec-16</div>
+        <div class="yt-meta">Klasik ders anlatımı + PDF notlar • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- ÖRNEK SORULAR -->
+  <div class="card">
+    <div class="card-title">📝 Örnek Sorular <span class="tag tag-gold">Çöz</span></div>
+
+    <div class="practice-q">
+      <div class="pq-num">Soru A — Kolay</div>
+      <div class="pq-text">Tek çevreli bir devrede <strong>10V</strong> kaynak, <strong>3Ω</strong> ve <strong>7Ω</strong> dirençler seri bağlıdır. 7Ω üzerindeki gerilimi bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>I = V / R_top = 10 / (3+7) = 1 A
+V_7Ω = I × 7 = 1 × 7 = 7 V</code>
+        <div class="ans-result">→ 7 V</div>
+      </div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-num">Soru B — Orta (Mesh)</div>
+      <div class="pq-text">İki mesh'li devrede: Sol mesh: <strong>12V</strong>, <strong>4Ω</strong>, ortak <strong>2Ω</strong>. Sağ mesh: <strong>8V</strong>, <strong>3Ω</strong>, ortak <strong>2Ω</strong>. I₁ ve I₂'yi bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>Mesh 1: 4I₁ + 2(I₁−I₂) = 12 → 6I₁ − 2I₂ = 12
+Mesh 2: 3I₂ + 2(I₂−I₁) = 8  → −2I₁ + 5I₂ = 8
+
+(1)×5: 30I₁ − 10I₂ = 60
+(2)×2: −4I₁ + 10I₂ = 16
+──────────────────────
+26I₁ = 76 → I₁ = 2.92 A
+I₂ = (8 + 2×2.92)/5 = 2.77 A</code>
+        <div class="ans-result">→ I₁ ≈ 2.92 A | I₂ ≈ 2.77 A</div>
+      </div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-num">Soru C — Zor (Sınavdan)</div>
+      <div class="pq-text">Sınavdaki devre: 12V+5Ω (sol), 3V+4Ω (orta), 18V+2Ω (sağ), alt tel 3Ω. Mesh yöntemiyle <strong>2Ω üzerindeki gerilimi</strong> bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>Mesh 1: 9I₁ − 4I₂ = 12
+Mesh 2: −4I₁ + 9I₂ = 21
+
+I₁ = 2.95 A,  I₂ = 3.64 A
+V_2Ω = I₂ × 2 = 3.64 × 2</code>
+        <div class="ans-result">→ V₂Ω ≈ 7.27 V</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     KONU 2: MANYETİK KUVVET (5b)
+═══════════════════════════════════ -->
+<div class="section" id="sec1">
+
+  <div class="topic-header" style="border-left-color:#a78bfa">
+    <div class="topic-icon">🧲</div>
+    <div>
+      <h2>Manyetik Kuvvet & Vektör Çarpım</h2>
+      <p>Soru 5b — Lorentz kuvveti, determinant yöntemi</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Temel Formüller <span class="tag tag-purple">Ezber</span></div>
+    <div class="formula">
+      <span class="f-label">Lorentz Kuvveti</span>
+      F = q(v × B)
+
+      <span class="f-label">Determinant (Çapraz Çarpım)</span>
+      | î  ĵ  k̂ |
+      | v₁ v₂ v₃|
+      | B₁ B₂ B₃|
+
+      î bileşeni (+): (v₂B₃ − v₃B₂)
+      ĵ bileşeni (−): −(v₁B₃ − v₃B₁)
+      k̂ bileşeni (+): (v₁B₂ − v₂B₁)
+
+      <span class="f-label">İşaret Kuralı</span>
+      Elektron: q = −1.6×10⁻¹⁹ C
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <h4>Matrisi kur</h4>
+          <p>1. satır: î ĵ k̂ | 2. satır: v bileşenleri | 3. satır: B bileşenleri</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <h4>Her bileşeni hesapla</h4>
+          <p>î için 1. sütunu kapat → 2×2 determinant. ĵ için eksi işaret unutma!</p>
+          <code>î: (v₂×B₃) − (v₃×B₂)
+ĵ: −[(v₁×B₃) − (v₃×B₁)]
+k̂: (v₁×B₂) − (v₂×B₁)</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <h4>q ile çarp</h4>
+          <p>F = q × (v×B). Elektronda q negatif → tüm bileşenler ters işaret.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">▶️ YouTube Videoları</div>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=7MBawzone30" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Magnetic Force on a Moving Charge (The Organic Chemistry Tutor)</div>
+        <div class="yt-meta">Hız ve manyetik alan üzerinden kuvvet hesabı • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=zA0fvwtvgvA" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Cross Product 1 — Khan Academy (Manyetik Kuvvetler)</div>
+        <div class="yt-meta">Çapraz çarpım temeli + yön kuralı • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=vLW2Aa6v6Q0" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Magnetic Force on a Charge — Cross Product Part 1</div>
+        <div class="yt-meta">Determinant yöntemiyle tam çözüm • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Örnek Sorular</div>
+
+    <div class="practice-q">
+      <div class="pq-num">Soru A — Kolay</div>
+      <div class="pq-text">v = 3î m/s, B = 2k̂ T, q = +1C. Manyetik kuvveti bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>v×B = (3î) × (2k̂)
+= 6(î×k̂) = 6(−ĵ) = −6ĵ
+F = q(v×B) = 1×(−6ĵ)</code>
+        <div class="ans-result">→ F = −6ĵ N</div>
+      </div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-num">Soru B — Sınavdan (5b)</div>
+      <div class="pq-text">v = (2î+ĵ)×10⁶ m/s, B = (î+k̂) T, elektron (q=−1.6×10⁻¹⁹C). Kuvveti bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>v×B: î(1×1−0×0)−ĵ(2×1−0×1)+k̂(2×0−1×1)
+    = î(1) − ĵ(2) + k̂(−1)
+    = (î − 2ĵ − k̂) × 10⁶
+
+F = (−1.6×10⁻¹⁹)(î−2ĵ−k̂)×10⁶</code>
+        <div class="ans-result">→ F = (−1.6î+3.2ĵ+1.6k̂)×10⁻¹³ N</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     KONU 3: BİOT-SAVART
+═══════════════════════════════════ -->
+<div class="section" id="sec2">
+
+  <div class="topic-header" style="border-left-color:#06b6d4">
+    <div class="topic-icon">📡</div>
+    <div>
+      <h2>Biot-Savart Yasası</h2>
+      <p>Soru 3 — Sonsuz tel, manyetik alan, integral</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Temel Formüller <span class="tag tag-blue">Ezber</span></div>
+    <div class="formula">
+      <span class="f-label">Biot-Savart Yasası</span>
+      dB = (μ₀/4π) × (I ds × r̂) / r²
+
+      <span class="f-label">Sonsuz Düz Tel Sonucu</span>
+      B = μ₀I / (2πa)
+
+      <span class="f-label">Sabitler</span>
+      μ₀ = 4π × 10⁻⁷ T·m/A
+      a  = tele olan dik mesafe
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <h4>dB ifadesini yaz</h4>
+          <code>dB = (μ₀I/4π) × a·dx / (x²+a²)^(3/2)</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <h4>−∞'dan +∞'a integral al</h4>
+          <code>∫dx/(x²+a²)^(3/2) = 2/a²</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <h4>Sonuç & Yön</h4>
+          <code>B = μ₀I/(2πa)
+Yön: Sağ el kuralı → B⃗ = B·ẑ</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">▶️ YouTube Videoları</div>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=lg-8EiahhwM" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Biot-Savart Law — Sonsuz Tel Uygulaması (L45.2)</div>
+        <div class="yt-meta">İntegral türetimi + sonsuz tel çözümü • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=BlIEavkDUF8" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Biot-Savart — Finite Wire Magnetic Field</div>
+        <div class="yt-meta">Sonlu tel çözümü adım adım • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Örnek Sorular</div>
+    <div class="practice-q">
+      <div class="pq-num">Soru A — Doğrudan Formül</div>
+      <div class="pq-text"><strong>I = 5A</strong> akım taşıyan sonsuz telden <strong>a = 0.1m</strong> uzaklıktaki P noktasında manyetik alan şiddetini bulunuz. (μ₀ = 4π×10⁻⁷)</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>B = μ₀I / (2πa)
+B = (4π×10⁻⁷ × 5) / (2π × 0.1)
+B = (20π×10⁻⁷) / (0.2π)
+B = 100×10⁻⁷ = 10⁻⁵</code>
+        <div class="ans-result">→ B = 10 μT</div>
+      </div>
+    </div>
+    <div class="practice-q">
+      <div class="pq-num">Soru B — Yön</div>
+      <div class="pq-text">x-ekseninde +x yönünde akım var. y-ekseninin üzerindeki P noktasında B alanının yönü nedir?</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>Sağ el kuralı:
+Baş parmak → +x (akım yönü)
+Parmaklar → P noktasında +z yönüne kıvrılır</code>
+        <div class="ans-result">→ B⃗ = +ẑ yönünde (sayfadan dışarı ⊙)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     KONU 4: AC DEVRE
+═══════════════════════════════════ -->
+<div class="section" id="sec3">
+
+  <div class="topic-header" style="border-left-color:#f59e0b">
+    <div class="topic-icon">⚡</div>
+    <div>
+      <h2>AC Devre Analizi</h2>
+      <p>Soru 4 — Tepe voltajı, anlık akım, RMS, güç</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Temel Formüller <span class="tag tag-gold">Ezber</span></div>
+    <div class="formula">
+      <span class="f-label">Açısal Frekans</span>
+      ω = 2πf
+
+      <span class="f-label">Anlık Değerler</span>
+      v(t) = Vₘ·sin(ωt)
+      i(t) = Iₘ·sin(ωt)
+
+      <span class="f-label">Ohm Yasası (AC)</span>
+      Vₘ = Iₘ × R
+
+      <span class="f-label">RMS Değerler</span>
+      Vrms = Vₘ / √2 ≈ Vₘ / 1.414
+      Irms = Iₘ / √2
+
+      <span class="f-label">Ortalama Güç</span>
+      P = Vrms² / R = Irms² × R
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <h4>ω'yı hesapla</h4>
+          <code>ω = 2π × f</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <h4>ωt'yi bul (radyan/derece)</h4>
+          <code>ωt = ω × t_saniye</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <h4>sin(ωt) ile tepe değerini bul</h4>
+          <code>i = Iₘ·sin(ωt) → Iₘ = i/sin(ωt)
+Vₘ = Iₘ × R</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">▶️ YouTube Videoları</div>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=ERIToctYUcQ" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">AC vs DC — RMS Voltage, Peak Current & Average Power (Organic Tutor)</div>
+        <div class="yt-meta">Tepe, RMS, ortalama güç tam anlatım • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=MhfIZpDA3aA" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Introduction to AC Circuits — RMS, Peak Current & Voltage</div>
+        <div class="yt-meta">Anlık akım ve gerilim formülleri • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=y8aR_vNjPFA" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">AC Current: Peak, RMS, Average Power Integral</div>
+        <div class="yt-meta">Frekans, periyot, açısal frekans tam ders • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Örnek Sorular</div>
+    <div class="practice-q">
+      <div class="pq-num">Soru A — Sınavdan (Soru 4)</div>
+      <div class="pq-text">f = 50Hz, R = 50Ω, t = 2ms'de i = 2A. Tepe voltajını (Vₘ) bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>ω = 2π×50 = 100π rad/s
+ωt = 100π × 0.002 = 0.2π = 36°
+sin(36°) = 0.5878
+Iₘ = 2 / 0.5878 = 3.403 A
+Vₘ = 3.403 × 50</code>
+        <div class="ans-result">→ Vₘ ≈ 170 V</div>
+      </div>
+    </div>
+    <div class="practice-q">
+      <div class="pq-num">Soru B — RMS ve Güç</div>
+      <div class="pq-text">Vₘ = 220V, R = 100Ω. RMS gerilimi ve ortalama gücü bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>Vrms = 220 / √2 = 155.6 V
+P = Vrms² / R = (155.6)² / 100
+P = 24211 / 100</code>
+        <div class="ans-result">→ Vrms ≈ 155.6 V | P ≈ 242 W</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     KONU 5: FARADAY + dq/dt
+═══════════════════════════════════ -->
+<div class="section" id="sec4">
+
+  <div class="topic-header" style="border-left-color:#22c55e">
+    <div class="topic-icon">🔁</div>
+    <div>
+      <h2>Faraday Yasası & Anlık Akım</h2>
+      <p>Soru 5a, 5c — dq/dt, indüklenen EMF, türev</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Temel Formüller <span class="tag tag-green">Ezber</span></div>
+    <div class="formula">
+      <span class="f-label">Anlık Akım (5a)</span>
+      i(t) = dq/dt   →  q(t)'yi türev al
+
+      <span class="f-label">Faraday Yasası (5c)</span>
+      ε = −dΦ/dt = −A × dB/dt
+
+      <span class="f-label">Manyetik Akı</span>
+      Φ = B × A × cos(θ)
+      (Dik ise θ=0 → Φ = B×A)
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <h4>q(t)'yi türev al → i(t)</h4>
+          <code>q(t) = t² + 2t
+i(t) = dq/dt = 2t + 2
+t=1 → i = 2(1)+2 = 4A</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <h4>B(t)'yi türev al → dB/dt</h4>
+          <code>B = 2t + 4t²
+dB/dt = 2 + 8t</code>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <h4>ε = −A × (dB/dt)</h4>
+          <code>t=2s: dB/dt = 2+8(2) = 18 T/s
+ε = −0.5 × 18 = −9V → |ε| = 9V</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">▶️ YouTube Videoları</div>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=7lKsshNjoow" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Electronics: i = dq/dt (Anlık Akım Türevi)</div>
+        <div class="yt-meta">dq/dt formülü ve örnekler • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=LDOa7UdfcMQ" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Faraday's Law — Magnetic Flux & Induced EMF (Organic Tutor)</div>
+        <div class="yt-meta">Faraday yasası tam anlatım + örnekler • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=7OK2wDQ3yeQ" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Faraday's Law Examples — B·dA/dt</div>
+        <div class="yt-meta">A×dB/dt ile EMF hesabı örnekleri • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=MHRBjGCgb4U" target="_blank">
+      <div class="yt-thumb"><svg viewBox="0 0 24 24" fill="#ef4444"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>
+      <div class="yt-info">
+        <div class="yt-title">Faraday's Law ε = −NΔΦ/Δt | Khan Academy</div>
+        <div class="yt-meta">Khan Academy klasik Faraday dersi • İngilizce</div>
+      </div>
+      <span class="yt-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Örnek Sorular</div>
+    <div class="practice-q">
+      <div class="pq-num">Soru A — 5a (Sınavdan)</div>
+      <div class="pq-text">q(t) = t² + 2t Coulomb. t = 1s'deki anlık akımı bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>i(t) = dq/dt = 2t + 2
+t = 1s → i = 2(1) + 2</code>
+        <div class="ans-result">→ i = 4 A</div>
+      </div>
+    </div>
+    <div class="practice-q">
+      <div class="pq-num">Soru B — 5c (Sınavdan)</div>
+      <div class="pq-text">A = 0.5m², B(t) = 2t + 4t² Tesla, halka B'ye dik. t = 2s'de indüklenen EMF'yi bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>dB/dt = 2 + 8t
+t=2s: dB/dt = 2 + 8(2) = 18 T/s
+ε = −A × dB/dt = −0.5 × 18</code>
+        <div class="ans-result">→ |ε| = 9 V</div>
+      </div>
+    </div>
+    <div class="practice-q">
+      <div class="pq-num">Soru C — Ekstra</div>
+      <div class="pq-text">q(t) = 3t³ − 2t + 1. t = 2s'deki anlık akımı bulunuz.</div>
+      <button class="show-ans-btn" onclick="toggleAns(this)">Cevabı Gör ▼</button>
+      <div class="ans-box">
+        <div class="ans-label">✅ Çözüm</div>
+        <code>i(t) = dq/dt = 9t² − 2
+t = 2s → i = 9(4) − 2 = 36 − 2</code>
+        <div class="ans-result">→ i = 34 A</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  function showTopic(n) {
+    document.querySelectorAll('.section').forEach((s,i) => {
+      s.classList.toggle('active', i === n);
+    });
+    document.querySelectorAll('.topic-btn').forEach((b,i) => {
+      b.classList.toggle('active', i === n);
+    });
+    document.querySelectorAll('.dot').forEach((d,i) => {
+      d.classList.toggle('active', i === n);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleAns(btn) {
+    const box = btn.nextElementSibling;
+    const open = box.classList.toggle('show');
+    btn.textContent = open ? 'Cevabı Gizle ▲' : 'Cevabı Gör ▼';
+  }
+
+  // Scroll top visibility
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollBtn');
+    btn.classList.toggle('visible', window.scrollY > 200);
+  });
+</script>
+</body>
+</html>
