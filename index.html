@@ -8,16 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#2a0f1c; --bg-alt:#3a1528; --accent:#ff5d8f; --rose:#ff8fb3; --plum:#c44d7a;
-    --muted:#c98aa6; --soft:#fbe4ee; --soft-dim:#cf9fb6;
+    /* Modernize Edilmiş Renk Paleti */
+    --bg: #0f172a;           /* Derin gece mavisi / Arduvaz */
+    --bg-alt: #1e293b;       /* Kartlar için bir ton açık arka plan */
+    --accent: #818cf8;       /* Yumuşak İndigo (Ana vurgu) */
+    --secondary: #38bdf8;    /* Açık Mavi (Oklar ve ufak detaylar için) */
+    --muted: #64748b;        /* Pasif öğeler için gri/mavi */
+    --soft: #f8fafc;         /* Tam beyaz yerine göz yormayan kırık beyaz */
+    --soft-dim: #cbd5e1;     /* Alt metinler için yumuşak gri */
   }
+  
   *{box-sizing:border-box;}
-  html{ background:#2a0f1c; }
+  html{ background: var(--bg); }
   body{
-    margin:0; background:#2a0f1c;
+    margin:0; background: var(--bg);
+    /* Daha modern, mistik ve derinlik katan yeni arka plan gradient'leri */
     background-image:
-      radial-gradient(circle at 18% 0%, #4a1a30 0%, transparent 55%),
-      radial-gradient(circle at 90% 95%, #45152b 0%, transparent 50%);
+      radial-gradient(circle at 15% 0%, #1e1b4b 0%, transparent 50%),
+      radial-gradient(circle at 85% 100%, #0c4a6e 0%, transparent 50%);
     background-attachment:fixed;
     color:var(--soft); font-family:'Space Grotesk', sans-serif; min-height:100vh;
     display:flex; justify-content:center; padding:32px 16px 48px;
@@ -31,21 +39,34 @@
   .grid{ display:flex; flex-direction:column; gap:12px; }
   .card{
     display:flex; align-items:center; gap:16px; text-decoration:none;
-    background:var(--bg-alt); border:1px solid rgba(255,143,179,.16);
+    background:var(--bg-alt); 
+    border:1px solid rgba(129, 140, 248, 0.15); /* Çerçeveye saydam bir indigo dokunuşu */
     border-left:4px solid var(--accent); border-radius:14px; padding:18px 18px;
-    transition:transform .12s, border-color .12s, background .12s;
+    transition:transform .15s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
   }
-  .card:active{ transform:scale(.985); background:#431a2e; }
+  /* Kartların üzerine gelindiğinde modern bir parlama ve yükselme efekti */
+  .card:hover:not(.soon) {
+    background: #27364f;
+    border-color: rgba(129, 140, 248, 0.4);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .card:active:not(.soon){ transform:scale(.985); background: #1e293b; }
+  
   .card .ico{ font-size:30px; line-height:1; flex:0 0 auto; }
   .card .body{ flex:1; min-width:0; }
   .card .title{ font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--soft); margin-bottom:2px; }
   .card .desc{ font-size:12.5px; color:var(--soft-dim); line-height:1.4; }
-  .card .arrow{ color:var(--rose); font-size:20px; flex:0 0 auto; }
+  
+  .card .arrow{ color:var(--secondary); font-size:20px; flex:0 0 auto; transition: transform 0.2s ease; }
+  /* Ok işaretinin üzerine gelince hafif sağa kayması (Mikro etkileşim) */
+  .card:hover:not(.soon) .arrow { transform: translateX(4px); }
+
   .card.soon{ border-left-color:var(--muted); opacity:.6; pointer-events:none; }
   .card.soon .arrow{ font-size:11px; font-family:'IBM Plex Mono', monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
 
-  footer{ text-align:center; margin-top:28px; font-size:11.5px; color:var(--soft-dim); font-family:'IBM Plex Mono', monospace; }
-  ::selection{ background:var(--accent); color:#3a0a1d; }
+  footer{ text-align:center; margin-top:28px; font-size:11.5px; color:var(--muted); font-family:'IBM Plex Mono', monospace; }
+  
+  ::selection{ background:var(--accent); color:#fff; }
 </style>
 </head>
 <body>
@@ -64,12 +85,10 @@
 </div>
 
 <script>
-  // Yeni ders eklemek için buraya bir satır ekle.
-  // file: aynı repodaki HTML dosyasının adı.  soon:true → "yakında" (link kapalı)
   const cards = [
     { ico:"💗", title:"YÖKDİL Kelime", desc:"255 kelime & edat · kartlar, test, liste", file:"yokdil-kelime.html" },
     { ico:"⚛️", title:"Fizik", desc:"Konu anlatımı ve çalışma kartları", file:"fizik.html" },
-    // Örnek (kapalı): { ico:"📐", title:"Matematik", desc:"Yakında", soon:true },
+    { ico:"📐", title:"Matematik", desc:"Yeni Formüller", soon:true },
   ];
 
   const grid = document.getElementById('grid');
