@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barış Kaya | Portfolyo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(25, 25, 25, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Header / Hero Section */
+        header {
+            text-align: center;
+            padding: 100px 20px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Container & Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Project Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #a855f7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px var(--accent-glow);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card h3::after {
+            content: '↗';
+            font-size: 1.2rem;
+            color: var(--accent);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover h3::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 20px;
+            align-self: flex-start;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Barış Kaya</h1>
+        <p>Web & Embedded Systems Developer Portfolio</p>
+    </header>
+
+    <div class="container">
+        <div class="project-grid">
+
+            <!-- Ana Portfolyo -->
+            <a href="https://kayalarbk.github.io/" target="_blank" class="card">
+                <h3>kayalarbk.github.io</h3>
+                <p>Kişisel ana web portfolyom ve özgeçmişim.</p>
+                <span class="tag">Main Portfolio</span>
+            </a>
+
+            <!-- MPDS -->
+            <a href="https://kayalarbk.github.io/MarmaraMPDS/" target="_blank" class="card">
+                <h3>MarmaraMPDS</h3>
+                <p>Marmara Project Developer Society kulübü için resmi web sitesi ve üye koordinasyon yapısı.</p>
+                <span class="tag">Organization</span>
+            </a>
+
+            <!-- Drone Projesi -->
+            <a href="https://kayalarbk.github.io/Drone_project_c/" target="_blank" class="card">
+                <h3>Drone_project_c</h3>
+                <p>Otonom drone ve robotik uçuş platformları için Ar-Ge dokümantasyonu.</p>
+                <span class="tag">Embedded Systems</span>
+            </a>
+
+            <!-- Duru ile Derin -->
+            <a href="https://kayalarbk.github.io/duruilederin/" target="_blank" class="card">
+                <h3>duruilederin</h3>
+                <p>Derin için hazırlanan özel arayüz tasarımı.</p>
+                <span class="tag">Personal</span>
+            </a>
+
+            <!-- Anı Kutumuz -->
+            <a href="https://kayalarbk.github.io/AniKutumuz/" target="_blank" class="card">
+                <h3>AniKutumuz</h3>
+                <p>Anıları saklamak ve sergilemek için geliştirilmiş dijital galeri projesi.</p>
+                <span class="tag">Gallery UI</span>
+            </a>
+
+            <!-- Ders Defteri -->
+            <a href="https://kayalarbk.github.io/Ders-defteri/" target="_blank" class="card">
+                <h3>Ders-defteri</h3>
+                <p>Mühendislik bölümü, devre analizi ve fizik gibi çekirdek dersler için not derlemeleri.</p>
+                <span class="tag">Education</span>
+            </a>
+
+            <!-- GANO Hesaplama -->
+            <a href="https://kayalarbk.github.io/Ganohesaplama/" target="_blank" class="card">
+                <h3>Ganohesaplama</h3>
+                <p>Öğrenciler için pratik ve hızlı akademik ortalama hesaplama aracı.</p>
+                <span class="tag">Web Tool</span>
+            </a>
+
+            <!-- Teknofest -->
+            <a href="https://kayalarbk.github.io/teknofest/" target="_blank" class="card">
+                <h3>teknofest</h3>
+                <p>Teknofest yarışmaları için geliştirilen proje tanıtım ve detay sayfası.</p>
+                <span class="tag">Competition</span>
+            </a>
+
+            <!-- Günlük İngilizce -->
+            <a href="https://kayalarbk.github.io/DailyEnglish/" target="_blank" class="card">
+                <h3>DailyEnglish</h3>
+                <p>Günlük İngilizce pratikleri ve kelime çalışmaları için web arayüzü.</p>
+                <span class="tag">Education</span>
+            </a>
+
+            <!-- My English Day -->
+            <a href="https://kayalarbk.github.io/Myenglishday/" target="_blank" class="card">
+                <h3>Myenglishday</h3>
+                <p>İngilizce öğrenim sürecini destekleyen interaktif platform.</p>
+                <span class="tag">Education</span>
+            </a>
+
+            <!-- Çevirim -->
+            <a href="https://kayalarbk.github.io/cevirim/" target="_blank" class="card">
+                <h3>cevirim</h3>
+                <p>Hızlı metin işlemleri ve dil çevirileri için geliştirilmiş uygulama sayfası.</p>
+                <span class="tag">Web App</span>
+            </a>
+
+            <!-- Kredi Takip -->
+            <a href="https://kayalarbk.github.io/Creditfollow/" target="_blank" class="card">
+                <h3>Creditfollow</h3>
+                <p>Kredi, bütçe ve finansal verileri takip etmek için oluşturulan gösterge paneli.</p>
+                <span class="tag">Dashboard</span>
+            </a>
+
+            <!-- Balkan Turu -->
+            <a href="https://kayalarbk.github.io/Balkanturu/" target="_blank" class="card">
+                <h3>Balkanturu</h3>
+                <p>Balkan seyahati rotaları, anıları ve gezi rehberi.</p>
+                <span class="tag">Travel</span>
+            </a>
+
+            <!-- Kolaj Yapıcı -->
+            <a href="https://kayalarbk.github.io/kolaj-yapici/" target="_blank" class="card">
+                <h3>kolaj-yapici</h3>
+                <p>Görselleri birleştirip web üzerinden kolaj oluşturmaya yarayan araç.</p>
+                <span class="tag">Utility</span>
+            </a>
+
+            <!-- Gift -->
+            <a href="https://kayalarbk.github.io/Gift/" target="_blank" class="card">
+                <h3>Gift</h3>
+                <p>Özel günler için tasarlanmış, sürpriz odaklı interaktif hediye sayfası.</p>
+                <span class="tag">Personal</span>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
