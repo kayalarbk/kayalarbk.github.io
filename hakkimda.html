@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda | Barış Kaya</title>
+
+    <meta name="description" content="Barış Kaya — web ve gömülü sistemler geliştiricisi. Kişisel tanıtım sayfası, yetenekler ve iletişim.">
+    <meta name="author" content="Barış Kaya">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Hakkımda | Barış Kaya">
+    <meta property="og:description" content="Web & gömülü sistemler geliştiricisi.">
+    <meta property="og:locale" content="tr_TR">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text x='50' y='71' font-size='58' font-family='sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'>B</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(25, 25, 25, 0.7);
+            --bg-input: rgba(255, 255, 255, 0.04);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #6366f1;
+            --accent-2: #a855f7;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        a { color: var(--accent); }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        .wrap {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Geri dön bağlantısı */
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: var(--bg-input);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color .25s ease, border-color .25s ease, transform .25s ease;
+        }
+        .back:hover { color: #fff; border-color: rgba(255,255,255,.3); transform: translateX(-3px); }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            padding: 50px 0 20px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 12px 30px var(--accent-glow);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .role {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .hero .meta {
+            color: var(--text-secondary);
+            font-size: .92rem;
+            font-weight: 300;
+        }
+
+        /* Bölümler */
+        section { margin-top: 56px; }
+
+        h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+        }
+
+        .lead { color: var(--text-secondary); }
+        .lead + .lead { margin-top: 14px; }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 26px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Yetenekler */
+        .skill-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .skill-groups h3 {
+            font-size: .8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .chip {
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: var(--accent);
+            font-size: .78rem;
+            font-weight: 600;
+        }
+
+        /* Zaman çizelgesi */
+        .timeline {
+            list-style: none;
+            border-left: 1px solid var(--border-color);
+            margin-left: 8px;
+            padding-left: 26px;
+        }
+
+        .timeline li { position: relative; padding-bottom: 26px; }
+        .timeline li:last-child { padding-bottom: 0; }
+
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 9px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 14px var(--accent-glow);
+        }
+
+        .timeline .when {
+            font-size: .75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .timeline .what { font-weight: 600; }
+        .timeline p { color: var(--text-secondary); font-size: .92rem; }
+
+        /* İletişim */
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 600;
+            transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+        }
+
+        .contact-links a:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 26px var(--accent-glow);
+        }
+
+        footer {
+            margin-top: 70px;
+            border-top: 1px solid var(--border-color);
+            padding: 26px 20px 40px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: .82rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding-top: 30px; gap: 20px; }
+            .avatar { width: 84px; height: 84px; font-size: 2rem; }
+            section { margin-top: 42px; }
+            .panel { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+
+        <a class="back" href="./index.html">← Projelere dön</a>
+
+        <header class="hero">
+            <div class="avatar" aria-hidden="true">BK</div>
+            <div>
+                <h1>Barış Kaya</h1>
+                <p class="role">Web &amp; Gömülü Sistemler Geliştiricisi</p>
+                <!-- DÜZENLE: bölüm ve şehir bilgisini kendine göre güncelle -->
+                <p class="meta">Marmara Üniversitesi · [Bölüm] · İstanbul, Türkiye</p>
+            </div>
+        </header>
+
+        <section>
+            <h2>Hakkımda</h2>
+            <div class="panel">
+                <!-- DÜZENLE: bu iki paragrafı kendi cümlelerinle değiştir -->
+                <p class="lead">
+                    Mühendislik okuyan, yazılımı hem ekranda hem de donanımın üzerinde görmeyi seven
+                    bir geliştiriciyim. Web tarafında sade ve hızlı arayüzler kuruyorum; gömülü
+                    tarafta ise otonom drone ve robotik uçuş platformları üzerine çalışıyorum.
+                </p>
+                <p class="lead">
+                    Öğrendiğim her şeyi küçük ama bitmiş projelere dönüştürmeyi tercih ediyorum —
+                    not derleyicilerinden ortalama hesaplama araçlarına, kulüp web sitelerinden
+                    Teknofest projelerine kadar hepsi bu alışkanlığın ürünü.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Yetenekler</h2>
+            <div class="panel skill-groups">
+                <!-- DÜZENLE: kullanmadığın teknolojileri sil, kullandıklarını ekle -->
+                <div>
+                    <h3>Web</h3>
+                    <div class="chips">
+                        <span class="chip">HTML5</span>
+                        <span class="chip">CSS3</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">Responsive Tasarım</span>
+                        <span class="chip">GitHub Pages</span>
+                    </div>
+                </div>
+                <div>
+                    <h3>Gömülü &amp; Donanım</h3>
+                    <div class="chips">
+                        <span class="chip">C</span>
+                        <span class="chip">Arduino</span>
+                        <span class="chip">Mikrodenetleyiciler</span>
+                        <span class="chip">Devre Analizi</span>
+                    </div>
+                </div>
+                <div>
+                    <h3>Araçlar</h3>
+                    <div class="chips">
+                        <span class="chip">Git</span>
+                        <span class="chip">GitHub</span>
+                        <span class="chip">VS Code</span>
+                    </div>
+                </div>
+                <div>
+                    <h3>Diller</h3>
+                    <div class="chips">
+                        <span class="chip">Türkçe (ana dil)</span>
+                        <span class="chip">İngilizce</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Deneyim &amp; Faaliyetler</h2>
+            <div class="panel">
+                <!-- DÜZENLE: tarihleri ve rolleri gerçek bilgilerinle güncelle -->
+                <ul class="timeline">
+                    <li>
+                        <span class="when">[Yıl] — Devam ediyor</span>
+                        <p class="what">Marmara Project Developer Society (MPDS)</p>
+                        <p>Kulübün resmi web sitesini ve üye koordinasyon yapısını geliştirdim.</p>
+                    </li>
+                    <li>
+                        <span class="when">[Yıl]</span>
+                        <p class="what">Teknofest — Proje Ekibi</p>
+                        <p>Yarışma projesinin tanıtım sayfası ve teknik dokümantasyonu.</p>
+                    </li>
+                    <li>
+                        <span class="when">[Yıl] — Devam ediyor</span>
+                        <p class="what">Otonom Drone Ar-Ge</p>
+                        <p>Robotik uçuş platformları için C tabanlı geliştirme ve dokümantasyon.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>İletişim</h2>
+            <div class="contact-links">
+                <a href="mailto:kayalarbk2004@gmail.com">E-posta</a>
+                <a href="https://github.com/kayalarbk" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <!-- DÜZENLE: LinkedIn adresini ekle, yoksa bu satırı sil -->
+                <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="./index.html">Tüm Projeler</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Barış Kaya</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
