@@ -1,0 +1,14 @@
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editör / IDE
+.idea/
+*.swp
+*~
+
+# Günlük ve geçici dosyalar
+*.log
+*.tmp
+node_modules/
