@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Barış Kaya | Portfolyo</title>
 
     <meta name="description" content="Barış Kaya'nın web ve gömülü sistemler projelerini bir araya getiren portfolyo sayfası.">
@@ -17,6 +17,14 @@
     <meta name="twitter:card" content="summary">
 
     <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+
+    <!-- PWA: ana ekrana eklendiğinde tam ekran uygulama gibi açılır -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portfolyo">
+    <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,8 +86,15 @@
 
     <footer>
         <p>&copy; <span id="year"></span> Barış Kaya · Tüm projeler GitHub Pages üzerinde yayınlanmaktadır.</p>
+        <p class="data-tools">
+            <button type="button" data-veri="disa-aktar">Verileri dışa aktar</button>
+            <span aria-hidden="true">·</span>
+            <button type="button" data-veri="ice-aktar">İçe aktar</button>
+            <span class="data-status" data-veri="durum" role="status" aria-live="polite"></span>
+        </p>
     </footer>
 
+    <script src="./assets/js/state.js"></script>
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/projects.data.js"></script>
     <script src="./assets/js/home.js"></script>

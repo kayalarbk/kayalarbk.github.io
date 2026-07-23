@@ -33,6 +33,30 @@ Build adımı, framework ve bağımlılık yoktur — saf HTML + CSS + vanilla J
 
 ## 2. Tamamlanan işler
 
+### 2026-07-23 — PWA'ya dönüştürme (`feat`)
+
+Site artık iPhone'da "Ana Ekrana Ekle" ile gerçek bir uygulama gibi çalışıyor.
+
+- `manifest.json`: `standalone` görüntü, `start_url: ./`, koyu tema renkleri
+  (`#0a0a0a`), 192/512 PNG ikonlar (+ `maskable` varyant).
+- İkonlar marka renginden üretildi → `assets/img/icon-192.png`, `icon-512.png`.
+- Her iki HTML'in `<head>`'ine PWA/Apple meta etiketleri ve
+  `viewport-fit=cover` eklendi.
+- `sw.js` service worker: kurulumda 14 statik dosya önbelleğe alınıyor
+  (cache-first), Google Fonts runtime cache'e giriyor, gezinmelerde
+  ağ yoksa önbellekten servis ediliyor. Sürüm değişince eski cache siliniyor.
+  Kayıt `common.js` içinde yapılıyor.
+- `assets/js/state.js`: arayüz durumu (aktif kategori + arama metni)
+  localStorage'a debounce'lu (250 ms) yazılıyor, açılışta geri yükleniyor.
+  Footer'a "Verileri dışa aktar / İçe aktar" (JSON) düğmeleri eklendi.
+- `base.css`: `env(safe-area-inset-*)` ile çentik/home bar güvenli alanı,
+  `100dvh` desteği ve footer veri araçlarının stilleri.
+
+Yerel doğrulama (`python -m http.server 5501`, Chrome): service worker
+`activated`, 14 dosya + 8 font kaydı önbellekte; **sunucu kapatıldıktan sonra
+sayfa tam olarak açıldı** (fontlar dahil); filtre + arama sayfa yenilendikten
+sonra korundu; içe aktarma bozuk dosyada anlamlı hata verdi.
+
 ### 2026-07-22 — Profesyonel dosya yapısına geçiş (`refactor`)
 
 - Tüm CSS satır içi `<style>` bloklarından çıkarıldı → `assets/css/`
@@ -82,9 +106,14 @@ Bu dosya oluşturulmadan önce tamamlanmış olan işler:
 │   ├── js/
 │   │   ├── projects.data.js      # ⭐ PROJE LİSTESİ — içerik burada düzenlenir
 │   │   ├── home.js               # Kart üretimi, filtre, arama, animasyon
-│   │   └── common.js             # Her sayfada çalışan ortak işler (telif yılı)
+│   │   ├── state.js              # localStorage kalıcılığı + JSON yedekleme
+│   │   └── common.js             # Ortak işler: telif yılı + SW kaydı
 │   └── img/
-│       └── favicon.svg           # Site ikonu
+│       ├── favicon.svg           # Site ikonu (tarayıcı sekmesi)
+│       ├── icon-192.png          # PWA / apple-touch-icon
+│       └── icon-512.png          # PWA (any + maskable)
+├── manifest.json                 # PWA manifesti
+├── sw.js                         # Service worker — çevrimdışı önbellek
 ├── SPEC.md                       # Ne yapılacak — kapsam ve gereksinimler
 ├── PROGRESS.md                   # Ne yapıldı — proje hafızası (bu dosya)
 ├── README.md                     # Depo tanıtımı ve hızlı başlangıç
@@ -114,6 +143,12 @@ bir satır ekle. Başka hiçbir dosyaya dokunmaya gerek yok.
 | **Favicon ayrı SVG dosyası** | `data:` URI iki HTML dosyasında kopyalanmıştı ve önbelleğe alınamıyordu. |
 | **Türkçe arama normalizasyonu** | `toLocaleLowerCase('tr')` + NFD; "İ/ı" sorunu ve şapkalı harfler yüzünden aramanın boş dönmesini engelliyor. |
 | **`.nojekyll`** | GitHub Pages varsayılan olarak Jekyll çalıştırıyor ve alt çizgiyle başlayan dosyaları yok sayıyor; bu dosya işlemeyi tamamen kapatıp yayını öngörülebilir kılıyor. |
+| **Statik dosyalar cache-first, sayfalar network-first** | Statik dosyalar sürümle birlikte değişiyor; onları önbellekten vermek en hızlısı. Sayfalarda ise içerik tazeliği önemli — ağ varken güncel HTML, yokken önbellek. |
+| **Google Fonts ayrı runtime cache'te** | Kurulum listesine konsaydı, kurulum anında ağ sorunu olduğunda `addAll` komple başarısız olur ve service worker hiç kurulmazdı. Runtime cache ilk çevrimiçi ziyarette dolduğu için çevrimdışı deneyim yine tam. |
+| **`localStorage`, IndexedDB değil** | Saklanan veri tek bir küçük nesne (kategori + arama metni). IndexedDB'nin asenkron API'si bu boyutta sadece karmaşıklık ekler. |
+| **Kaydetme debounce'lu (250 ms)** | Arama kutusunda her tuş vuruşu `uygula()` çağırıyor; debounce olmadan her harfte diske senkron yazma yapılırdı. |
+| **Yedekleme düğmeleri footer'da, sade** | iOS Safari uzun süre açılmayan sitelerin depolamasını silebiliyor, bu yüzden dışa/içe aktarma şart. Ama saklanan veri yalnızca arayüz tercihi olduğu için portfolyonun görsel odağını dağıtmayacak şekilde küçük tutuldu. |
+| **`skipWaiting` + `clients.claim()`** | Tek kişilik statik bir sitede iki sekme arasında sürüm uyuşmazlığı riski önemsiz; yeni sürümün ikinci ziyareti beklemeden devreye girmesi daha değerli. |
 | **Kod yorumları Türkçe** | Depo tek kişilik ve Türkçe; okunabilirlik dil tutarlılığından daha önemli. |
 
 ---
@@ -136,7 +171,27 @@ bir satır ekle. Başka hiçbir dosyaya dokunmaya gerek yok.
       (yıldız sayısı, son güncelleme). SPEC'te şu an kapsam dışı —
       API oran sınırı ve JS kapalıyken boş sayfa riski nedeniyle.
 
-## 6. Bilinen buglar
+- [ ] **`sw.js` içindeki `CACHE_SURUM`**, statik dosya listesi her
+      değiştiğinde elle artırılmalı (`v1` → `v2`). Unutulursa kullanıcılar
+      eski sürümü görmeye devam eder. Sürüm atlamayı hatırlatan bir not
+      `sw.js` başında duruyor.
+
+## 6. PWA test kontrol listesi
+
+Gerçek iPhone'da her yayından sonra tekrarlanmalı:
+
+- [ ] Ana ekrana eklenince tam ekran (Safari çubuğu yok) açılıyor
+- [ ] Uçak modunda açılıp çalışıyor
+- [ ] Veri girildikten sonra uygulama kapatılıp açılınca veri duruyor
+- [ ] Çentik/home bar içerikle çakışmıyor
+- [ ] İkon ana ekranda doğru görünüyor
+
+Masaüstü Chrome'da (localhost, 2026-07-23) doğrulananlar: service worker
+kuruluyor ve etkinleşiyor, sunucu kapalıyken sayfa fontlarıyla birlikte
+açılıyor, filtre/arama yenilemeden sonra korunuyor, dışa/içe aktarma
+çalışıyor. **iOS üzerindeki 5 madde henüz gerçek cihazda test edilmedi.**
+
+## 7. Bilinen buglar
 
 - **Açık bug yok.**
 

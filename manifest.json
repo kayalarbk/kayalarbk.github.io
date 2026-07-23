@@ -1,0 +1,33 @@
+{
+    "name": "Barış Kaya | Portfolyo",
+    "short_name": "Portfolyo",
+    "description": "Barış Kaya'nın web ve gömülü sistemler projeleri.",
+    "lang": "tr",
+    "dir": "ltr",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0a0a0a",
+    "background_color": "#0a0a0a",
+    "icons": [
+        {
+            "src": "./assets/img/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./assets/img/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./assets/img/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

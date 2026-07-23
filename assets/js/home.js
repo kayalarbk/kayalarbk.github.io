@@ -44,11 +44,19 @@
         return card;
     });
 
+    // Önceki oturumdan kalan arayüz durumunu geri yükle (state.js)
+    const kayitli = (window.Depo && Depo.oku()) || {};
+    // Kayıtlı kategori silinmiş olabilir; butonu olmayan bir filtreye düşme.
+    const gecerliKat = kat => kat === TUMU ||
+        (KATEGORILER.includes(kat) && PROJELER.some(p => p.kat === kat));
+
     // Filtre butonları (parantez içinde proje sayısıyla)
-    let aktif = TUMU;
+    let aktif = gecerliKat(kayitli.kategori) ? kayitli.kategori : TUMU;
     const sayi = kat => kat === TUMU
         ? PROJELER.length
         : PROJELER.filter(p => p.kat === kat).length;
+
+    if (typeof kayitli.arama === 'string') search.value = kayitli.arama;
 
     [TUMU, ...KATEGORILER].forEach(kat => {
         if (sayi(kat) === 0) return;           // boş kalan kategoriyi gösterme
@@ -81,6 +89,9 @@
             card.hidden = !goster;
             if (goster) gorunen++;
         });
+
+        // Durumu kalıcı yap (state.js içinde debounce'lu)
+        if (window.Depo) Depo.yaz({ kategori: aktif, arama: search.value });
 
         count.textContent = gorunen + ' / ' + cards.length + ' proje gösteriliyor';
         empty.hidden = gorunen !== 0;

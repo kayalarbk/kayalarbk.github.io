@@ -34,6 +34,19 @@ body {
         radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
     background-attachment: fixed;
     min-height: 100vh;
+
+    /* iOS çentiği ve home bar'ı (viewport-fit=cover ile birlikte).
+       Tarayıcı env() bilmiyorsa değerler 0 kabul edilir. */
+    padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+}
+
+/* Adres çubuğu olmayan cihazlarda gerçek görünür yükseklik */
+@supports (min-height: 100dvh) {
+    body { min-height: 100dvh; }
 }
 
 a { color: var(--accent); }
@@ -73,6 +86,33 @@ footer {
     text-align: center;
     color: var(--text-secondary);
     font-size: 0.85rem;
+}
+
+/* Footer'daki veri yedekleme araçları */
+.data-tools {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.data-tools button {
+    background: none;
+    border: 0;
+    padding: 2px 4px;
+    font: inherit;
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.data-tools button:hover { color: var(--text-primary); }
+
+.data-status {
+    display: block;
+    margin-top: 6px;
+    min-height: 1.2em;
+    color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
